@@ -405,7 +405,7 @@ $RECYCLE.BIN/
 ### Yeoman ###
 bower_components/
 
-build/
+# build/
 dist/
 
 ### VisualStudio ###

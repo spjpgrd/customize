@@ -55,7 +55,7 @@ class App extends React.Component<IAppProps, IAppState> {
       organizationTitle: "",
       linkedinUrl: "asdf",
       workplaceUrl: "asdfasd",
-      profilePicture: "",
+      profilePicture: "https://www.awarehq.com/hubfs/email-signature/aware/jeff-schumann-aware-64.png",
       utmParams: {
         utmContent: "",
         utmMedium: UTMMediumEnum.EmailSignature,
@@ -80,12 +80,12 @@ class App extends React.Component<IAppProps, IAppState> {
     console.log({ [name]: value });
   }
 
-  public handleNameChange(event: any) {
+  public async handleNameChange(event: any) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
     this.setState({
-      [name]: value,
+      [name]: await value,
     });
     const fullName = this.getFullNameDisplay(this.state.honorificPrefix, this.state.givenName, this.state.additionalName, this.state.familyName, this.state.honorificSuffix);
     this.setState({ fullName });
@@ -106,12 +106,17 @@ class App extends React.Component<IAppProps, IAppState> {
 
         <form name="personal-info" autoComplete="on">
           <fieldset>
+            <legend>Your Photo</legend>
+            <label htmlFor="profilePicture">Profile Picture URL</label><br />
+            <input type="photo" name="profilePicture" value={this.state.profilePicture} autoFocus={true} required={true} onChange={this.handleInputChange} /><br />
+          </fieldset>
+          <fieldset>
             <legend>Your Details</legend>
             <label htmlFor="honorificPrefix">Honorific Prefix (optional)</label><br />
             <span>Examples: Dr., Sir, Queen</span><br />
             <input type="text" name="honorificPrefix" autoCorrect="off" title="Dr., Sir, Queen, etc. 👑" autoComplete="honorific-prefix" value={this.state.honorificPrefix} onChange={this.handleNameChange} /><br />
             <label htmlFor="givenName">First Name</label><br />
-            <input type="text" name="givenName" required={true} autoFocus={true} autoCorrect="off" autoComplete="given-name" title="What do they call you? 🤔" value={this.state.givenName} onChange={this.handleNameChange} /><br />
+            <input type="text" name="givenName" required={true} autoCorrect="off" autoComplete="given-name" title="What do they call you? 🤔" value={this.state.givenName} onChange={this.handleNameChange} /><br />
             <label htmlFor="additionalName">Middle Name (optional)</label><br />
             <input type="text" name="additionalName" autoCorrect="off" autoComplete="additionalName" title="I once worked with someone who had five middle names 🥁" value={this.state.additionalName} onChange={this.handleNameChange} /><br />
             <label htmlFor="familyName">Last Name</label><br />
@@ -137,11 +142,6 @@ class App extends React.Component<IAppProps, IAppState> {
             <label htmlFor="linkedinUrl">LinkedIn Profile (optional)</label><br />
             <span>Tip: <a href="https://linkedin.com/" target="_blank">Head to LinkedIn</a>, go to your profile, and copy the URL from the address bar</span><br />
             <input type="url" name="linkedinUrl" value={this.state.linkedinUrl} onChange={this.handleInputChange} /><br />
-          </fieldset>
-          <fieldset>
-            <legend>Your Photo</legend>
-            <label htmlFor="profilePicture">Profile Picture URL</label><br />
-            <input type="photo" name="profilePicture" value={this.state.profilePicture} required={true} onChange={this.handleInputChange} /><br />
           </fieldset>
         </form>
         <EmailSignatureBasic

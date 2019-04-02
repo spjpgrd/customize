@@ -1,7 +1,7 @@
 import * as React from 'react';
 // import UTMMediumEnum from "../enums/utm-medium-enum";
 // import UTMSourceEnum from "../enums/utm-source-enum";
-import { IPersonModel } from "../models/person-model";
+// import { IPersonModel } from "../models/person-model";
 import { IUTMParamModel } from "../models/utm-param-model"
 
 // export interface IEmailSignatureBasic {
@@ -9,7 +9,20 @@ import { IUTMParamModel } from "../models/utm-param-model"
 // }
 
 interface IEmailSignatureBasicProps {
-    person: IPersonModel;
+    additionalName: string;
+    cellPhone: string;
+    emailAddress: string;
+    workPhone: string;
+    familyName: string;
+    fullName: string;
+    fullNameSlug: string;
+    givenName: string;
+    honorificPrefix: string;
+    honorificSuffix: string;
+    organizationTitle: string;
+    linkedinUrl: string;
+    workplaceUrl: string;
+    profilePicture: string;
     utmParams: IUTMParamModel;
 };
 
@@ -36,21 +49,8 @@ class EmailSignatureBasic extends React.Component<IEmailSignatureBasicProps, IEm
 
     // }
 
-    public getFullNameDisplay(firstName: string, middleName: string | null, lastName: string) {
-        if (firstName != null && firstName.trim() === "" && middleName != null && middleName.trim() === "" && lastName != null && lastName.trim() === "") {
-            const fullName = firstName + " " + middleName + " " + lastName;
-            return fullName;
-        } else if (firstName != null && firstName.trim() === "" && middleName === null && lastName != null && lastName.trim() === "") {
-            const fullName = firstName + " " + lastName;
-            return fullName;
-        } else {
-            const fullName = firstName + " " + middleName + " " + lastName;
-            return fullName;
-        }
-    }
 
-
-    // const fullName = firstName + " " + middleName.trim() > 0 ? middleName + " " : " " + " " + lastName;
+    // const fullName = givenName + " " + additionalName.trim() > 0 ? additionalName + " " : " " + " " + familyName;
     // return fullName;
 
 
@@ -69,12 +69,11 @@ class EmailSignatureBasic extends React.Component<IEmailSignatureBasicProps, IEm
                     <tbody>
                         <tr>
                             <td style={{ paddingLeft: "0px", paddingTop: "32px", paddingBottom: " 4px", paddingRight: "0px", verticalAlign: "top" }}>
-                                {this.props.person.honorificPrefix}
-                                <a href={this.props.person.linkedinUrl}><img src="https://www.awarehq.com/hubfs/email-signature/austin-mckinley-64.png" style={{ textDecoration: "none!important", borderBottomWidth: "0", width: "64px", height: "64px", border: "none" }} width="64" height="64" alt={this.props.person.fullName} title={this.props.person.fullName} /></a></td>
+                                <a href={this.props.linkedinUrl}><img src={this.props.profilePicture} style={{ textDecoration: "none!important", borderBottomWidth: "0", width: "64px", height: "64px", border: "none" }} width="64" height="64" alt={this.props.fullName} title={this.props.fullName} /></a></td>
                         </tr>
                         <tr>
                             <td style={{ verticalAlign: "top", paddingLeft: "0px", paddingTop: "0px", paddingBottom: "8px", paddingRight: "0px" }}>
-                                <span style={{ textAlign: "left", color: "#26241F", fontFamily: "'Effra','Lato','-apple-system', 'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','sans-serif','Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol','sans-serif'", fontSize: "10pt", fontWeight: "bold" }}>{this.props.person.fullName}<br /><span style={{ textAlign: "left", marginTop: "0px", marginBottom: "0px", color: "#555759", fontFamily: "'Effra','Lato','-apple-system', 'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','sans-serif','Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol','sans-serif'", fontWeight: "normal", fontSize: "10pt", lineHeight: "1.5" }}>Director of Strategic Partnerships | Workplace<br />O: 614.407.9884 • <a style={{ textDecoration: "none", borderBottomWidth: "0", color: "#F16E25", fontFamily: "'Effra','Lato','-apple-system', 'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','sans-serif','Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol','sans-serif'", fontSize: "10pt", fontStyle: "normal", fontWeight: "normal", lineHeight: "1.5" }} href="mailto:austin.mckinley@awarehq.com">austin.mckinley@awarehq.com</a></span></span></td>
+                                <span style={{ textAlign: "left", color: "#26241F", fontFamily: "'Effra','Lato','-apple-system', 'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','sans-serif','Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol','sans-serif'", fontSize: "10pt", fontWeight: "bold" }}>{this.props.fullName}<br /><span style={{ textAlign: "left", marginTop: "0px", marginBottom: "0px", color: "#555759", fontFamily: "'Effra','Lato','-apple-system', 'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','sans-serif','Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol','sans-serif'", fontWeight: "normal", fontSize: "10pt", lineHeight: "1.5" }}>Director of Strategic Partnerships | Workplace<br />O: 614.407.9884 • <a style={{ textDecoration: "none", borderBottomWidth: "0", color: "#F16E25", fontFamily: "'Effra','Lato','-apple-system', 'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','sans-serif','Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol','sans-serif'", fontSize: "10pt", fontStyle: "normal", fontWeight: "normal", lineHeight: "1.5" }} href="mailto:austin.mckinley@awarehq.com">austin.mckinley@awarehq.com</a></span></span></td>
                         </tr>
                         <tr>
                             <td style={{ verticalAlign: "top", paddingLeft: "0px", paddingTop: "8px", paddingBottom: "0px", paddingRight: "0px", marginTop: "0px" }}>

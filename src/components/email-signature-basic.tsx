@@ -1,6 +1,6 @@
 import * as React from 'react';
-import UTMMediumEnum from "../enums/utm-medium-enum";
-import UTMSourceEnum from "../enums/utm-source-enum";
+// import UTMMediumEnum from "../enums/utm-medium-enum";
+// import UTMSourceEnum from "../enums/utm-source-enum";
 import { IPersonModel } from "../models/person-model";
 import { IUTMParamModel } from "../models/utm-param-model"
 
@@ -26,34 +26,7 @@ class EmailSignatureBasic extends React.Component<IEmailSignatureBasicProps, IEm
 
         // const workPhone = "844-433-3326";
 
-        this.state = {
-            person: {
-                contactOptions: {
-                    cellPhone: "",
-                    emailAddress: "",
-                    workPhone: "",
-                },
-                name: {
-                    additionalName: "",
-                    familyName: "",
-                    fullName: "",
-                    fullNameSlug: "",
-                    givenName: "",
-                    honorificPrefix: "",
-                    honorificSuffix: "",
-                },
-                organizationTitle: "",
-                personalExternalLinks: {
-                    linkedinUrl: "",
-                    workplaceUrl: "",
-                },
-            },
-            utmParams: {
-                utmContent: "",
-                utmMedium: UTMMediumEnum.EmailSignature,
-                utmSource: UTMSourceEnum.Email,
-            }
-        }
+
     }
 
     // public componentDidMount() {
@@ -96,6 +69,7 @@ class EmailSignatureBasic extends React.Component<IEmailSignatureBasicProps, IEm
                     <tbody>
                         <tr>
                             <td style={{ paddingLeft: "0px", paddingTop: "32px", paddingBottom: " 4px", paddingRight: "0px", verticalAlign: "top" }}>
+                                {this.props.person.name.honorificPrefix}
                                 <a href="https://www.linkedin.com/in/austinjmckinley/"><img src="https://www.awarehq.com/hubfs/email-signature/austin-mckinley-64.png" style={{ textDecoration: "none!important", borderBottomWidth: "0", width: "64px", height: "64px", border: "none" }} width="64" height="64" alt={this.props.person.name.fullName} title={this.props.person.name.fullName} /></a></td>
                         </tr>
                         <tr>

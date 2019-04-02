@@ -1,11 +1,13 @@
 import * as React from 'react';
 import './App.css';
 
+// import logo from './logo.svg';
 import EmailSignatureBasic from './components/email-signature-basic';
+import UTMMediumEnum from "./enums/utm-medium-enum";
+import UTMSourceEnum from "./enums/utm-source-enum";
 // import { slugify } from './helpers/helpers';
 import { IPersonModel } from './models/person-model';
 import { IUTMParamModel } from "./models/utm-param-model";
-// import logo from './logo.svg';
 
 
 // tslint:disable-next-line: no-empty-interface
@@ -13,7 +15,6 @@ interface IAppProps {
 
 }
 
-// tslint:disable-next-line: no-empty-interface
 interface IAppState {
   person: IPersonModel;
   utmParams: IUTMParamModel;
@@ -43,8 +44,8 @@ class App extends React.Component<IAppProps, IAppState> {
       },
       utmParams: {
         utmContent: "",
-        utmMedium: "",
-        utmSource: "",
+        utmMedium: UTMMediumEnum.EmailSignature,
+        utmSource: UTMSourceEnum.Email,
       }
     }
   }

@@ -1,6 +1,8 @@
 import * as React from 'react';
-import { IUTMParamModel } from 'src/models/utm-param-model';
+import UTMMediumEnum from "../enums/utm-medium-enum";
+import UTMSourceEnum from "../enums/utm-source-enum";
 import { IPersonModel } from "../models/person-model";
+import { IUTMParamModel } from "../models/utm-param-model"
 
 // export interface IEmailSignatureBasic {
 
@@ -44,8 +46,8 @@ class EmailSignatureBasic extends React.Component<IEmailSignatureBasicProps, IEm
             },
             utmParams: {
                 utmContent: "",
-                utmMedium: "",
-                utmSource: "",
+                utmMedium: UTMMediumEnum.EmailSignature,
+                utmSource: UTMSourceEnum.Email,
             }
         }
     }

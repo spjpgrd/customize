@@ -7,12 +7,12 @@ import EmailSignatureBasic from './components/email-signature-basic';
 
 // tslint:disable-next-line: no-empty-interface
 interface IAppProps {
-
+  person: any[];
 }
 
 // tslint:disable-next-line: no-empty-interface
 interface IAppState {
-  fullName: string;
+
 }
 
 class App extends React.Component<IAppProps, IAppState> {
@@ -20,14 +20,30 @@ class App extends React.Component<IAppProps, IAppState> {
     super(props);
 
     this.state = {
-      fullName: ""
+      person: {
+        contactOptions: {
+          cellPhone: "",
+          emailAddress: "",
+          officePhone: "",
+        },
+        jobTitle: "",
+        linkedinUrl: "",
+        name: {
+          firstName: "",
+          fullName: "",
+          fullNameSlug: "",
+          lastName: "",
+          middleName: "",
+          title: "",
+        },
+      }
     }
   }
 
   public render() {
     return (
       <>
-        <EmailSignatureBasic fullName={this.state.fullName} />
+        <EmailSignatureBasic />
       </>
     );
   }

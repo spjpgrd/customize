@@ -4,6 +4,7 @@ import './App.css';
 import EmailSignatureBasic from './components/email-signature-basic';
 // import { slugify } from './helpers/helpers';
 import { IPersonModel } from './models/person-model';
+import { IUTMParamModel } from "./models/utm-param-model";
 // import logo from './logo.svg';
 
 
@@ -15,6 +16,7 @@ interface IAppProps {
 // tslint:disable-next-line: no-empty-interface
 interface IAppState {
   person: IPersonModel;
+  utmParams: IUTMParamModel;
 }
 
 class App extends React.Component<IAppProps, IAppState> {
@@ -38,6 +40,11 @@ class App extends React.Component<IAppProps, IAppState> {
           middleName: "",
           title: "",
         },
+      },
+      utmParams: {
+        utmContent: "",
+        utmMedium: "",
+        utmSource: "",
       }
     }
   }
@@ -75,7 +82,7 @@ class App extends React.Component<IAppProps, IAppState> {
             <br /><label htmlFor="input-email-address">Email Address</label>
             <br /><input type="email" name="input-email-address" required={true} autoComplete="email" pattern="^[a-zA-Z0-9]+@[a-zA-Z0-9].awarehq.[a-zA-z]+$" title="Please use your @awarehq.com address" />
             <br /><label htmlFor="input-workplace-profile">Workplace Profile (optional)</label>
-            <br /><span>Tip: Head to Workplace, go to your profile, and copy the URL</span>
+            <br /><span>Tip: <a href={"https://workplace.com/?utm_medium=email-sig?utm_source=" + this.state.person.name.fullNameSlug} target="_blank">Head to Workplace</a>, go to your profile, and copy the URL from the address bar</span>
             <br /><input type="url" name="input-workplace-profile" />
           </fieldset>
           <fieldset>

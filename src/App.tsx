@@ -120,16 +120,16 @@ class App extends React.Component<IAppProps, IAppState> {
               </fieldset>
               <fieldset>
                 <legend>Your Details</legend>
-                <label htmlFor="honorificPrefix">Honorific Prefix (optional)</label><br />
+                <label htmlFor="honorificPrefix">Honorific Prefix <span className="c-form-label__optional">(optional)</span></label><br />
                 <span className="c-form-input__example">Examples: Dr., Sir, Queen</span><br />
                 <input type="text" name="honorificPrefix" autoCorrect="off" title="Dr., Sir, Queen, etc. 👑" autoComplete="honorific-prefix" value={this.state.honorificPrefix} onChange={this.handleNameChange} /><br />
                 <label htmlFor="givenName">First Name</label><br />
                 <input type="text" name="givenName" required={true} autoCorrect="off" autoComplete="given-name" title="What do they call you? 🤔" value={this.state.givenName} onChange={this.handleNameChange} /><br />
-                <label htmlFor="additionalName">Middle Name (optional)</label><br />
+                <label htmlFor="additionalName">Middle Name <span className="c-form-label__optional">(optional)</span></label><br />
                 <input type="text" name="additionalName" autoCorrect="off" autoComplete="additionalName" title="I once worked with someone who had five middle names 🥁" value={this.state.additionalName} onChange={this.handleNameChange} /><br />
                 <label htmlFor="familyName">Last Name</label><br />
                 <input type="text" name="familyName" required={true} autoCorrect="off" autoComplete="family-name" title="Your last name, please 🙃" value={this.state.familyName} onChange={this.handleNameChange} /><br />
-                <label htmlFor="honorificSuffix">Honorific Suffix (optional)</label><br />
+                <label htmlFor="honorificSuffix">Honorific Suffix <span className="c-form-label__optional">(optional)</span></label><br />
                 <span className="c-form-input__example">Examples: Jr., PhD, MBA</span><br />
                 <input type="text" name="honorificSuffix" autoCorrect="off" autoComplete="honorific-suffix" title="Suffix or bust 🎰" value={this.state.honorificSuffix} onChange={this.handleNameChange} /><br />
                 <label htmlFor="organizationTitle">Job Title</label><br />
@@ -137,16 +137,16 @@ class App extends React.Component<IAppProps, IAppState> {
               </fieldset>
               <fieldset>
                 <legend>Contact Options</legend>
-                <label htmlFor="cellPhone">Cell Phone (optional)</label><br />
+                <label htmlFor="cellPhone">Cell Phone <span className="c-form-label__optional">(optional)</span></label><br />
                 <input type="tel-national" name="cellPhone" autoComplete="tel-national" value={this.state.cellPhone} onChange={this.handleInputChange} /><br />
-                <label htmlFor="workPhone">Work Phone (optional)</label><br />
+                <label htmlFor="workPhone">Work Phone <span className="c-form-label__optional">(optional)</span></label><br />
                 <input type="tel-national" name="workPhone" autoComplete="tel-national" value={this.state.workPhone} onChange={this.handleInputChange} /><br />
                 <label htmlFor="emailAddress">Email Address</label><br />
                 <input type="email" name="emailAddress" required={true} autoComplete="email" pattern="^[a-zA-Z0-9]+@[a-zA-Z0-9].awarehq.[a-zA-z]+$" title="Please use your @awarehq.com address 📬" value={this.state.emailAddress} onChange={this.handleInputChange} /><br />
-                {/* <label htmlFor="workplaceUrl">Workplace Profile (optional)</label><br />
+                {/* <label htmlFor="workplaceUrl">Workplace Profile <span className="c-form-label__optional">(optional)</span></label><br />
                 <span className="c-form-input__example">Tip: <a href={"https://workplace.com/?utm_medium=email-sig?utm_source=" + this.state.fullNameSlug} target="_blank">Head to Workplace</a>, go to your profile, and copy the URL from the address bar</span><br />
                 <input type="url" name="workplaceUrl" value={this.state.workplaceUrl} onChange={this.handleInputChange} /><br /> */}
-                <label htmlFor="linkedinUrl">LinkedIn Profile (optional)</label><br />
+                <label htmlFor="linkedinUrl">LinkedIn Profile <span className="c-form-label__optional">(optional)</span></label><br />
                 <input type="url" name="linkedinUrl" value={this.state.linkedinUrl} onChange={this.handleInputChange} /><br />
               </fieldset>
             </form>

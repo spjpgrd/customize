@@ -110,7 +110,6 @@ class App extends React.Component<IAppProps, IAppState> {
       <>
         {/* Input names based on these standard autocomplete keywords */}
         {/* https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofilling-form-controls:-the-autocomplete-attribute */}
-        <nav>Customize</nav>
         <div className="row between-xs">
           <div className="last-xs last-sm initial-order-md col-xs-12 col-sm-12 col-md-6 col-lg-5 col-xl-4">
             <form name="personal-info" autoComplete="on">

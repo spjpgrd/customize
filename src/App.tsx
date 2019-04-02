@@ -93,7 +93,7 @@ class App extends React.Component<IAppProps, IAppState> {
           <input type="reset" />
           <input type="submit" value="Create My Signature" />
         </form>
-        <EmailSignatureBasic person={this.state.person} />
+        <EmailSignatureBasic person={this.state.person} utmParams={this.state.utmParams} />
       </>
     );
   }

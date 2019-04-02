@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { IUTMParamModel } from 'src/models/utm-param-model';
 import { IPersonModel } from "../models/person-model";
 
 // export interface IEmailSignatureBasic {
@@ -7,6 +8,7 @@ import { IPersonModel } from "../models/person-model";
 
 interface IEmailSignatureBasicProps {
     person: IPersonModel;
+    utmParams: IUTMParamModel;
 };
 
 // tslint:disable-next-line: no-empty-interface
@@ -39,6 +41,11 @@ class EmailSignatureBasic extends React.Component<IEmailSignatureBasicProps, IEm
                     middleName: "",
                     title: "",
                 },
+            },
+            utmParams: {
+                utmContent: "",
+                utmMedium: "",
+                utmSource: "",
             }
         }
     }

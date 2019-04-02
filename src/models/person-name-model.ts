@@ -1,8 +1,9 @@
 export interface IPersonNameModel {
-    firstName: string,
+    givenName: string,
     fullName: string,
     fullNameSlug: string,
-    lastName: string,
-    middleName?: string,
-    title: string,
+    honorificPrefix?: string,
+    honorificSuffix?: string;
+    familyName: string,
+    additionalName?: string,
 }

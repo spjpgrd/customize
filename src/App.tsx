@@ -23,7 +23,6 @@ interface IAppState {
   workPhone: string;
   familyName: string;
   fullName: string;
-  firstLastSlug: string;
   fullNameSlug: string;
   givenName: string;
   honorificPrefix: string;
@@ -50,7 +49,6 @@ class App extends React.Component<IAppProps, IAppState> {
       familyName: "Schumann",
       fullName: "Jeff Schumann",
       fullNameSlug: "jeff-schumann",
-      firstLastSlug: "jeff-schumannn",
       givenName: "Jeff",
       honorificPrefix: "",
       honorificSuffix: "",

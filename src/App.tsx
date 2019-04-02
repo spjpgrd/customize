@@ -270,22 +270,22 @@ class App extends React.Component<IAppProps, IAppState> {
 
     this.state = {
       additionalName: "",
-      cellPhone: "",
-      emailAddress: "",
-      workPhone: "",
+      cellPhone: "555-867-5309",
+      emailAddress: "jeff@awarehq.com",
+      workPhone: "555-133-7123",
       // tslint:disable-next-line: object-literal-sort-keys
       employeeList,
       selectedEmployee: "",
-      familyName: "",
-      fullName: "",
-      fullNameSlug: "",
-      givenName: "",
+      familyName: "Schumann",
+      fullName: "Jeff Schumann",
+      fullNameSlug: "jeff-schumann",
+      givenName: "Jeff",
       honorificPrefix: "",
       honorificSuffix: "",
-      organizationTitle: "",
-      linkedinUrl: "",
-      workplaceUrl: "",
-      profilePicture: "",
+      organizationTitle: "CEO & Co-Founder",
+      linkedinUrl: "https://www.linkedin.com/in/jeffreyschumann/",
+      workplaceUrl: "https://wiretap.facebook.com/profile.php?id=100013799348501",
+      profilePicture: "https://www.awarehq.com/hubfs/email-signature/aware/jeff-schumann-aware-64.png",
       utmParams: {
         utmContent: "",
         utmMedium: UTMMediumEnum.EmailSignature,
@@ -358,7 +358,7 @@ class App extends React.Component<IAppProps, IAppState> {
         <div className="row between-xs">
           <div className="last-xs last-sm initial-order-md col-xs-12 col-sm-12 col-md-6 col-lg-5 col-xl-4">
             <form name="personal-info" autoComplete="on">
-              <fieldset>
+              {/* <fieldset>
                 <legend>Quick Setup</legend>
                 <label htmlFor="employeeSelected">What's your name?</label>
                 <input type="text" list="employeeList" id="employeeSelected" name="employeeSelected" onChange={this.handleEmployeeListSelection} autoFocus={true} />
@@ -367,7 +367,7 @@ class App extends React.Component<IAppProps, IAppState> {
                     <option key={index} value={employee.fullName}>{employee.fullName}</option>
                   ))}
                 </datalist>
-              </fieldset>
+              </fieldset> */}
               <fieldset>
                 <legend>Your Photo</legend>
                 <label htmlFor="profilePicture">Profile Picture URL</label><br />

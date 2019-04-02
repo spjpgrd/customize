@@ -24,24 +24,28 @@ class EmailSignatureBasic extends React.Component<IEmailSignatureBasicProps, IEm
     constructor(props: IEmailSignatureBasicProps) {
         super(props);
 
-        const officePhone = "844-433-3326";
+        // const workPhone = "844-433-3326";
 
         this.state = {
             person: {
                 contactOptions: {
                     cellPhone: "",
                     emailAddress: "",
-                    officePhone,
+                    workPhone: "",
                 },
-                jobTitle: "",
-                linkedinUrl: "",
                 name: {
-                    firstName: "",
+                    additionalName: "",
+                    familyName: "",
                     fullName: "",
                     fullNameSlug: "",
-                    lastName: "",
-                    middleName: "",
-                    title: "",
+                    givenName: "",
+                    honorificPrefix: "",
+                    honorificSuffix: "",
+                },
+                organizationTitle: "",
+                personalExternalLinks: {
+                    linkedinUrl: "",
+                    workplaceUrl: "",
                 },
             },
             utmParams: {

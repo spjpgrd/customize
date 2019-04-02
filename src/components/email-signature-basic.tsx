@@ -1,7 +1,7 @@
 import * as React from 'react';
 // import UTMMediumEnum from "../enums/utm-medium-enum";
 // import UTMSourceEnum from "../enums/utm-source-enum";
-import { IPersonModel } from "../models/person-model";
+// import { IPersonModel } from "../models/person-model";
 import { IUTMParamModel } from "../models/utm-param-model"
 
 // export interface IEmailSignatureBasic {
@@ -9,7 +9,7 @@ import { IUTMParamModel } from "../models/utm-param-model"
 // }
 
 interface IEmailSignatureBasicProps {
-    person: IPersonModel;
+    person: any;
     utmParams: IUTMParamModel;
 };
 
@@ -69,12 +69,12 @@ class EmailSignatureBasic extends React.Component<IEmailSignatureBasicProps, IEm
                     <tbody>
                         <tr>
                             <td style={{ paddingLeft: "0px", paddingTop: "32px", paddingBottom: " 4px", paddingRight: "0px", verticalAlign: "top" }}>
-                                {this.props.person.name.honorificPrefix}
-                                <a href="https://www.linkedin.com/in/austinjmckinley/"><img src="https://www.awarehq.com/hubfs/email-signature/austin-mckinley-64.png" style={{ textDecoration: "none!important", borderBottomWidth: "0", width: "64px", height: "64px", border: "none" }} width="64" height="64" alt={this.props.person.name.fullName} title={this.props.person.name.fullName} /></a></td>
+                                {this.props.person.honorificPrefix}
+                                <a href="https://www.linkedin.com/in/austinjmckinley/"><img src="https://www.awarehq.com/hubfs/email-signature/austin-mckinley-64.png" style={{ textDecoration: "none!important", borderBottomWidth: "0", width: "64px", height: "64px", border: "none" }} width="64" height="64" alt={this.props.person.fullName} title={this.props.person.fullName} /></a></td>
                         </tr>
                         <tr>
                             <td style={{ verticalAlign: "top", paddingLeft: "0px", paddingTop: "0px", paddingBottom: "8px", paddingRight: "0px" }}>
-                                <span style={{ textAlign: "left", color: "#26241F", fontFamily: "'Effra','Lato','-apple-system', 'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','sans-serif','Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol','sans-serif'", fontSize: "10pt", fontWeight: "bold" }}>{this.props.person.name.fullName}<br /><span style={{ textAlign: "left", marginTop: "0px", marginBottom: "0px", color: "#555759", fontFamily: "'Effra','Lato','-apple-system', 'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','sans-serif','Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol','sans-serif'", fontWeight: "normal", fontSize: "10pt", lineHeight: "1.5" }}>Director of Strategic Partnerships | Workplace<br />O: 614.407.9884 • <a style={{ textDecoration: "none", borderBottomWidth: "0", color: "#F16E25", fontFamily: "'Effra','Lato','-apple-system', 'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','sans-serif','Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol','sans-serif'", fontSize: "10pt", fontStyle: "normal", fontWeight: "normal", lineHeight: "1.5" }} href="mailto:austin.mckinley@awarehq.com">austin.mckinley@awarehq.com</a></span></span></td>
+                                <span style={{ textAlign: "left", color: "#26241F", fontFamily: "'Effra','Lato','-apple-system', 'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','sans-serif','Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol','sans-serif'", fontSize: "10pt", fontWeight: "bold" }}>{this.props.person.fullName}<br /><span style={{ textAlign: "left", marginTop: "0px", marginBottom: "0px", color: "#555759", fontFamily: "'Effra','Lato','-apple-system', 'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','sans-serif','Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol','sans-serif'", fontWeight: "normal", fontSize: "10pt", lineHeight: "1.5" }}>Director of Strategic Partnerships | Workplace<br />O: 614.407.9884 • <a style={{ textDecoration: "none", borderBottomWidth: "0", color: "#F16E25", fontFamily: "'Effra','Lato','-apple-system', 'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','sans-serif','Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol','sans-serif'", fontSize: "10pt", fontStyle: "normal", fontWeight: "normal", lineHeight: "1.5" }} href="mailto:austin.mckinley@awarehq.com">austin.mckinley@awarehq.com</a></span></span></td>
                         </tr>
                         <tr>
                             <td style={{ verticalAlign: "top", paddingLeft: "0px", paddingTop: "8px", paddingBottom: "0px", paddingRight: "0px", marginTop: "0px" }}>

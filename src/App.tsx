@@ -146,12 +146,12 @@ class App extends React.Component<IAppProps, IAppState> {
     return fullName;
   }
 
-  public async handleEmployeeListSelection(event: any) {
+  public handleEmployeeListSelection(event: any) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
     this.setState({
-      [name]: await value,
+      [name]: value,
     });
     // tslint:disable-next-line: no-console
     console.log({ value });

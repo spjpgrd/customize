@@ -178,8 +178,8 @@ class App extends React.Component<IAppProps, IAppState> {
               <fieldset>
                 <legend>Quick Setup</legend>
                 <label htmlFor="employeeSelected">What's your name?</label>
-                <input list="employeeList" id="employeeSelected" name="employeeSelected" />
-                <datalist onChange={this.handleEmployeeListSelection} id="employeeList" >
+                <input type="text" list="employeeList" id="employeeSelected" name="employeeSelected" onChange={this.handleEmployeeListSelection} />
+                <datalist id="employeeList" >
                   {this.state.employeeList.map((employee, index) => (
                     <option key={index} value={employee.name}>{employee.name}</option>
                   ))}

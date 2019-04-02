@@ -11,6 +11,9 @@ import UTMSourceEnum from "./enums/utm-source-enum";
 // import { IPersonModel } from './models/person-model';
 import { IUTMParamModel } from "./models/utm-param-model";
 
+interface IEmployeeList {
+  name: string;
+}
 // tslint:disable-next-line: no-empty-interface
 interface IAppProps {
 
@@ -32,6 +35,9 @@ interface IAppState {
   workplaceUrl: string;
   profilePicture: string;
   utmParams: IUTMParamModel;
+  profilePictureSelect: any;
+  employeeList: IEmployeeList[];
+  selectedEmployee: string;
   [key: string]: any;
 }
 
@@ -40,12 +46,53 @@ class App extends React.Component<IAppProps, IAppState> {
   constructor(props: IAppProps) {
     super(props);
 
+    const employeeList = [
+      { "name": "alex weiker", },
+      { "name": "andi scarcello", },
+      { "name": "anthony dario", },
+      { "name": "austin mckinley", },
+      { "name": "betsy barnhouse", },
+      { "name": "betsy sewell", },
+      { "name": "cooper davell", },
+      { "name": "craig seibert", },
+      { "name": "david bourke", },
+      { "name": "greg moran", },
+      { "name": "jack lawson", },
+      { "name": "james tsai", },
+      { "name": "jason morgan", },
+      { "name": "jason stein", },
+      { "name": "jeff schumann", },
+      { "name": "jeff spridgeon", },
+      { "name": "julia fletcher", },
+      { "name": "kaitlyn debelak", },
+      { "name": "kristi ritzer", },
+      { "name": "kristian vandemark", },
+      { "name": "kyjah keys", },
+      { "name": "kyle lescoezec", },
+      { "name": "matt huber", },
+      { "name": "matt pasternack", },
+      { "name": "matt stiffler", },
+      { "name": "megan mcclellan", },
+      { "name": "missy perdue", },
+      { "name": "nick holmer", },
+      { "name": "robb dunewood", },
+      { "name": "sarah kenny", },
+      { "name": "sean oneill", },
+      { "name": "sean patrick john paul george ringo doran", },
+      { "name": "shawn domer", },
+      { "name": "steve ruland", },
+      { "name": "susan smallwood", },
+      { "name": "xu joseph shen", },
+    ];
+
     this.state = {
       additionalName: "",
       cellPhone: "555-867-5309",
       emailAddress: "jeff@awarehq.com",
       workPhone: "555-133-7123",
       // tslint:disable-next-line: object-literal-sort-keys
+      employeeList,
+      selectedEmployee: "",
       familyName: "Schumann",
       fullName: "Jeff Schumann",
       fullNameSlug: "jeff-schumann",
@@ -56,6 +103,7 @@ class App extends React.Component<IAppProps, IAppState> {
       linkedinUrl: "https://www.linkedin.com/in/jeffreyschumann/",
       workplaceUrl: "https://wiretap.facebook.com/profile.php?id=100013799348501",
       profilePicture: "https://www.awarehq.com/hubfs/email-signature/aware/jeff-schumann-aware-64.png",
+      profilePictureSelect: {},
       utmParams: {
         utmContent: "",
         utmMedium: UTMMediumEnum.EmailSignature,
@@ -67,6 +115,7 @@ class App extends React.Component<IAppProps, IAppState> {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
     this.getFullNameDisplay = this.getFullNameDisplay.bind(this);
+    this.handleEmployeeListSelection = this.handleEmployeeListSelection.bind(this);
   }
 
   public handleInputChange(event: any) {
@@ -97,6 +146,10 @@ class App extends React.Component<IAppProps, IAppState> {
     return fullName;
   }
 
+  public handleEmployeeListSelection(event: any) {
+    this.setState({ selectedEmployee: event.target.selectedEmployee });
+  }
+
   // Probably wont work for easily autopopulating the profile picture
   // Example: Xu / Joseph
   // Forces someone to mess with the display name to get the right profile picture
@@ -113,6 +166,16 @@ class App extends React.Component<IAppProps, IAppState> {
         <div className="row between-xs">
           <div className="last-xs last-sm initial-order-md col-xs-12 col-sm-12 col-md-6 col-lg-5 col-xl-4">
             <form name="personal-info" autoComplete="on">
+              {/* <fieldset>
+                <legend>Quick Setup</legend>
+                <label htmlFor="employeeSelected">What's your name?</label>
+                <input list="employeeList" id="employeeSelected" name="employeeSelected" />
+                <datalist onChange={this.handleEmployeeListSelection} id="employeeList" >
+                  {this.state.employeeList.map((employee, index) => (
+                    <option key={index} value={employee.name}>{employee.name}</option>
+                  ))}
+                </datalist>
+              </fieldset> */}
               <fieldset>
                 <legend>Your Photo</legend>
                 <label htmlFor="profilePicture">Profile Picture URL</label><br />
@@ -171,7 +234,7 @@ class App extends React.Component<IAppProps, IAppState> {
                 utmParams={this.state.utmParams} />
             </div>
           </div>
-        </div>
+        </div >
       </>
     );
   }

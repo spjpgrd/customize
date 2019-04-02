@@ -1,7 +1,7 @@
 import * as React from 'react';
 // import UTMMediumEnum from "../enums/utm-medium-enum";
 // import UTMSourceEnum from "../enums/utm-source-enum";
-// import { IPersonModel } from "../models/person-model";
+import { IPersonModel } from "../models/person-model";
 import { IUTMParamModel } from "../models/utm-param-model"
 
 // export interface IEmailSignatureBasic {
@@ -9,7 +9,7 @@ import { IUTMParamModel } from "../models/utm-param-model"
 // }
 
 interface IEmailSignatureBasicProps {
-    person: any;
+    person: IPersonModel;
     utmParams: IUTMParamModel;
 };
 
@@ -70,7 +70,7 @@ class EmailSignatureBasic extends React.Component<IEmailSignatureBasicProps, IEm
                         <tr>
                             <td style={{ paddingLeft: "0px", paddingTop: "32px", paddingBottom: " 4px", paddingRight: "0px", verticalAlign: "top" }}>
                                 {this.props.person.honorificPrefix}
-                                <a href="https://www.linkedin.com/in/austinjmckinley/"><img src="https://www.awarehq.com/hubfs/email-signature/austin-mckinley-64.png" style={{ textDecoration: "none!important", borderBottomWidth: "0", width: "64px", height: "64px", border: "none" }} width="64" height="64" alt={this.props.person.fullName} title={this.props.person.fullName} /></a></td>
+                                <a href={this.props.person.linkedinUrl}><img src="https://www.awarehq.com/hubfs/email-signature/austin-mckinley-64.png" style={{ textDecoration: "none!important", borderBottomWidth: "0", width: "64px", height: "64px", border: "none" }} width="64" height="64" alt={this.props.person.fullName} title={this.props.person.fullName} /></a></td>
                         </tr>
                         <tr>
                             <td style={{ verticalAlign: "top", paddingLeft: "0px", paddingTop: "0px", paddingBottom: "8px", paddingRight: "0px" }}>

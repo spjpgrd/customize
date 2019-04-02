@@ -8,6 +8,7 @@ import UTMSourceEnum from "./enums/utm-source-enum";
 // import { slugify } from './helpers/helpers';
 // import { IPersonModel } from './models/person-model';
 import { IUTMParamModel } from "./models/utm-param-model";
+import { IPersonModel } from './models/person-model';
 
 
 // tslint:disable-next-line: no-empty-interface
@@ -16,7 +17,7 @@ interface IAppProps {
 }
 
 interface IAppState {
-  person: any;
+  person: IPersonModel;
   utmParams: IUTMParamModel;
   [key: string]: any;
 }

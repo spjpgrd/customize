@@ -154,7 +154,9 @@ class App extends React.Component<IAppProps, IAppState> {
       [name]: await value,
     });
     // tslint:disable-next-line: no-console
-    console.log({ event });
+    console.log({ value });
+    // tslint:disable-next-line: no-console
+    console.log({ name });
   }
 
   // Probably wont work for easily autopopulating the profile picture

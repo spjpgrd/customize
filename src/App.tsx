@@ -23,6 +23,7 @@ interface IAppState {
   workPhone: string;
   familyName: string;
   fullName: string;
+  firstLastSlug: string;
   fullNameSlug: string;
   givenName: string;
   honorificPrefix: string;
@@ -49,6 +50,7 @@ class App extends React.Component<IAppProps, IAppState> {
       familyName: "",
       fullName: "",
       fullNameSlug: "",
+      firstLastSlug: "",
       givenName: "",
       honorificPrefix: "",
       honorificSuffix: "",
@@ -96,6 +98,13 @@ class App extends React.Component<IAppProps, IAppState> {
     const fullName = [honorificPrefix, givenName, additionalName, familyName, honorificSuffix].filter(function (value) { return value; }).join(" ");
     return fullName;
   }
+
+  // Probably wont work for easily autopopulating the profile picture
+  // Example: Xu / Joseph
+  // Forces someone to mess with the display name to get the right profile picture
+  // Too finnicky
+  // public getFirstLastSlug(givenName: string | null, familyName: string | null) {
+  // }
 
   // tslint:disable-next-line: member-access
   render() {

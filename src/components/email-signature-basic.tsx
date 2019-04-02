@@ -15,6 +15,7 @@ interface IEmailSignatureBasicProps {
     workPhone: string;
     familyName: string;
     fullName: string;
+    firstLastSlug: string;
     fullNameSlug: string;
     givenName: string;
     honorificPrefix: string;

@@ -146,8 +146,15 @@ class App extends React.Component<IAppProps, IAppState> {
     return fullName;
   }
 
-  public handleEmployeeListSelection(event: any) {
-    this.setState({ selectedEmployee: event.target.selectedEmployee });
+  public async handleEmployeeListSelection(event: any) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+    this.setState({
+      [name]: await value,
+    });
+    // tslint:disable-next-line: no-console
+    console.log({ event });
   }
 
   // Probably wont work for easily autopopulating the profile picture
@@ -166,7 +173,7 @@ class App extends React.Component<IAppProps, IAppState> {
         <div className="row between-xs">
           <div className="last-xs last-sm initial-order-md col-xs-12 col-sm-12 col-md-6 col-lg-5 col-xl-4">
             <form name="personal-info" autoComplete="on">
-              {/* <fieldset>
+              <fieldset>
                 <legend>Quick Setup</legend>
                 <label htmlFor="employeeSelected">What's your name?</label>
                 <input list="employeeList" id="employeeSelected" name="employeeSelected" />
@@ -175,7 +182,7 @@ class App extends React.Component<IAppProps, IAppState> {
                     <option key={index} value={employee.name}>{employee.name}</option>
                   ))}
                 </datalist>
-              </fieldset> */}
+              </fieldset>
               <fieldset>
                 <legend>Your Photo</legend>
                 <label htmlFor="profilePicture">Profile Picture URL</label><br />

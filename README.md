@@ -4,7 +4,7 @@
 
 A painless tool to create HTML email signatures — without coding another table. Built with React.
 
-[View the Live Demo](https://customize-me.spjpgrd.now.sh/)
+**[View the Live Demo 🚀](https://customize-me.spjpgrd.now.sh/)**
 
 * * *
 

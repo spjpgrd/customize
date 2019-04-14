@@ -1,4 +1,4 @@
-![Customize Hero](https://raw.githubusercontent.com/spjpgrd/customize/52b0d353ce048ae8d46cba1116ce96cbde1dddad/public/customize-og-image-v1.png)
+![Customize Hero](https://github.com/spjpgrd/customize/blob/master/public/customize-og-image-v1.png)
 
 # Customize
 

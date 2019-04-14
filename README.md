@@ -1,8 +1,10 @@
-![Customize Hero](https://raw.githubusercontent.com/spjpgrd/customize/52b0d353ce048ae8d46cba1116ce96cbde1dddad/public/customize-og-image-v1.png)
+![Customize Hero](https://github.com/spjpgrd/customize/blob/master/public/customize-og-image-v1.png)
 
 # Customize
 
 A painless tool to create HTML email signatures — without coding another table. Built with React.
+
+**[View the Live Demo 🚀](https://customize-me.spjpgrd.now.sh/)**
 
 * * *
 

@@ -6,9 +6,7 @@ import 'flexboxgrid2'
 import Checkbox from "./components/checkbox";
 import EmailSignatureBasic from './components/email-signature-basic';
 import Modal from "./components/modal";
-import UTMMediumEnum from "./enums/utm-medium-enum";
-import UTMSourceEnum from "./enums/utm-source-enum";
-import { slugify } from './helpers/helpers';
+import { getSlugIfNotNull } from './helpers/helpers';
 // import { IPersonModel } from './models/person-model';
 // import { IPersonModel } from './models/person-model';
 import { IUTMParamModel } from "./models/utm-param-model";
@@ -42,12 +40,15 @@ interface IAppState {
   honorificPrefix: string;
   honorificSuffix: string;
   isBoxModalOpen: boolean;
+  isCopyHtmlModalOpen: boolean;
   organizationTitle: string;
   linkedinUrl: string;
   workplaceUrl: string;
   profilePicture: string;
+  companyLogoUrl: string;
   sameLinePhoneNumbers: boolean;
   utmParams: IUTMParamModel;
+  utmContent: string;
   // employeeList: IEmployeeList[];
   selectedEmployee: string;
   [key: string]: any;
@@ -77,23 +78,26 @@ class App extends React.Component<IAppProps, IAppState> {
       honorificPrefix: "",
       honorificSuffix: "",
       isBoxModalOpen: false,
+      isCopyHtmlModalOpen: false,
       organizationTitle: "CEO & Co-Founder",
       linkedinUrl: "https://www.linkedin.com/in/jeffreyschumann/",
       sameLinePhoneNumbers: true,
       workplaceUrl: "https://wiretap.facebook.com/profile.php?id=100013799348501",
       profilePicture: "https://wiretapfiles.box.com/shared/static/81nuynta2p10mbvg0kksiy8pa18qv140.png",
+      companyLogoUrl: "https://github.com/spjpgrd/customize/blob/master/public/company-logos/aware-email-32.png?raw=true",
       utmParams: {
         utmContent: "",
-        utmMedium: UTMMediumEnum.EmailSignature,
-        utmSource: UTMSourceEnum.Email,
+        utmMedium: "email-signature",
+        utmSource: "email",
       },
+      utmContent: "",
       // tslint:disable-next-line: object-literal-sort-keys
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleUtmChange = this.handleUtmChange.bind(this);
     this.getFullNameDisplay = this.getFullNameDisplay.bind(this);
-    this.getFullNameSlug = this.getFullNameSlug.bind(this);
     this.toggleBoxModal = this.toggleBoxModal.bind(this);
     // this.handleEmployeeListSelection = this.handleEmployeeListSelection.bind(this);
     // this.handleCheckboxChange = this.handleCheckboxChange.bind(this);fhandleCheckboxChange
@@ -119,9 +123,18 @@ class App extends React.Component<IAppProps, IAppState> {
       [name]: await value,
     });
     const fullName = this.getFullNameDisplay(this.state.honorificPrefix, this.state.givenName, this.state.additionalName, this.state.familyName, this.state.honorificSuffix);
-    const fullNameSlug = this.getFullNameSlug(fullName);
+    const fullNameSlug = getSlugIfNotNull(fullName);
 
     this.setState({ fullName, fullNameSlug });
+  }
+
+  public async handleUtmChange(event: any) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+    this.setState({
+      [name]: await value,
+    });
   }
 
   public getFullNameDisplay(honorificPrefix: string | null, givenName: string | null, additionalName: string | null, familyName: string | null, honorificSuffix: string | null) {
@@ -130,20 +143,27 @@ class App extends React.Component<IAppProps, IAppState> {
     return fullName;
   }
 
-  public getFullNameSlug(fullName: string | null) {
-    if (fullName != null) {
-      const fullNameSlug = slugify(fullName);
-      return fullNameSlug;
-    } else {
-      return "";
-    }
-  }
-
   public toggleBoxModal = () => {
     this.setState({
       isBoxModalOpen: !this.state.isBoxModalOpen
     });
   }
+
+  public toggleCopyHtmlModal = () => {
+    this.setState({
+      isCopyHtmlModalOpen: !this.state.isCopyHtmlModalOpen
+    });
+  }
+
+  // public copyDivAsHtmlToClipboard(elementId: string) {
+  //   if ((document !== null) && (document.getElementById(elementId) !== null)) {
+  //     const domNode = document.getElementById(elementId);
+  //     if (domNode !== null) {
+  //       return domNode.innerHTML
+
+  //     }
+  //   }
+  // }
 
   // public async handleEmployeeListSelection(event: any) {
   //   const target = event.target;
@@ -195,7 +215,7 @@ class App extends React.Component<IAppProps, IAppState> {
               </header>
             </div>
             <div className="col-xs-6">
-              <div className="c-nav-time">Updated: <time>April 12, 2019</time></div>
+              <div className="c-nav-time">Updated: <time>May 3, 2019</time></div>
             </div>
           </div>
         </nav>
@@ -237,6 +257,11 @@ class App extends React.Component<IAppProps, IAppState> {
                     <input type="text" name="organizationTitle" required={true} autoComplete="organization-title" title="Your job description this month 📝" value={this.state.organizationTitle || ""} onChange={this.handleInputChange} /><br />
                   </fieldset>
                   <fieldset>
+                    <legend>Your Company's Logo</legend>
+                    <label htmlFor="companyLogoUrl">Company Logo URL<span className="c-form-label__optional">(optional)</span></label><br />
+                    <input type="photo" name="companyLogoUrl" value={this.state.companyLogoUrl} required={false} onChange={this.handleInputChange} /><br />
+                  </fieldset>
+                  <fieldset>
                     <legend>Contact Options</legend>
                     <label htmlFor="workPhone">Office Phone <span className="c-form-label__optional">(optional)</span></label><br />
                     <input type="tel-national" name="workPhone" autoComplete="tel-national" value={this.state.workPhone || ""} onChange={this.handleInputChange} /><br />
@@ -249,6 +274,16 @@ class App extends React.Component<IAppProps, IAppState> {
                 <input type="url" name="workplaceUrl" value={this.state.workplaceUrl || ""} onChange={this.handleInputChange} /><br /> */}
                     <label htmlFor="linkedinUrl">LinkedIn Profile <span className="c-form-label__optional">(optional)</span></label><br />
                     <input type="url" name="linkedinUrl" value={this.state.linkedinUrl || ""} onChange={this.handleInputChange} /><br />
+                  </fieldset>
+                  <fieldset>
+                    <legend>UTM Parameters</legend>
+                    <label htmlFor="utmContent">Kind of Content<span className="c-form-label__optional">(optional)</span></label><br />
+                    <span className="c-form-input__example">Examples: Reply, Ignite 2019, Out-of-Office</span><br />
+                    <input type="text" name="utmContent" value={this.state.utmContent || ""} onChange={this.handleUtmChange} /><br />
+                    <label htmlFor="utmMedium">Medium<span className="c-form-label__optional">(fixed value)</span></label><br />
+                    <input type="text" name="utmMedium" autoCorrect="off" value={this.state.utmParams.utmMedium} readOnly={true} disabled={true} style={{ cursor: "not-allowed" }} /><br />
+                    <label htmlFor="utmSource">Source<span className="c-form-label__optional">(fixed value)</span></label><br />
+                    <input type="text" name="utmSource" autoCorrect="off" value={this.state.utmParams.utmSource} readOnly={true} disabled={true} style={{ cursor: "not-allowed" }} /><br />
                   </fieldset>
                   <fieldset>
                     <legend>Alterations</legend>
@@ -345,8 +380,19 @@ class App extends React.Component<IAppProps, IAppState> {
                     linkedinUrl={this.state.linkedinUrl}
                     workplaceUrl={this.state.workplaceUrl}
                     profilePicture={this.state.profilePicture}
-                    utmParams={this.state.utmParams} />
+                    companyLogoUrl={this.state.companyLogoUrl}
+                    utmParams={this.state.utmParams}
+                    utmContent={this.state.utmContent} />
                 </div>
+                {/* <hr />
+                <div>
+                  <button onClick={this.copySignature}>
+                    Copy Signature
+                  </button>
+                  <button onClick={this.copyDivAsHtmlToClipboard()}>
+                    Copy Signature as HTML
+                  </button>
+                </div> */}
               </div>
             </div>
           </div>
@@ -372,6 +418,42 @@ class App extends React.Component<IAppProps, IAppState> {
             </p>
           </div>
         </Modal>
+        {/* <Modal show={this.state.isCopyHtmlModalOpen}
+          onClose={this.toggleCopyHtmlModal}>
+          <div className="c-modal">
+            <h2>
+              Copy HTML
+            </h2>
+            <p>
+              <pre style={{ height: "12.5em" }}>
+                <EmailSignatureBasic
+                  additionalName={this.state.additionalName}
+                  cellPhone={this.state.cellPhone}
+                  emailAddress={this.state.emailAddress}
+                  workPhone={this.state.workPhone}
+                  familyName={this.state.familyName}
+                  fullName={this.state.fullName}
+                  fullNameSlug={this.state.fullNameSlug}
+                  givenName={this.state.givenName}
+                  hidePicture={this.state.hidePicture}
+                  hideAwareLogo={this.state.hideAwareLogo}
+                  hideAddress={this.state.hideAddress}
+                  hideSocialLinks={this.state.hideSocialLinks}
+                  hideFKAW={this.state.hideFKAW}
+                  honorificPrefix={this.state.honorificPrefix}
+                  honorificSuffix={this.state.honorificSuffix}
+                  sameLinePhoneNumbers={this.state.sameLinePhoneNumbers}
+                  organizationTitle={this.state.organizationTitle}
+                  linkedinUrl={this.state.linkedinUrl}
+                  workplaceUrl={this.state.workplaceUrl}
+                  profilePicture={this.state.profilePicture}
+                  companyLogoUrl={this.state.companyLogoUrl}
+                  utmParams={this.state.utmParams}
+                  utmContent={this.state.utmContent} />
+              </pre>
+            </p>
+          </div>
+        </Modal> */}
       </>
     );
   }

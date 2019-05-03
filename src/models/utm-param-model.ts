@@ -3,7 +3,9 @@
 // import UTMSourceEnum from "../enums/utm-source-enum";
 
 export interface IUTMParamModel {
-  utmContent: string;
-  utmMedium: string;
+  utmTerm?: string;
+  utmCampaign?: string;
+  utmContent?: string;
+  utmMedium?: string;
   utmSource: string;
 }

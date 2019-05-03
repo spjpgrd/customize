@@ -6,7 +6,7 @@ import 'flexboxgrid2'
 import Checkbox from "./components/checkbox";
 import EmailSignatureBasic from './components/email-signature-basic';
 import Modal from "./components/modal";
-import { getSlugIfNotNull, setBackgroundColorForRubberbanding } from './helpers/helpers';
+import { getSlugIfNotNull } from './helpers/helpers';
 // import { IPersonModel } from './models/person-model';
 // import { IPersonModel } from './models/person-model';
 import { IUTMParamModel } from "./models/utm-param-model";
@@ -74,10 +74,10 @@ class App extends React.Component<IAppProps, IAppState> {
       // employeeList,
       // tslint:disable-next-line: object-literal-sort-keys
       selectedEmployee: "",
-      familyName: "Schumann",
+      familyName: "",
       fullName: "Jeff Schumann",
       fullNameSlug: "jeff-schumann",
-      givenName: "Jeff",
+      givenName: "Jeff Schumann",
       hidePicture: false,
       hideAwareLogo: false,
       hideAddress: false,
@@ -173,49 +173,6 @@ class App extends React.Component<IAppProps, IAppState> {
     });
   }
 
-  public componentDidMount() {
-    setBackgroundColorForRubberbanding(document, window);
-  }
-
-  // public copyDivAsHtmlToClipboard(elementId: string) {
-  //   if ((document !== null) && (document.getElementById(elementId) !== null)) {
-  //     const domNode = document.getElementById(elementId);
-  //     if (domNode !== null) {
-  //       return domNode.innerHTML
-
-  //     }
-  //   }
-  // }
-
-  // public async handleEmployeeListSelection(event: any) {
-  //   const target = event.target;
-  //   const value = target.type === 'checkbox' ? target.checked : target.value;
-  //   const name = target.name;
-  //   await this.setState({
-  //     [name]: value,
-  //   });
-  //   const fullNameSlug = value.replace("/profile-photos/", "").replace("-aware-128.png", "");
-  //   await this.setState({ fullNameSlug });
-  //   const utmParams = Object.assign({}, this.state.utmParams);
-  //   utmParams.utmCampaign = value;
-  //   await this.setState({ utmParams });
-  // }
-
-  // public handleCheckboxChange =(changeEvent: any) => {
-  //   const { name } = changeEvent.target;
-
-  //   this.setState({
-  //     [name]: value,
-  //   });
-  // }
-
-  // Probably wont work for easily autopopulating the profile picture
-  // Example: Xu / Joseph
-  // Forces someone to mess with the display name to get the right profile picture
-  // Too finnicky
-  // public getFirstLastSlug(givenName: string | null, familyName: string | null) {
-  // }
-
   // tslint:disable-next-line: member-access
   render() {
     return (
@@ -246,59 +203,39 @@ class App extends React.Component<IAppProps, IAppState> {
             <div className="row between-xs">
               <div className="last-xs last-sm initial-order-md col-xs-12 col-sm-12 col-md-6 col-lg-5 col-xl-4">
                 <form name="personal-info" autoComplete="on">
-                  {/* <fieldset>
-                    <legend>Pick Your Pic</legend>
-                    <label htmlFor="profilePicture">Browse or type to search</label>
-                    <input type="text" list="employeeList" id="profilePicture" name="profilePicture" onChange={this.handleEmployeeListSelection} autoFocus={true} />
-                    <datalist id="employeeList" >
-                      {this.state.employeeList.map((employee, index) => (
-                        <option key={index} value={employee.profilePicture}>{employee.profilePicture}</option>
-                      ))}
-                    </datalist>
-                  </fieldset> */}
                   <fieldset>
                     <legend>Your Photo</legend>
-                    <label htmlFor="profilePicture">🖼️ Profile Picture URL</label><a style={{ float: "right", cursor: "pointer", fontSize: ".8em", color: "rgb(72, 54, 150)" }} onClick={this.toggleBoxModal}>Need Help with Box?</a><br />
+                    <label htmlFor="profilePicture"><span aria-hidden="true">🖼️ </span>Profile Picture URL</label><a style={{ float: "right", cursor: "pointer", fontSize: ".8em", color: "rgb(72, 54, 150)" }} onClick={this.toggleBoxModal}>Need Help with Box?</a><br />
                     <input type="photo" name="profilePicture" value={this.state.profilePicture} required={true} onChange={this.handleInputChange} /><br />
                   </fieldset>
                   <fieldset>
                     <legend>Your Details</legend>
-                    <label htmlFor="honorificPrefix">👑 Honorific Prefix <span className="c-form-label__optional">(optional)</span></label><br />
-                    <span className="c-form-input__example">Examples: Dr., Sir, Queen</span><br />
-                    <input type="text" name="honorificPrefix" autoCorrect="off" title="Dr., Sir, Queen, etc. 👑" autoComplete="honorific-prefix" value={this.state.honorificPrefix || ""} onChange={this.handleNameChange} /><br />
-                    <label htmlFor="givenName">🙂 First Name</label><br />
+                    <label htmlFor="givenName"><span aria-hidden="true">🙂 </span>Your Name</label><br />
                     <input type="text" name="givenName" required={true} autoCorrect="off" autoComplete="given-name" title="What do they call you? 🤔" value={this.state.givenName || ""} onChange={this.handleNameChange} /><br />
-                    <label htmlFor="additionalName">😃 Middle Name <span className="c-form-label__optional">(optional)</span></label><br />
-                    <input type="text" name="additionalName" autoCorrect="off" autoComplete="additionalName" title="I once worked with someone who had five middle names 🥁" value={this.state.additionalName || ""} onChange={this.handleNameChange} /><br />
-                    <label htmlFor="familyName">😁 Last Name</label><br />
-                    <input type="text" name="familyName" required={true} autoCorrect="off" autoComplete="family-name" title="Your last name, please 🙃" value={this.state.familyName || ""} onChange={this.handleNameChange} /><br />
-                    <label htmlFor="honorificSuffix">🤙 Honorific Suffix <span className="c-form-label__optional">(optional)</span></label><br />
-                    <span className="c-form-input__example">Examples: Jr., PhD, MBA</span><br />
-                    <input type="text" name="honorificSuffix" autoCorrect="off" autoComplete="honorific-suffix" title="Suffix or bust 🎰" value={this.state.honorificSuffix || ""} onChange={this.handleNameChange} /><br />
-                    <label htmlFor="organizationTitle">💼 Job Title</label><br />
+                    <label htmlFor="organizationTitle"><span aria-hidden="true">💼 </span>Job Title</label><br />
                     <input type="text" name="organizationTitle" required={true} autoComplete="organization-title" title="Your job description this month 📝" value={this.state.organizationTitle || ""} onChange={this.handleInputChange} /><br />
                   </fieldset>
                   <fieldset>
                     <legend>Your Company's Details</legend>
-                    <label htmlFor="companyName">📛 Company Name</label><br />
+                    <label htmlFor="companyName"><span aria-hidden="true">📛 </span>Company Name</label><br />
                     <input type="text" name="companyName" value={this.state.companyName} required={false} onChange={this.handleInputChange} /><br />
-                    <label htmlFor="companyLogoUrl">🎨 Company Logo URL<span className="c-form-label__optional">(optional)</span></label><br />
+                    <label htmlFor="companyLogoUrl"><span aria-hidden="true">🎨 </span>Company Logo URL<span className="c-form-label__optional">(optional)</span></label><br />
                     <input type="photo" name="companyLogoUrl" value={this.state.companyLogoUrl} required={false} onChange={this.handleInputChange} /><br />
-                    <label htmlFor="directionsUrl">📍 Directions URL<span className="c-form-label__optional">(optional)</span></label><br />
+                    <label htmlFor="directionsUrl"><span aria-hidden="true">📍 </span>Directions URL<span className="c-form-label__optional">(optional)</span></label><br />
                     <input type="url" name="directionsUrl" value={this.state.directionsUrl} required={false} onChange={this.handleInputChange} /><br />
                   </fieldset>
                   <fieldset>
                     <legend>Contact Options</legend>
-                    <label htmlFor="workPhone">☎️ Office Phone<span className="c-form-label__optional">(optional)</span></label><br />
+                    <label htmlFor="workPhone"><span aria-hidden="true">☎️</span> Office Phone<span className="c-form-label__optional">(optional)</span></label><br />
                     <input type="tel-national" name="workPhone" autoComplete="tel-national" value={this.state.workPhone || ""} onChange={this.handleInputChange} /><br />
-                    <label htmlFor="cellPhone">📱 Cell Phone <span className="c-form-label__optional">(optional)</span></label><br />
+                    <label htmlFor="cellPhone"><span aria-hidden="true">📱 </span>Cell Phone <span className="c-form-label__optional">(optional)</span></label><br />
                     <input type="tel-national" name="cellPhone" autoComplete="tel-national" value={this.state.cellPhone || ""} onChange={this.handleInputChange} /><br />
-                    <label htmlFor="emailAddress">💌 Email Address </label><br />
+                    <label htmlFor="emailAddress"><span aria-hidden="true">💌 </span>Email Address </label><br />
                     <input type="email" name="emailAddress" required={true} autoComplete="email" pattern="^[a-zA-Z0-9]+@[a-zA-Z0-9].awarehq.[a-zA-z]+$" title="Please use your @awarehq.com address 📬" value={this.state.emailAddress} onChange={this.handleInputChange} /><br />
-                    {/* <label htmlFor="workplaceUrl">Workplace Profile <span className="c-form-label__optional">(optional)</span></label><br />
+                    {/* <label htmlFor="workplaceUrl"><span aria-hidden="true">Wo</span>rkplace Profile <span className="c-form-label__optional">(optional)</span></label><br />
                 <span className="c-form-input__example">Tip: <a href={"https://workplace.com/?utm_medium=email-sig?utm_source=" + this.state.fullNameSlug} target="_blank">Head to Workplace</a>, go to your profile, and copy the URL from the address bar</span><br />
                 <input type="url" name="workplaceUrl" value={this.state.workplaceUrl || ""} onChange={this.handleInputChange} /><br /> */}
-                    <label htmlFor="linkedinUrl">🔗 LinkedIn Profile <span className="c-form-label__optional">(optional)</span></label><br />
+                    <label htmlFor="linkedinUrl"><span aria-hidden="true">🔗 </span>LinkedIn Profile <span className="c-form-label__optional">(optional)</span></label><br />
                     <input type="url" name="linkedinUrl" value={this.state.linkedinUrl || ""} onChange={this.handleInputChange} /><br />
                   </fieldset>
                   <fieldset>
@@ -318,27 +255,6 @@ class App extends React.Component<IAppProps, IAppState> {
                   </fieldset>
                   <fieldset>
                     <legend>Alterations</legend>
-                    {/* <label htmlFor="hidePicture" className="u-cur--pointer">
-                      <input type="checkbox" name="hidePicture" id="hidePicture" value={this.state.hidePicture} />
-                      <span className="c-checkbox-input-text">Hide My Picture</span>
-                    </label><br />
-                    <label htmlFor="hideAwareLogo" className="u-cur--pointer">
-                      <input type="checkbox" name="hideAwareLogo" id="hideAwareLogo" value={this.state.hideAwareLogo} />
-                      <span className="c-checkbox-input-text">Hide Aware Logo</span>
-                    </label><br />
-                    <label htmlFor="hideAddress" className="u-cur--pointer">
-                      <input type="checkbox" name="hideAddress" id="hideAddress" value={this.state.hideAddress} />
-                      <span className="c-checkbox-input-text">Hide Address</span>
-                    </label><br />
-                    <label htmlFor="hideSocialLinks" className="u-cur--pointer">
-                      <input type="checkbox" name="hideSocialLinks" id="hideSocialLinks" value={this.state.hideSocialLinks} />
-                      <span className="c-checkbox-input-text">Hide Social Links</span>
-                    </label><br />
-                    <label htmlFor="hideFKAW" className="u-cur--pointer">
-                      <input type="checkbox" name="hideFKAW" id="hideFKAW" value={this.state.hideFKAW} />
-                      <span className="c-checkbox-input-text">Hide "Formerly Known as Wiretap"</span>
-                    </label><br />
-                    <hr /> */}
                     <Checkbox
                       label="Put phone numbers on same line"
                       name="sameLinePhoneNumbers"

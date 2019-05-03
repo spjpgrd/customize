@@ -84,7 +84,7 @@ class App extends React.Component<IAppProps, IAppState> {
       sameLinePhoneNumbers: true,
       workplaceUrl: "https://wiretap.facebook.com/profile.php?id=100013799348501",
       profilePicture: "https://wiretapfiles.box.com/shared/static/81nuynta2p10mbvg0kksiy8pa18qv140.png",
-      companyLogoUrl: "https://github.com/spjpgrd/customize/blob/master/public/company-logos/aware-email-32.png?raw=true",
+      companyLogoUrl: "https://www.awarehq.com/hubfs/email-signature/aware/aware-email-32.png",
       utmParams: {
         utmContent: "",
         utmMedium: "email-signature",

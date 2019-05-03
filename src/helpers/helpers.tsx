@@ -8,3 +8,12 @@ export function slugify(text: string) {
         .replace(/^-+/, "")
         .replace(/-+$/, "");
 }
+
+export function getSlugIfNotNull(inputText: string | null) {
+    if (inputText != null) {
+        const inputTextSlug = slugify(inputText);
+        return inputTextSlug;
+    } else {
+        return "";
+    }
+}

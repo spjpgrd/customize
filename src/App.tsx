@@ -296,7 +296,9 @@ class App extends React.Component<IAppProps, IAppState> {
                   </fieldset>
                 </form>
                 <footer className="u-mb7">
-                  <small>Hacked together for Aware \u00B7 <a href="https://github.com/spjpgrd/customize" target="_blank">View on Github</a></small>
+                  <small>Hacked together for Aware · <a href="https://github.com/spjpgrd/customize" target="_blank">View on Github</a></small><br />
+                  <hr />
+                  <small><a href="https://wiretapfiles.app.box.com/folder/72642759039" target="_blank">Grab an Aware wallpaper in Box</a></small>
                 </footer>
               </div>
               <div className="col-xs-12 col-sm-12 col-md-5 col-lg-6 col-xl-7">

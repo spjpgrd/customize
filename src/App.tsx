@@ -240,17 +240,15 @@ class App extends React.Component<IAppProps, IAppState> {
                     <input type="photo" name="companyLogoUrl" value={this.state.companyLogoUrl} required={false} onChange={this.handleInputChange} /><br />
                     <div className="row">
                       <div className="col-xs-6">
-                        <label htmlFor="companyLogoWidth"><span aria-hidden="true">📏 </span>Logo Width</label><br />
-                        <span className="c-form-input__example">In pixels</span><br />
-                        <div className="col-xs-6">
-                          <input type="number" name="companyLogoWidth" value={this.state.companyLogoWidth} required={false} onChange={this.handleInputChange} />
+                        <label htmlFor="companyLogoWidth">Logo Width (px)</label><br />
+                        <div className="col-xs-8" style={{ marginRight: "0", paddingRight: "0", marginLeft: "0", paddingLeft: "0" }}>
+                          <input type="number" name="companyLogoWidth" value={this.state.companyLogoWidth} required={false} onChange={this.handleInputChange} className="u-ff--mono u-fvn--tab" />
                         </div>
                       </div>
                       <div className="col-xs-6">
-                        <label htmlFor="companyLogoHeight"><span aria-hidden="true">📐 </span>Logo Height</label><br />
-                        <span className="c-form-input__example">In pixels</span><br />
-                        <div className="col-xs-6">
-                          <input type="number" name="companyLogoHeight" value={this.state.companyLogoHeight} required={false} onChange={this.handleInputChange} /><br />
+                        <label htmlFor="companyLogoHeight">Logo Height (px)</label><br />
+                        <div className="col-xs-8" style={{ marginRight: "0", paddingRight: "0", marginLeft: "0", paddingLeft: "0" }}>
+                          <input type="number" name="companyLogoHeight" value={this.state.companyLogoHeight} required={false} onChange={this.handleInputChange} className="u-ff--mono u-fvn--tab" /><br />
                         </div>
                       </div>
                     </div>
@@ -262,7 +260,7 @@ class App extends React.Component<IAppProps, IAppState> {
                     <label htmlFor="directionsUrl"><span aria-hidden="true">📍 </span>Directions URL<span className="c-form-label__optional">(optional)</span></label><br />
                     <input type="url" name="directionsUrl" value={this.state.directionsUrl} required={false} onChange={this.handleInputChange} />
                     <label htmlFor="companyAddress"><span aria-hidden="true">📬 </span>Company Address<span className="c-form-label__optional">(optional)</span></label><br />
-                    <input type="photo" name="companyAddress" value={this.state.companyAddress} required={false} onChange={this.handleInputChange} />
+                    <input type="text" name="companyAddress" value={this.state.companyAddress} required={false} onChange={this.handleInputChange} />
                   </fieldset>
                   <fieldset>
                     <legend>UTM Parameters</legend>
@@ -360,7 +358,7 @@ class App extends React.Component<IAppProps, IAppState> {
               How to Get a Direct Link to an <span className="u-nowrap">Image in Box</span>
             </h2>
             <p>
-              A direct link will end in the file extension.<br />This is the kind of URL the generator needs 👍
+              A direct link will end in the file extension. This is the kind of URL the generator needs 👍
           </p>
             <img src="/assets/images/how-to-get-a-public-link-from-box.gif" style={{ border: "2px solid rgba(0,0,0,.05)", marginTop: "16px", marginBottom: "24px" }} />
             <p>

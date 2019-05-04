@@ -318,7 +318,7 @@ Icon.png
 *.csr
 *.css
 *.htm
-*.html
+# *.html
 *.js
 *.jsp
 *.php

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getSlugIfNotNull } from 'src/helpers/helpers';
+import { slugify } from 'src/helpers/helpers';
 // import UTMMediumEnum from "../enums/utm-medium-enum";
 // import UTMSourceEnum from "../enums/utm-source-enum";
 // import { IPersonModel } from "../models/person-model";
@@ -62,8 +62,8 @@ class EmailSignatureBasic extends React.Component<IEmailSignatureBasicProps, IEm
     }
 
     public render() {
-        const utmCampaignSlug = getSlugIfNotNull(this.props.utmCampaign);
-        const fullUtmParams = `?utm_content=${this.props.utmParams.utmContent}-via-${this.props.fullNameSlug}&utm_medium=${this.props.utmParams.utmMedium}&utm_source=${this.props.utmParams.utmSource}${utmCampaignSlug !== "" && `&utm_campaign=${utmCampaignSlug}`}`;
+        const utmCampaignSlug = slugify(this.props.utmCampaign).trim();
+        const fullUtmParams = `?utm_content=${this.props.utmParams.utmContent}-via-${this.props.fullNameSlug}&utm_medium=${this.props.utmParams.utmMedium}&utm_source=${this.props.utmParams.utmSource}${utmCampaignSlug !== "" ? `&utm_campaign=${utmCampaignSlug}` : ``}`;
 
         return (
             <>

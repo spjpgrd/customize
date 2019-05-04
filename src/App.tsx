@@ -46,6 +46,8 @@ interface IAppState {
   workplaceUrl: string;
   profilePicture: string;
   companyLogoUrl: string;
+  companyLogoWidth: number;
+  companyLogoHeight: number;
   companyAddress: string;
   companyWebsite: string;
   companyLinkedIn: string;
@@ -68,9 +70,9 @@ class App extends React.Component<IAppProps, IAppState> {
     super(props);
     this.state = {
       additionalName: "",
-      cellPhone: "555-867-5309",
+      cellPhone: "O: 555-867-5309",
       emailAddress: "jeff@awarehq.com",
-      workPhone: "555-133-7123",
+      workPhone: "W: 555-133-7123",
       // employeeList,
       // tslint:disable-next-line: object-literal-sort-keys
       selectedEmployee: "",
@@ -92,9 +94,11 @@ class App extends React.Component<IAppProps, IAppState> {
       sameLinePhoneNumbers: true,
       workplaceUrl: "https://wiretap.facebook.com/profile.php?id=100013799348501",
       profilePicture: "https://wiretapfiles.box.com/shared/static/81nuynta2p10mbvg0kksiy8pa18qv140.png",
-      companyLogoUrl: "https://www.awarehq.com/hubfs/email-signature/aware/aware-email-32.png",
+      companyLogoUrl: "https://www.awarehq.com/hubfs/email-signature/aware/aware-email-24.png",
+      companyLogoWidth: 64,
+      companyLogoHeight: 16,
       companyName: "Aware",
-      companyAddress: "111 Liberty Street • Suite 102 • Columbus, OH 43215",
+      companyAddress: "111 Liberty Street \u00B7 Suite 102 \u00B7 Columbus, OH 43215",
       companyWebsite: "https://awarehq.com",
       companyLinkedIn: "http://awarehq.com/li",
       companyTwitter: "http://awarehq.com/tw",
@@ -212,17 +216,8 @@ class App extends React.Component<IAppProps, IAppState> {
                     <legend>Your Details</legend>
                     <label htmlFor="givenName"><span aria-hidden="true">🙂 </span>Your Name</label><br />
                     <input type="text" name="givenName" required={true} autoCorrect="off" autoComplete="given-name" title="What do they call you? 🤔" value={this.state.givenName || ""} onChange={this.handleNameChange} /><br />
-                    <label htmlFor="organizationTitle"><span aria-hidden="true">💼 </span>Job Title</label><br />
+                    <label htmlFor="organizationTitle"><span aria-hidden="true">💼 </span>Job Title <span className="c-form-label__optional">(optional)</span></label><br />
                     <input type="text" name="organizationTitle" required={true} autoComplete="organization-title" title="Your job description this month 📝" value={this.state.organizationTitle || ""} onChange={this.handleInputChange} /><br />
-                  </fieldset>
-                  <fieldset>
-                    <legend>Your Company's Details</legend>
-                    <label htmlFor="companyName"><span aria-hidden="true">📛 </span>Company Name</label><br />
-                    <input type="text" name="companyName" value={this.state.companyName} required={false} onChange={this.handleInputChange} /><br />
-                    <label htmlFor="companyLogoUrl"><span aria-hidden="true">🎨 </span>Company Logo URL<span className="c-form-label__optional">(optional)</span></label><br />
-                    <input type="photo" name="companyLogoUrl" value={this.state.companyLogoUrl} required={false} onChange={this.handleInputChange} /><br />
-                    <label htmlFor="directionsUrl"><span aria-hidden="true">📍 </span>Directions URL<span className="c-form-label__optional">(optional)</span></label><br />
-                    <input type="url" name="directionsUrl" value={this.state.directionsUrl} required={false} onChange={this.handleInputChange} /><br />
                   </fieldset>
                   <fieldset>
                     <legend>Contact Options</legend>
@@ -236,7 +231,38 @@ class App extends React.Component<IAppProps, IAppState> {
                 <span className="c-form-input__example">Tip: <a href={"https://workplace.com/?utm_medium=email-sig?utm_source=" + this.state.fullNameSlug} target="_blank">Head to Workplace</a>, go to your profile, and copy the URL from the address bar</span><br />
                 <input type="url" name="workplaceUrl" value={this.state.workplaceUrl || ""} onChange={this.handleInputChange} /><br /> */}
                     <label htmlFor="linkedinUrl"><span aria-hidden="true">🔗 </span>LinkedIn Profile <span className="c-form-label__optional">(optional)</span></label><br />
+                    <span className="c-form-input__example">Adds a link to your profile picture</span><br />
                     <input type="url" name="linkedinUrl" value={this.state.linkedinUrl || ""} onChange={this.handleInputChange} /><br />
+                  </fieldset>
+                  <fieldset>
+                    <legend>Your Company's Logo</legend>
+                    <label htmlFor="companyLogoUrl"><span aria-hidden="true">🎨 </span>Company Logo URL<span className="c-form-label__optional">(optional)</span></label><br />
+                    <input type="photo" name="companyLogoUrl" value={this.state.companyLogoUrl} required={false} onChange={this.handleInputChange} /><br />
+                    <div className="row">
+                      <div className="col-xs-6">
+                        <label htmlFor="companyLogoWidth"><span aria-hidden="true">📏 </span>Logo Width</label><br />
+                        <span className="c-form-input__example">In pixels</span><br />
+                        <div className="col-xs-6">
+                          <input type="number" name="companyLogoWidth" value={this.state.companyLogoWidth} required={false} onChange={this.handleInputChange} />
+                        </div>
+                      </div>
+                      <div className="col-xs-6">
+                        <label htmlFor="companyLogoHeight"><span aria-hidden="true">📐 </span>Logo Height</label><br />
+                        <span className="c-form-input__example">In pixels</span><br />
+                        <div className="col-xs-6">
+                          <input type="number" name="companyLogoHeight" value={this.state.companyLogoHeight} required={false} onChange={this.handleInputChange} /><br />
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <fieldset>
+                    <legend>Your Company's Details</legend>
+                    <label htmlFor="companyName"><span aria-hidden="true">📛 </span>Company Name</label><br />
+                    <input type="text" name="companyName" value={this.state.companyName} required={false} onChange={this.handleInputChange} /><br />
+                    <label htmlFor="directionsUrl"><span aria-hidden="true">📍 </span>Directions URL<span className="c-form-label__optional">(optional)</span></label><br />
+                    <input type="url" name="directionsUrl" value={this.state.directionsUrl} required={false} onChange={this.handleInputChange} />
+                    <label htmlFor="companyAddress"><span aria-hidden="true">📬 </span>Company Address<span className="c-form-label__optional">(optional)</span></label><br />
+                    <input type="photo" name="companyAddress" value={this.state.companyAddress} required={false} onChange={this.handleInputChange} />
                   </fieldset>
                   <fieldset>
                     <legend>UTM Parameters</legend>
@@ -256,35 +282,6 @@ class App extends React.Component<IAppProps, IAppState> {
                   <fieldset>
                     <legend>Alterations</legend>
                     <Checkbox
-                      label="Put phone numbers on same line"
-                      name="sameLinePhoneNumbers"
-                      isSelected={this.state.sameLinePhoneNumbers}
-                      onCheckboxChange={this.handleInputChange}
-                      key="sameLinePhoneNumbers"
-                    />
-                    <hr />
-                    <Checkbox
-                      label="Hide my picture"
-                      name="hidePicture"
-                      isSelected={this.state.hidePicture}
-                      onCheckboxChange={this.handleInputChange}
-                      key="hidePicture"
-                    />
-                    <Checkbox
-                      label={`Hide ${this.state.companyName} logo`}
-                      name="hideAwareLogo"
-                      isSelected={this.state.hideAwareLogo}
-                      onCheckboxChange={this.handleInputChange}
-                      key="hideAwareLogo"
-                    />
-                    <Checkbox
-                      label="Hide Address"
-                      name="hideAddress"
-                      isSelected={this.state.hideAddress}
-                      onCheckboxChange={this.handleInputChange}
-                      key="hideAddress"
-                    />
-                    <Checkbox
                       label="Hide Social Links"
                       name="hideSocialLinks"
                       isSelected={this.state.hideSocialLinks}
@@ -301,44 +298,46 @@ class App extends React.Component<IAppProps, IAppState> {
                   </fieldset>
                 </form>
                 <footer className="u-mb7">
-                  <small>Hacked together for Aware • <a href="https://github.com/spjpgrd/customize" target="_blank">View on Github</a></small>
+                  <small>Hacked together for Aware \u00B7 <a href="https://github.com/spjpgrd/customize" target="_blank">View on Github</a></small>
                 </footer>
               </div>
               <div className="col-xs-12 col-sm-12 col-md-5 col-lg-6 col-xl-7">
                 <div className="w-signature">
                   <EmailSignatureBasic
-                    additionalName={this.state.additionalName}
-                    cellPhone={this.state.cellPhone}
-                    emailAddress={this.state.emailAddress}
-                    workPhone={this.state.workPhone}
-                    familyName={this.state.familyName}
-                    fullName={this.state.fullName}
-                    fullNameSlug={this.state.fullNameSlug}
-                    givenName={this.state.givenName}
+                    additionalName={this.state.additionalName.trim()}
+                    cellPhone={this.state.cellPhone.trim()}
+                    emailAddress={this.state.emailAddress.trim()}
+                    workPhone={this.state.workPhone.trim()}
+                    familyName={this.state.familyName.trim()}
+                    fullName={this.state.fullName.trim()}
+                    fullNameSlug={this.state.fullNameSlug.trim()}
+                    givenName={this.state.givenName.trim()}
                     hidePicture={this.state.hidePicture}
                     hideAwareLogo={this.state.hideAwareLogo}
                     hideAddress={this.state.hideAddress}
                     hideSocialLinks={this.state.hideSocialLinks}
                     hideFKAW={this.state.hideFKAW}
-                    honorificPrefix={this.state.honorificPrefix}
-                    honorificSuffix={this.state.honorificSuffix}
+                    honorificPrefix={this.state.honorificPrefix.trim()}
+                    honorificSuffix={this.state.honorificSuffix.trim()}
                     sameLinePhoneNumbers={this.state.sameLinePhoneNumbers}
-                    organizationTitle={this.state.organizationTitle}
-                    linkedinUrl={this.state.linkedinUrl}
-                    workplaceUrl={this.state.workplaceUrl}
-                    profilePicture={this.state.profilePicture}
-                    companyLogoUrl={this.state.companyLogoUrl}
-                    companyAddress={this.state.companyAddress}
-                    companyWebsite={this.state.companyWebsite}
-                    companyLinkedIn={this.state.companyLinkedIn}
-                    companyTwitter={this.state.companyTwitter}
-                    companyFacebook={this.state.companyFacebook}
-                    companyInstagram={this.state.companyInstagram}
-                    companyName={this.state.companyName}
+                    organizationTitle={this.state.organizationTitle.trim()}
+                    linkedinUrl={this.state.linkedinUrl.trim()}
+                    workplaceUrl={this.state.workplaceUrl.trim()}
+                    profilePicture={this.state.profilePicture.trim()}
+                    companyLogoUrl={this.state.companyLogoUrl.trim()}
+                    companyLogoHeight={this.state.companyLogoHeight}
+                    companyLogoWidth={this.state.companyLogoWidth}
+                    companyAddress={this.state.companyAddress.trim()}
+                    companyWebsite={this.state.companyWebsite.trim()}
+                    companyLinkedIn={this.state.companyLinkedIn.trim()}
+                    companyTwitter={this.state.companyTwitter.trim()}
+                    companyFacebook={this.state.companyFacebook.trim()}
+                    companyInstagram={this.state.companyInstagram.trim()}
+                    companyName={this.state.companyName.trim()}
                     utmParams={this.state.utmParams}
-                    utmCampaign={this.state.utmCampaign}
-                    fontStack={this.state.fontStack}
-                    directionsUrl={this.state.directionsUrl}
+                    utmCampaign={this.state.utmCampaign.trim()}
+                    fontStack={this.state.fontStack.trim()}
+                    directionsUrl={this.state.directionsUrl.trim()}
                   />
                 </div>
                 {/* <hr />

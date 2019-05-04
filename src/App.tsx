@@ -46,9 +46,19 @@ interface IAppState {
   workplaceUrl: string;
   profilePicture: string;
   companyLogoUrl: string;
+  companyLogoWidth: number;
+  companyLogoHeight: number;
+  companyAddress: string;
+  companyWebsite: string;
+  companyLinkedIn: string;
+  companyTwitter: string;
+  companyFacebook: string;
+  companyInstagram: string;
   sameLinePhoneNumbers: boolean;
   utmParams: IUTMParamModel;
-  utmContent: string;
+  utmCampaign: string;
+  fontStack: string;
+  directionsUrl: string;
   // employeeList: IEmployeeList[];
   selectedEmployee: string;
   [key: string]: any;
@@ -60,21 +70,21 @@ class App extends React.Component<IAppProps, IAppState> {
     super(props);
     this.state = {
       additionalName: "",
-      cellPhone: "555-867-5309",
+      cellPhone: "O: 555-867-5309",
       emailAddress: "jeff@awarehq.com",
-      workPhone: "555-133-7123",
+      workPhone: "W: 555-133-7123",
       // employeeList,
       // tslint:disable-next-line: object-literal-sort-keys
       selectedEmployee: "",
-      familyName: "Schumann",
+      familyName: "",
       fullName: "Jeff Schumann",
       fullNameSlug: "jeff-schumann",
-      givenName: "Jeff",
+      givenName: "Jeff Schumann",
       hidePicture: false,
       hideAwareLogo: false,
       hideAddress: false,
       hideSocialLinks: false,
-      hideFKAW: false,
+      hideFKAW: true,
       honorificPrefix: "",
       honorificSuffix: "",
       isBoxModalOpen: false,
@@ -84,13 +94,25 @@ class App extends React.Component<IAppProps, IAppState> {
       sameLinePhoneNumbers: true,
       workplaceUrl: "https://wiretap.facebook.com/profile.php?id=100013799348501",
       profilePicture: "https://wiretapfiles.box.com/shared/static/81nuynta2p10mbvg0kksiy8pa18qv140.png",
-      companyLogoUrl: "https://github.com/spjpgrd/customize/blob/master/public/company-logos/aware-email-32.png?raw=true",
+      companyLogoUrl: "https://www.awarehq.com/hubfs/email-signature/aware/aware-email-24.png",
+      companyLogoWidth: 64,
+      companyLogoHeight: 16,
+      companyName: "Aware",
+      companyAddress: "111 Liberty Street \u00B7 Suite 102 \u00B7 Columbus, OH 43215",
+      companyWebsite: "https://awarehq.com",
+      companyLinkedIn: "http://awarehq.com/li",
+      companyTwitter: "http://awarehq.com/tw",
+      companyFacebook: "http://awarehq.com/fb",
+      companyInstagram: "http://awarehq.com/ig",
       utmParams: {
-        utmContent: "",
+        utmCampaign: "",
+        utmContent: "email-link",
         utmMedium: "email-signature",
         utmSource: "email",
       },
-      utmContent: "",
+      utmCampaign: "",
+      fontStack: "'Effra','-apple-system', 'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','sans-serif','Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol','sans-serif'",
+      directionsUrl: "https://wrtp.me/HQ1directions",
       // tslint:disable-next-line: object-literal-sort-keys
     }
 
@@ -155,45 +177,6 @@ class App extends React.Component<IAppProps, IAppState> {
     });
   }
 
-  // public copyDivAsHtmlToClipboard(elementId: string) {
-  //   if ((document !== null) && (document.getElementById(elementId) !== null)) {
-  //     const domNode = document.getElementById(elementId);
-  //     if (domNode !== null) {
-  //       return domNode.innerHTML
-
-  //     }
-  //   }
-  // }
-
-  // public async handleEmployeeListSelection(event: any) {
-  //   const target = event.target;
-  //   const value = target.type === 'checkbox' ? target.checked : target.value;
-  //   const name = target.name;
-  //   await this.setState({
-  //     [name]: value,
-  //   });
-  //   const fullNameSlug = value.replace("/profile-photos/", "").replace("-aware-128.png", "");
-  //   await this.setState({ fullNameSlug });
-  //   const utmParams = Object.assign({}, this.state.utmParams);
-  //   utmParams.utmContent = value;
-  //   await this.setState({ utmParams });
-  // }
-
-  // public handleCheckboxChange =(changeEvent: any) => {
-  //   const { name } = changeEvent.target;
-
-  //   this.setState({
-  //     [name]: value,
-  //   });
-  // }
-
-  // Probably wont work for easily autopopulating the profile picture
-  // Example: Xu / Joseph
-  // Forces someone to mess with the display name to get the right profile picture
-  // Too finnicky
-  // public getFirstLastSlug(givenName: string | null, familyName: string | null) {
-  // }
-
   // tslint:disable-next-line: member-access
   render() {
     return (
@@ -224,119 +207,78 @@ class App extends React.Component<IAppProps, IAppState> {
             <div className="row between-xs">
               <div className="last-xs last-sm initial-order-md col-xs-12 col-sm-12 col-md-6 col-lg-5 col-xl-4">
                 <form name="personal-info" autoComplete="on">
-                  {/* <fieldset>
-                    <legend>Pick Your Pic</legend>
-                    <label htmlFor="profilePicture">Browse or type to search</label>
-                    <input type="text" list="employeeList" id="profilePicture" name="profilePicture" onChange={this.handleEmployeeListSelection} autoFocus={true} />
-                    <datalist id="employeeList" >
-                      {this.state.employeeList.map((employee, index) => (
-                        <option key={index} value={employee.profilePicture}>{employee.profilePicture}</option>
-                      ))}
-                    </datalist>
-                  </fieldset> */}
                   <fieldset>
                     <legend>Your Photo</legend>
-                    <label htmlFor="profilePicture">Profile Picture URL</label><a style={{ float: "right", cursor: "pointer", fontSize: ".8em", color: "rgb(72, 54, 150)" }} onClick={this.toggleBoxModal}>🙋‍♂️ Need Help with Box?</a><br />
+                    <label htmlFor="profilePicture"><span aria-hidden="true">🖼️ </span>Profile Picture URL</label><a style={{ float: "right", cursor: "pointer", fontSize: ".8em", color: "rgb(72, 54, 150)" }} onClick={this.toggleBoxModal}>Need Help with Box?</a><br />
                     <input type="photo" name="profilePicture" value={this.state.profilePicture} required={true} onChange={this.handleInputChange} /><br />
                   </fieldset>
                   <fieldset>
                     <legend>Your Details</legend>
-                    <label htmlFor="honorificPrefix">Honorific Prefix <span className="c-form-label__optional">(optional)</span></label><br />
-                    <span className="c-form-input__example">Examples: Dr., Sir, Queen</span><br />
-                    <input type="text" name="honorificPrefix" autoCorrect="off" title="Dr., Sir, Queen, etc. 👑" autoComplete="honorific-prefix" value={this.state.honorificPrefix || ""} onChange={this.handleNameChange} /><br />
-                    <label htmlFor="givenName">First Name</label><br />
+                    <label htmlFor="givenName"><span aria-hidden="true">🙂 </span>Your Name</label><br />
                     <input type="text" name="givenName" required={true} autoCorrect="off" autoComplete="given-name" title="What do they call you? 🤔" value={this.state.givenName || ""} onChange={this.handleNameChange} /><br />
-                    <label htmlFor="additionalName">Middle Name <span className="c-form-label__optional">(optional)</span></label><br />
-                    <input type="text" name="additionalName" autoCorrect="off" autoComplete="additionalName" title="I once worked with someone who had five middle names 🥁" value={this.state.additionalName || ""} onChange={this.handleNameChange} /><br />
-                    <label htmlFor="familyName">Last Name</label><br />
-                    <input type="text" name="familyName" required={true} autoCorrect="off" autoComplete="family-name" title="Your last name, please 🙃" value={this.state.familyName || ""} onChange={this.handleNameChange} /><br />
-                    <label htmlFor="honorificSuffix">Honorific Suffix <span className="c-form-label__optional">(optional)</span></label><br />
-                    <span className="c-form-input__example">Examples: Jr., PhD, MBA</span><br />
-                    <input type="text" name="honorificSuffix" autoCorrect="off" autoComplete="honorific-suffix" title="Suffix or bust 🎰" value={this.state.honorificSuffix || ""} onChange={this.handleNameChange} /><br />
-                    <label htmlFor="organizationTitle">Job Title</label><br />
+                    <label htmlFor="organizationTitle"><span aria-hidden="true">💼 </span>Job Title <span className="c-form-label__optional">(optional)</span></label><br />
                     <input type="text" name="organizationTitle" required={true} autoComplete="organization-title" title="Your job description this month 📝" value={this.state.organizationTitle || ""} onChange={this.handleInputChange} /><br />
                   </fieldset>
                   <fieldset>
-                    <legend>Your Company's Logo</legend>
-                    <label htmlFor="companyLogoUrl">Company Logo URL<span className="c-form-label__optional">(optional)</span></label><br />
-                    <input type="photo" name="companyLogoUrl" value={this.state.companyLogoUrl} required={false} onChange={this.handleInputChange} /><br />
-                  </fieldset>
-                  <fieldset>
                     <legend>Contact Options</legend>
-                    <label htmlFor="workPhone">Office Phone <span className="c-form-label__optional">(optional)</span></label><br />
+                    <label htmlFor="workPhone"><span aria-hidden="true">☎️</span> Office Phone<span className="c-form-label__optional">(optional)</span></label><br />
                     <input type="tel-national" name="workPhone" autoComplete="tel-national" value={this.state.workPhone || ""} onChange={this.handleInputChange} /><br />
-                    <label htmlFor="cellPhone">Cell Phone <span className="c-form-label__optional">(optional)</span></label><br />
+                    <label htmlFor="cellPhone"><span aria-hidden="true">📱 </span>Cell Phone <span className="c-form-label__optional">(optional)</span></label><br />
                     <input type="tel-national" name="cellPhone" autoComplete="tel-national" value={this.state.cellPhone || ""} onChange={this.handleInputChange} /><br />
-                    <label htmlFor="emailAddress">Email Address</label><br />
+                    <label htmlFor="emailAddress"><span aria-hidden="true">💌 </span>Email Address </label><br />
                     <input type="email" name="emailAddress" required={true} autoComplete="email" pattern="^[a-zA-Z0-9]+@[a-zA-Z0-9].awarehq.[a-zA-z]+$" title="Please use your @awarehq.com address 📬" value={this.state.emailAddress} onChange={this.handleInputChange} /><br />
-                    {/* <label htmlFor="workplaceUrl">Workplace Profile <span className="c-form-label__optional">(optional)</span></label><br />
+                    {/* <label htmlFor="workplaceUrl"><span aria-hidden="true">Wo</span>rkplace Profile <span className="c-form-label__optional">(optional)</span></label><br />
                 <span className="c-form-input__example">Tip: <a href={"https://workplace.com/?utm_medium=email-sig?utm_source=" + this.state.fullNameSlug} target="_blank">Head to Workplace</a>, go to your profile, and copy the URL from the address bar</span><br />
                 <input type="url" name="workplaceUrl" value={this.state.workplaceUrl || ""} onChange={this.handleInputChange} /><br /> */}
-                    <label htmlFor="linkedinUrl">LinkedIn Profile <span className="c-form-label__optional">(optional)</span></label><br />
+                    <label htmlFor="linkedinUrl"><span aria-hidden="true">🔗 </span>LinkedIn Profile <span className="c-form-label__optional">(optional)</span></label><br />
+                    <span className="c-form-input__example">Adds a link to your profile picture</span><br />
                     <input type="url" name="linkedinUrl" value={this.state.linkedinUrl || ""} onChange={this.handleInputChange} /><br />
                   </fieldset>
                   <fieldset>
+                    <legend>Your Company's Logo</legend>
+                    <label htmlFor="companyLogoUrl"><span aria-hidden="true">🎨 </span>Company Logo URL<span className="c-form-label__optional">(optional)</span></label><br />
+                    <input type="photo" name="companyLogoUrl" value={this.state.companyLogoUrl} required={false} onChange={this.handleInputChange} /><br />
+                    <div className="row">
+                      <div className="col-xs-6">
+                        <label htmlFor="companyLogoWidth">Logo Width (px)</label><br />
+                        <div className="col-xs-8" style={{ marginRight: "0", paddingRight: "0", marginLeft: "0", paddingLeft: "0" }}>
+                          <input type="number" name="companyLogoWidth" value={this.state.companyLogoWidth} required={false} onChange={this.handleInputChange} className="u-ff--mono u-fvn--tab" />
+                        </div>
+                      </div>
+                      <div className="col-xs-6">
+                        <label htmlFor="companyLogoHeight">Logo Height (px)</label><br />
+                        <div className="col-xs-8" style={{ marginRight: "0", paddingRight: "0", marginLeft: "0", paddingLeft: "0" }}>
+                          <input type="number" name="companyLogoHeight" value={this.state.companyLogoHeight} required={false} onChange={this.handleInputChange} className="u-ff--mono u-fvn--tab" /><br />
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <fieldset>
+                    <legend>Your Company's Details</legend>
+                    <label htmlFor="companyName"><span aria-hidden="true">📛 </span>Company Name</label><br />
+                    <input type="text" name="companyName" value={this.state.companyName} required={false} onChange={this.handleInputChange} /><br />
+                    <label htmlFor="directionsUrl"><span aria-hidden="true">📍 </span>Directions URL<span className="c-form-label__optional">(optional)</span></label><br />
+                    <input type="url" name="directionsUrl" value={this.state.directionsUrl} required={false} onChange={this.handleInputChange} />
+                    <label htmlFor="companyAddress"><span aria-hidden="true">📬 </span>Company Address<span className="c-form-label__optional">(optional)</span></label><br />
+                    <input type="text" name="companyAddress" value={this.state.companyAddress} required={false} onChange={this.handleInputChange} />
+                  </fieldset>
+                  <fieldset>
                     <legend>UTM Parameters</legend>
-                    <label htmlFor="utmContent">Kind of Content<span className="c-form-label__optional">(optional)</span></label><br />
-                    <span className="c-form-input__example">Examples: Reply, Ignite 2019, Out-of-Office</span><br />
-                    <input type="text" name="utmContent" value={this.state.utmContent || ""} onChange={this.handleUtmChange} /><br />
+                    <small className="u-d--b u-ml--2 u-mb--6 u-op--70">
+                      ℹ️ These are additional details added to the end of a URL. They provide more specific information about the link for marketing and analytics.
+                    </small>
+                    <label htmlFor="utmCampaign">Campaign<span className="c-form-label__optional">(optional)</span></label><br />
+                    <span className="c-form-input__example">Examples: Replies to Acme, Ignite 2019, Webinar Outreach</span><br />
+                    <input type="text" name="utmCampaign" value={this.state.utmCampaign || ""} onChange={this.handleUtmChange} className="u-ff--mono" /><br />
+                    <label htmlFor="utmContent">Content<span className="c-form-label__optional">(fixed value)</span></label><br />
+                    <input type="text" name="utmContent" value={this.state.utmParams.utmContent} disabled={true} style={{ cursor: "not-allowed" }} className="u-ff--mono" /><br />
                     <label htmlFor="utmMedium">Medium<span className="c-form-label__optional">(fixed value)</span></label><br />
-                    <input type="text" name="utmMedium" autoCorrect="off" value={this.state.utmParams.utmMedium} readOnly={true} disabled={true} style={{ cursor: "not-allowed" }} /><br />
+                    <input type="text" name="utmMedium" autoCorrect="off" value={this.state.utmParams.utmMedium} readOnly={true} disabled={true} style={{ cursor: "not-allowed" }} className="u-ff--mono" /><br />
                     <label htmlFor="utmSource">Source<span className="c-form-label__optional">(fixed value)</span></label><br />
-                    <input type="text" name="utmSource" autoCorrect="off" value={this.state.utmParams.utmSource} readOnly={true} disabled={true} style={{ cursor: "not-allowed" }} /><br />
+                    <input type="text" name="utmSource" autoCorrect="off" value={this.state.utmParams.utmSource} readOnly={true} disabled={true} style={{ cursor: "not-allowed" }} className="u-ff--mono" /><br />
                   </fieldset>
                   <fieldset>
                     <legend>Alterations</legend>
-                    {/* <label htmlFor="hidePicture" className="u-cur--pointer">
-                      <input type="checkbox" name="hidePicture" id="hidePicture" value={this.state.hidePicture} />
-                      <span className="c-checkbox-input-text">Hide My Picture</span>
-                    </label><br />
-                    <label htmlFor="hideAwareLogo" className="u-cur--pointer">
-                      <input type="checkbox" name="hideAwareLogo" id="hideAwareLogo" value={this.state.hideAwareLogo} />
-                      <span className="c-checkbox-input-text">Hide Aware Logo</span>
-                    </label><br />
-                    <label htmlFor="hideAddress" className="u-cur--pointer">
-                      <input type="checkbox" name="hideAddress" id="hideAddress" value={this.state.hideAddress} />
-                      <span className="c-checkbox-input-text">Hide Address</span>
-                    </label><br />
-                    <label htmlFor="hideSocialLinks" className="u-cur--pointer">
-                      <input type="checkbox" name="hideSocialLinks" id="hideSocialLinks" value={this.state.hideSocialLinks} />
-                      <span className="c-checkbox-input-text">Hide Social Links</span>
-                    </label><br />
-                    <label htmlFor="hideFKAW" className="u-cur--pointer">
-                      <input type="checkbox" name="hideFKAW" id="hideFKAW" value={this.state.hideFKAW} />
-                      <span className="c-checkbox-input-text">Hide "Formerly Known as Wiretap"</span>
-                    </label><br />
-                    <hr /> */}
-                    <Checkbox
-                      label="Put phone numbers on same line"
-                      name="sameLinePhoneNumbers"
-                      isSelected={this.state.sameLinePhoneNumbers}
-                      onCheckboxChange={this.handleInputChange}
-                      key="sameLinePhoneNumbers"
-                    />
-                    <hr />
-                    <Checkbox
-                      label="Hide my picture"
-                      name="hidePicture"
-                      isSelected={this.state.hidePicture}
-                      onCheckboxChange={this.handleInputChange}
-                      key="hidePicture"
-                    />
-                    <Checkbox
-                      label="Hide Aware logo"
-                      name="hideAwareLogo"
-                      isSelected={this.state.hideAwareLogo}
-                      onCheckboxChange={this.handleInputChange}
-                      key="hideAwareLogo"
-                    />
-                    <Checkbox
-                      label="Hide Address"
-                      name="hideAddress"
-                      isSelected={this.state.hideAddress}
-                      onCheckboxChange={this.handleInputChange}
-                      key="hideAddress"
-                    />
                     <Checkbox
                       label="Hide Social Links"
                       name="hideSocialLinks"
@@ -354,35 +296,49 @@ class App extends React.Component<IAppProps, IAppState> {
                   </fieldset>
                 </form>
                 <footer className="u-mb7">
-                  <small>Hacked together for Aware • <a href="https://github.com/spjpgrd/customize" target="_blank">View on Github</a></small>
+                  <small>Hacked together for Aware · <a href="https://github.com/spjpgrd/customize" target="_blank">View on Github</a></small><br />
+                  <hr />
+                  <small><a href="https://wiretapfiles.app.box.com/folder/72642759039" target="_blank">Grab an Aware wallpaper in Box</a></small>
                 </footer>
               </div>
               <div className="col-xs-12 col-sm-12 col-md-5 col-lg-6 col-xl-7">
                 <div className="w-signature">
                   <EmailSignatureBasic
-                    additionalName={this.state.additionalName}
-                    cellPhone={this.state.cellPhone}
-                    emailAddress={this.state.emailAddress}
-                    workPhone={this.state.workPhone}
-                    familyName={this.state.familyName}
-                    fullName={this.state.fullName}
-                    fullNameSlug={this.state.fullNameSlug}
-                    givenName={this.state.givenName}
+                    additionalName={this.state.additionalName.trim()}
+                    cellPhone={this.state.cellPhone.trim()}
+                    emailAddress={this.state.emailAddress.trim()}
+                    workPhone={this.state.workPhone.trim()}
+                    familyName={this.state.familyName.trim()}
+                    fullName={this.state.fullName.trim()}
+                    fullNameSlug={this.state.fullNameSlug.trim()}
+                    givenName={this.state.givenName.trim()}
                     hidePicture={this.state.hidePicture}
                     hideAwareLogo={this.state.hideAwareLogo}
                     hideAddress={this.state.hideAddress}
                     hideSocialLinks={this.state.hideSocialLinks}
                     hideFKAW={this.state.hideFKAW}
-                    honorificPrefix={this.state.honorificPrefix}
-                    honorificSuffix={this.state.honorificSuffix}
+                    honorificPrefix={this.state.honorificPrefix.trim()}
+                    honorificSuffix={this.state.honorificSuffix.trim()}
                     sameLinePhoneNumbers={this.state.sameLinePhoneNumbers}
-                    organizationTitle={this.state.organizationTitle}
-                    linkedinUrl={this.state.linkedinUrl}
-                    workplaceUrl={this.state.workplaceUrl}
-                    profilePicture={this.state.profilePicture}
-                    companyLogoUrl={this.state.companyLogoUrl}
+                    organizationTitle={this.state.organizationTitle.trim()}
+                    linkedinUrl={this.state.linkedinUrl.trim()}
+                    workplaceUrl={this.state.workplaceUrl.trim()}
+                    profilePicture={this.state.profilePicture.trim()}
+                    companyLogoUrl={this.state.companyLogoUrl.trim()}
+                    companyLogoHeight={this.state.companyLogoHeight}
+                    companyLogoWidth={this.state.companyLogoWidth}
+                    companyAddress={this.state.companyAddress.trim()}
+                    companyWebsite={this.state.companyWebsite.trim()}
+                    companyLinkedIn={this.state.companyLinkedIn.trim()}
+                    companyTwitter={this.state.companyTwitter.trim()}
+                    companyFacebook={this.state.companyFacebook.trim()}
+                    companyInstagram={this.state.companyInstagram.trim()}
+                    companyName={this.state.companyName.trim()}
                     utmParams={this.state.utmParams}
-                    utmContent={this.state.utmContent} />
+                    utmCampaign={this.state.utmCampaign.trim()}
+                    fontStack={this.state.fontStack.trim()}
+                    directionsUrl={this.state.directionsUrl.trim()}
+                  />
                 </div>
                 {/* <hr />
                 <div>
@@ -404,7 +360,7 @@ class App extends React.Component<IAppProps, IAppState> {
               How to Get a Direct Link to an <span className="u-nowrap">Image in Box</span>
             </h2>
             <p>
-              A direct link will end in the file extension.<br />This is the kind of URL the generator needs 👍
+              A direct link will end in the file extension. This is the kind of URL the generator needs 👍
           </p>
             <img src="/assets/images/how-to-get-a-public-link-from-box.gif" style={{ border: "2px solid rgba(0,0,0,.05)", marginTop: "16px", marginBottom: "24px" }} />
             <p>
@@ -449,7 +405,7 @@ class App extends React.Component<IAppProps, IAppState> {
                   profilePicture={this.state.profilePicture}
                   companyLogoUrl={this.state.companyLogoUrl}
                   utmParams={this.state.utmParams}
-                  utmContent={this.state.utmContent} />
+                  utmCampaign={this.state.utmCampaign} />
               </pre>
             </p>
           </div>

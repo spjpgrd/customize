@@ -198,7 +198,7 @@ class App extends React.Component<IAppProps, IAppState> {
               </header>
             </div>
             <div className="col-xs-6">
-              <div className="c-nav-time">Updated: <time>May 3, 2019</time></div>
+              <span className="c-nav-time">Updated: <time>May 14, 2019</time></span>
             </div>
           </div>
         </nav>

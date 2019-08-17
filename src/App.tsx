@@ -70,7 +70,7 @@ class App extends React.Component<IAppProps, IAppState> {
     super(props);
     this.state = {
       additionalName: "",
-      cellPhone: "O: 555-867-5309",
+      cellPhone: "C: 555-867-5309",
       emailAddress: "jeff@awarehq.com",
       workPhone: "W: 555-133-7123",
       // employeeList,

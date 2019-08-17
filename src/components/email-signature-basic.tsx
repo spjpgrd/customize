@@ -72,7 +72,7 @@ class EmailSignatureBasic extends React.Component<IEmailSignatureBasicProps, IEm
                         {(!this.props.hidePicture && this.props.profilePicture !== "") &&
                             <tr >
                                 <td style={{ paddingLeft: "0px", paddingTop: "0px", paddingBottom: " 4px", paddingRight: "0px", verticalAlign: "top" }}>
-                                    <a href={this.props.linkedinUrl}><img src={this.props.profilePicture.endsWith("") ? this.props.profilePicture : "/profile-photos/default-aware-128.png"} style={{ width: "64px", height: "64px", }} width="64" height="64" alt={this.props.fullName} title={this.props.fullName} /></a></td>
+                                    <a target="_blank" href={this.props.linkedinUrl}><img src={this.props.profilePicture.endsWith("") ? this.props.profilePicture : "/profile-photos/default-aware-128.png"} style={{ width: "64px", height: "64px", }} width="64" height="64" alt={this.props.fullName} title={this.props.fullName} /></a></td>
                             </tr>
                         }
                         <tr>

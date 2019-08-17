@@ -2,9 +2,11 @@
 
 # Customize
 
-A painless tool to create HTML email signatures — without coding another table. Built with React.
+A painless tool to create HTML email signatures — without coding another table. Built with React.  
 
-**[View the Live Demo 🚀](https://customize-me.spjpgrd.now.sh/)**
+_**P.S.** So this can be used as a teaching tool, I tried to make the markup and CSS stupidly simple while also not ejecting it from [`create-react-app`.](https://www.github.com/facebook/create-react-app)_
+
+**[View the Live Demo 🚀](https://customize.spjpgrd.now.sh/)**
 
 * * *
 

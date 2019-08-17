@@ -198,7 +198,7 @@ class App extends React.Component<IAppProps, IAppState> {
               </header>
             </div>
             <div className="col-xs-6">
-              <div className="c-nav-time">Updated: <time>May 3, 2019</time></div>
+              <span className="c-nav-time">Updated: <time>2019 June 12</time></span>
             </div>
           </div>
         </nav>
@@ -209,7 +209,7 @@ class App extends React.Component<IAppProps, IAppState> {
                 <form name="personal-info" autoComplete="on">
                   <fieldset>
                     <legend>Your Photo</legend>
-                    <label htmlFor="profilePicture"><span aria-hidden="true">🖼️ </span>Profile Picture URL</label><a style={{ float: "right", cursor: "pointer", fontSize: ".8em", color: "rgb(72, 54, 150)" }} onClick={this.toggleBoxModal}>Need Help with Box?</a><br />
+                    <label htmlFor="profilePicture"><span aria-hidden="true">🖼️ </span>Headshot URL <span className="c-form-label__optional">(optional)</span></label><a style={{ float: "right", cursor: "pointer", fontSize: ".8em", color: "rgb(72, 54, 150)" }} onClick={this.toggleBoxModal}>Need Help with Box?</a><br />
                     <input type="photo" name="profilePicture" value={this.state.profilePicture} required={true} onChange={this.handleInputChange} /><br />
                   </fieldset>
                   <fieldset>
@@ -221,7 +221,7 @@ class App extends React.Component<IAppProps, IAppState> {
                   </fieldset>
                   <fieldset>
                     <legend>Contact Options</legend>
-                    <label htmlFor="workPhone"><span aria-hidden="true">☎️</span> Office Phone<span className="c-form-label__optional">(optional)</span></label><br />
+                    <label htmlFor="workPhone"><span aria-hidden="true">☎️</span> Office Phone <span className="c-form-label__optional">(optional)</span></label><br />
                     <input type="tel-national" name="workPhone" autoComplete="tel-national" value={this.state.workPhone || ""} onChange={this.handleInputChange} /><br />
                     <label htmlFor="cellPhone"><span aria-hidden="true">📱 </span>Cell Phone <span className="c-form-label__optional">(optional)</span></label><br />
                     <input type="tel-national" name="cellPhone" autoComplete="tel-national" value={this.state.cellPhone || ""} onChange={this.handleInputChange} /><br />
@@ -255,7 +255,7 @@ class App extends React.Component<IAppProps, IAppState> {
                   </fieldset>
                   <fieldset>
                     <legend>Your Company's Details</legend>
-                    <label htmlFor="companyName"><span aria-hidden="true">📛 </span>Company Name</label><br />
+                    <label htmlFor="companyName"><span aria-hidden="true">📛 </span>Company Name <span className="c-form-label__optional">(optional)</span></label><br />
                     <input type="text" name="companyName" value={this.state.companyName} required={false} onChange={this.handleInputChange} /><br />
                     <label htmlFor="directionsUrl"><span aria-hidden="true">📍 </span>Directions URL<span className="c-form-label__optional">(optional)</span></label><br />
                     <input type="url" name="directionsUrl" value={this.state.directionsUrl} required={false} onChange={this.handleInputChange} />

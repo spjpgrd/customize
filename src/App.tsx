@@ -286,13 +286,6 @@ class App extends React.Component<IAppProps, IAppState> {
                       onCheckboxChange={this.handleInputChange}
                       key="hideSocialLinks"
                     />
-                    <Checkbox
-                      label={`Hide "Formerly Known As"`}
-                      name="hideFKAW"
-                      isSelected={this.state.hideFKAW}
-                      onCheckboxChange={this.handleInputChange}
-                      key="hideFKAW"
-                    />
                   </fieldset>
                 </form>
                 <footer className="u-mb7">

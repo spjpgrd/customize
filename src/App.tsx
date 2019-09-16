@@ -68,6 +68,7 @@ class App extends React.Component<IAppProps, IAppState> {
 
   constructor(props: IAppProps) {
     super(props);
+
     this.state = {
       additionalName: "",
       cellPhone: "C: 555-867-5309",
@@ -206,11 +207,12 @@ class App extends React.Component<IAppProps, IAppState> {
           <div className="container">
             <div className="row between-xs">
               <div className="last-xs last-sm initial-order-md col-xs-12 col-sm-12 col-md-6 col-lg-5 col-xl-4">
+                <a href="https://wiretapfiles.app.box.com/folder/72642759039" target="_blank" className="c-button c-button--primary c-button--block u-ta--c"><small>Grab an Aware Wallpaper</small></a>
                 <form name="personal-info" autoComplete="on">
                   <fieldset>
                     <legend>Your Photo</legend>
                     <div className="l-flex l-jc--sb l-ai--bl">
-                      <label htmlFor="profilePicture"><span aria-hidden="true">🖼️ </span>Headshot URL <span className="c-form-label__optional">(optional)</span></label><a style={{ float: "right", cursor: "pointer", fontSize: ".8em", color: "rgb(72, 54, 150)" }} onClick={this.toggleBoxModal}>Get Your Headshot</a>
+                      <label htmlFor="profilePicture"><span aria-hidden="true">🖼️ </span>Headshot URL <span className="c-form-label__optional">(optional)</span></label><a style={{ float: "right", cursor: "pointer", fontSize: ".8em", }} onClick={this.toggleBoxModal} className="c-text-gradient">Get Your Headshot</a>
                     </div>
                     <input type="photo" name="profilePicture" value={this.state.profilePicture} required={true} onChange={this.handleInputChange} /><br />
                   </fieldset>
@@ -291,9 +293,7 @@ class App extends React.Component<IAppProps, IAppState> {
                   </fieldset>
                 </form>
                 <footer className="u-mb7">
-                  <small>Hacked together for Aware · <a href="https://github.com/spjpgrd/customize" target="_blank">View on Github</a></small><br />
-                  <hr />
-                  <small><a href="https://wiretapfiles.app.box.com/folder/72642759039" target="_blank">Grab an Aware wallpaper in Box</a></small>
+                  <small>Hacked together for Aware · <a href="https://github.com/spjpgrd/customize" target="_blank" className="c-text-gradient">View on Github</a></small><br />
                 </footer>
               </div>
               <div className="col-xs-12 col-sm-12 col-md-5 col-lg-6 col-xl-7">

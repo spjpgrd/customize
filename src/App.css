@@ -281,7 +281,7 @@ footer {
     color: #979797;
 }
 
-footer a {
+.c-text-gradient {
     background-image: -moz-linear-gradient(-90deg, #862984 0%, #E64257 100%);
     background-image: -webkit-gradient(-90deg, #862984 0%, #E64257 100%);
     background-image: -webkit-linear-gradient(-90deg, #862984 0%, #E64257 100%);
@@ -352,4 +352,8 @@ footer a {
 
 .l-ai--bl {
     align-items: baseline;
+}
+
+.u-ta--c {
+    text-align: center;
 }

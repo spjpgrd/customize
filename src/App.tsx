@@ -357,7 +357,7 @@ class App extends React.Component<IAppProps, IAppState> {
             <p>
               A direct link will end in the file extension. This is the kind of URL the generator needs 👍
           </p>
-            <img src="/assets/images/how-to-get-a-public-link-from-box.gif" style={{ border: "2px solid rgba(0,0,0,.05)", marginTop: "16px", marginBottom: "24px" }} />
+            <img src="https://github.com/spjpgrd/customize/blob/master/public/assets/images/how-to-get-a-public-link-from-box.gif?raw=true" style={{ border: "2px solid rgba(0,0,0,.05)", marginTop: "16px", marginBottom: "24px" }} />
             <p>
               <a href="https://wiretapfiles.box.com/v/emailsignatures" target="_blank" className="c-button c-button--primary c-button--block">Get your photo in Box
 

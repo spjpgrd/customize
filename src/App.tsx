@@ -209,7 +209,9 @@ class App extends React.Component<IAppProps, IAppState> {
                 <form name="personal-info" autoComplete="on">
                   <fieldset>
                     <legend>Your Photo</legend>
-                    <label htmlFor="profilePicture"><span aria-hidden="true">🖼️ </span>Headshot URL <span className="c-form-label__optional">(optional)</span></label><a style={{ float: "right", cursor: "pointer", fontSize: ".8em", color: "rgb(72, 54, 150)" }} onClick={this.toggleBoxModal}>Need Help with Box?</a><br />
+                    <div className="l-flex l-jc--sb l-ai--bl">
+                      <label htmlFor="profilePicture"><span aria-hidden="true">🖼️ </span>Headshot URL <span className="c-form-label__optional">(optional)</span></label><a style={{ float: "right", cursor: "pointer", fontSize: ".8em", color: "rgb(72, 54, 150)" }} onClick={this.toggleBoxModal}>Get Your Headshot</a>
+                    </div>
                     <input type="photo" name="profilePicture" value={this.state.profilePicture} required={true} onChange={this.handleInputChange} /><br />
                   </fieldset>
                   <fieldset>
@@ -357,7 +359,7 @@ class App extends React.Component<IAppProps, IAppState> {
           </p>
             <img src="/assets/images/how-to-get-a-public-link-from-box.gif" style={{ border: "2px solid rgba(0,0,0,.05)", marginTop: "16px", marginBottom: "24px" }} />
             <p>
-              <a href="https://wiretapfiles.box.com/v/emailsignatures" target="_blank" className="c-button c-button--primary c-button--block">Find your photo in Box
+              <a href="https://wiretapfiles.box.com/v/emailsignatures" target="_blank" className="c-button c-button--primary c-button--block">Get your photo in Box
 
               <svg style={{ marginLeft: "8px" }} width="16px" height="16px" viewBox="0 0 16 16" version="1.1">
                   <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">

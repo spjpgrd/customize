@@ -17,7 +17,7 @@ body {
 html,
 body {
     /* background-color: #2C2B2A; */
-    background-image: linear-gradient(180deg, #2C2B2A 49.999999%, #FFFFFF 50%);
+    background-image: linear-gradient(0deg, #2C2B2A 49.999999%, #FFFFFF 50%);
     /* background: -webkit-gradient(
     linear,
     left top,

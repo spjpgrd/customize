@@ -40,7 +40,6 @@ img {
 nav {
     position: sticky;
     top: 0;
-    height: 3.2em;
     width: 100%;
     background-color: #2C2B2A;
     padding: 1rem;
@@ -140,6 +139,31 @@ small {
 
 .c-button--primary:active {
     background-image: linear-gradient(-45deg, rgb(119, 38, 118) 0%, rgb(187, 45, 64) 100%);
+}
+
+.c-button--secondary {
+    background-image: linear-gradient(-45deg, rgb(238, 238, 238) 0%, rgb(247, 247, 247) 100%);
+    border: .075em solid hsl(4, 4%, 1%);
+    color: hsl(4, 4%, 1%);
+    padding: .75rem 1rem;
+    font-size: 1.25em;
+    letter-spacing: .5px;
+    font-weight: 700;
+    font-family: 'Effra', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'sans-serif';
+    border-radius: 1.5rem;
+    opacity: .9;
+}
+
+.c-button--secondary:hover,
+.c-button--secondary:focus {
+    opacity: 1;
+    color: rgb(247, 247, 247);
+    background-image: linear-gradient(-45deg, #2C2B2A 0%, #2C2B2A 100%);
+}
+
+.c-button--secondary:active {
+    color: rgb(247, 247, 247);
+    background-image: linear-gradient(-45deg, hsl(4, 8%, 7%) 0%, hsl(4, 8%, 7%) 100%);
 }
 
 .c-button--block {

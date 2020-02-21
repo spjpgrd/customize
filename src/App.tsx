@@ -1,15 +1,16 @@
-import * as React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 
 // import logo from './logo.svg';
-import 'flexboxgrid2'
+import "flexboxgrid2";
 import Checkbox from "./components/checkbox";
-import EmailSignatureBasic from './components/email-signature-basic';
+import EmailSignatureBasic, { IEmailSignatureBasicProps } from "./components/email-signature-basic";
 import Modal from "./components/modal";
-import { getSlugIfNotNull } from './helpers/helpers';
+import { getSlugIfNotNull, fixedEncodeURIComponent, parseBoolean } from "./helpers/helpers";
 // import { IPersonModel } from './models/person-model';
 // import { IPersonModel } from './models/person-model';
 import { IUTMParamModel } from "./models/utm-param-model";
+import queryString from "query-string";
 
 // interface IEmployeeList {
 //   fullName: string;
@@ -40,6 +41,7 @@ interface IAppState {
   honorificPrefix: string;
   honorificSuffix: string;
   isBoxModalOpen: boolean;
+  isSaveModalOpen: boolean;
   isCopyHtmlModalOpen: boolean;
   organizationTitle: string;
   linkedinUrl: string;
@@ -70,12 +72,12 @@ class App extends React.Component<IAppProps, IAppState> {
     super(props);
 
     this.state = {
+      // employeeList,
+      // tslint:disable-next-line: object-literal-sort-keys
       additionalName: "",
       cellPhone: "C: 555-867-5309",
       emailAddress: "jeff@awarehq.com",
       workPhone: "W: 555-133-7123",
-      // employeeList,
-      // tslint:disable-next-line: object-literal-sort-keys
       selectedEmployee: "",
       familyName: "",
       fullName: "Jeff Schumann",
@@ -90,6 +92,7 @@ class App extends React.Component<IAppProps, IAppState> {
       honorificSuffix: "",
       isBoxModalOpen: false,
       isCopyHtmlModalOpen: false,
+      isSaveModalOpen: false,
       organizationTitle: "CEO & Co-Founder",
       linkedinUrl: "https://www.linkedin.com/in/jeffreyschumann/",
       sameLinePhoneNumbers: true,
@@ -115,21 +118,114 @@ class App extends React.Component<IAppProps, IAppState> {
       fontStack: "'Effra','-apple-system', 'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','sans-serif','Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol','sans-serif'",
       directionsUrl: "https://wrtp.me/HQ1directions",
       // tslint:disable-next-line: object-literal-sort-keys
-    }
+    };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleUtmChange = this.handleUtmChange.bind(this);
     this.getFullNameDisplay = this.getFullNameDisplay.bind(this);
     this.toggleBoxModal = this.toggleBoxModal.bind(this);
+    this.toggleSaveModal = this.toggleSaveModal.bind(this);
+    this.handleQueryParams = this.handleQueryParams.bind(this);
+    this.getShareableUrl = this.getShareableUrl.bind(this);
+    this.copyText = this.copyText.bind(this);
     // this.handleEmployeeListSelection = this.handleEmployeeListSelection.bind(this);
     // this.handleCheckboxChange = this.handleCheckboxChange.bind(this);fhandleCheckboxChange
 
   }
 
-  public handleInputChange(event: any) {
+  componentDidMount() {
+    const parsedQuery: IEmailSignatureBasicProps = this.handleQueryParams() as unknown as IEmailSignatureBasicProps;
+    console.log(parsedQuery);
+
+    this.setState({
+      additionalName: parsedQuery.additionalName ? parsedQuery.additionalName : this.state.additionalName,
+      cellPhone: parsedQuery.cellPhone ? parsedQuery.cellPhone : this.state.cellPhone,
+      emailAddress: parsedQuery.emailAddress ? parsedQuery.emailAddress : this.state.emailAddress,
+      workPhone: parsedQuery.workPhone ? parsedQuery.workPhone : this.state.workPhone,
+      familyName: parsedQuery.familyName ? parsedQuery.familyName : this.state.familyName,
+      fullName: parsedQuery.fullName ? parsedQuery.fullName : this.state.fullName,
+      fullNameSlug: parsedQuery.fullNameSlug ? parsedQuery.fullNameSlug : this.state.fullNameSlug,
+      givenName: parsedQuery.givenName ? parsedQuery.givenName : this.state.givenName,
+      hidePicture: parsedQuery.hidePicture ? parseBoolean(parsedQuery.hidePicture) : this.state.hidePicture,
+      hideAwareLogo: parsedQuery.hideAwareLogo ? parseBoolean(parsedQuery.hideAwareLogo) : this.state.hideAwareLogo,
+      hideAddress: parsedQuery.hideAddress ? parseBoolean(parsedQuery.hideAddress) : this.state.hideAddress,
+      hideSocialLinks: parsedQuery.hideSocialLinks ? parseBoolean(parsedQuery.hideSocialLinks) : this.state.hideSocialLinks,
+      hideFKAW: parsedQuery.hideFKAW ? parseBoolean(parsedQuery.hideFKAW) : this.state.hideFKAW,
+      honorificPrefix: parsedQuery.honorificPrefix ? parsedQuery.honorificPrefix : this.state.honorificPrefix,
+      honorificSuffix: parsedQuery.honorificSuffix ? parsedQuery.honorificSuffix : this.state.honorificSuffix,
+      sameLinePhoneNumbers: parsedQuery.sameLinePhoneNumbers ? parseBoolean(parsedQuery.sameLinePhoneNumbers) : this.state.sameLinePhoneNumbers,
+      organizationTitle: parsedQuery.organizationTitle ? parsedQuery.organizationTitle : this.state.organizationTitle,
+      linkedinUrl: parsedQuery.linkedinUrl ? parsedQuery.linkedinUrl : this.state.linkedinUrl,
+      workplaceUrl: parsedQuery.workplaceUrl ? parsedQuery.workplaceUrl : this.state.workplaceUrl,
+      profilePicture: parsedQuery.profilePicture ? parsedQuery.profilePicture : this.state.profilePicture,
+      companyLogoUrl: parsedQuery.companyLogoUrl ? parsedQuery.companyLogoUrl : this.state.companyLogoUrl,
+      companyLogoHeight: parsedQuery.companyLogoHeight ? Number(parsedQuery.companyLogoHeight) : this.state.companyLogoHeight,
+      companyLogoWidth: parsedQuery.companyLogoWidth ? Number(parsedQuery.companyLogoWidth) : this.state.companyLogoWidth,
+      companyAddress: parsedQuery.companyAddress ? parsedQuery.companyAddress : this.state.companyAddress,
+      companyWebsite: parsedQuery.companyWebsite ? parsedQuery.companyWebsite : this.state.companyWebsite,
+      companyLinkedIn: parsedQuery.companyLinkedIn ? parsedQuery.companyLinkedIn : this.state.companyLinkedIn,
+      companyTwitter: parsedQuery.companyTwitter ? parsedQuery.companyTwitter : this.state.companyTwitter,
+      companyFacebook: parsedQuery.companyFacebook ? parsedQuery.companyFacebook : this.state.companyFacebook,
+      companyInstagram: parsedQuery.companyInstagram ? parsedQuery.companyInstagram : this.state.companyInstagram,
+      companyName: parsedQuery.companyName ? parsedQuery.companyName : this.state.companyName,
+      utmCampaign: parsedQuery.utmCampaign ? parsedQuery.utmCampaign : this.state.utmCampaign,
+      directionsUrl: parsedQuery.directionsUrl ? parsedQuery.directionsUrl : this.state.directionsUrl,
+    });
+  }
+
+  handleQueryParams() {
+    return { ...queryString.parse(location.search) };
+  }
+
+  getShareableUrl() {
+    let url = `${window.location.protocol}//${window.location.host}?`;
+
+    const params = [
+      `additionalName=${fixedEncodeURIComponent(this.state.additionalName)}`,
+      `cellPhone=${fixedEncodeURIComponent(this.state.cellPhone)}`,
+      `emailAddress=${fixedEncodeURIComponent(this.state.emailAddress)}`,
+      `workPhone=${fixedEncodeURIComponent(this.state.workPhone)}`,
+      `familyName=${fixedEncodeURIComponent(this.state.familyName)}`,
+      `fullName=${fixedEncodeURIComponent(this.state.fullName)}`,
+      `fullNameSlug=${fixedEncodeURIComponent(this.state.fullNameSlug)}`,
+      `givenName=${fixedEncodeURIComponent(this.state.givenName)}`,
+      `hidePicture=${fixedEncodeURIComponent(this.state.hidePicture.toString())}`,
+      `hideAwareLogo=${fixedEncodeURIComponent(this.state.hideAwareLogo.toString())}`,
+      `hideAddress=${fixedEncodeURIComponent(this.state.hideAddress.toString())}`,
+      `hideSocialLinks=${fixedEncodeURIComponent(this.state.hideSocialLinks.toString())}`,
+      `hideFKAW=${fixedEncodeURIComponent(this.state.hideFKAW.toString())}`,
+      `honorificPrefix=${fixedEncodeURIComponent(this.state.honorificPrefix)}`,
+      `honorificSuffix=${fixedEncodeURIComponent(this.state.honorificSuffix)}`,
+      `sameLinePhoneNumbers=${fixedEncodeURIComponent(this.state.sameLinePhoneNumbers.toString())}`,
+      `organizationTitle=${fixedEncodeURIComponent(this.state.organizationTitle)}`,
+      `linkedinUrl=${fixedEncodeURIComponent(this.state.linkedinUrl)}`,
+      `workplaceUrl=${fixedEncodeURIComponent(this.state.workplaceUrl)}`,
+      `profilePicture=${fixedEncodeURIComponent(this.state.profilePicture)}`,
+      `companyLogoUrl=${fixedEncodeURIComponent(this.state.companyLogoUrl)}`,
+      `companyLogoHeight=${fixedEncodeURIComponent(this.state.companyLogoHeight.toString())}`,
+      `companyLogoWidth=${fixedEncodeURIComponent(this.state.companyLogoWidth.toString())}`,
+      `companyAddress=${fixedEncodeURIComponent(this.state.companyAddress)}`,
+      `companyWebsite=${fixedEncodeURIComponent(this.state.companyWebsite)}`,
+      `companyLinkedIn=${fixedEncodeURIComponent(this.state.companyLinkedIn)}`,
+      `companyTwitter=${fixedEncodeURIComponent(this.state.companyTwitter)}`,
+      `companyFacebook=${fixedEncodeURIComponent(this.state.companyFacebook)}`,
+      `companyInstagram=${fixedEncodeURIComponent(this.state.companyInstagram)}`,
+      `companyName=${fixedEncodeURIComponent(this.state.companyName)}`,
+      `utmCampaign=${fixedEncodeURIComponent(this.state.utmCampaign)}`,
+      `directionsUrl=${fixedEncodeURIComponent(this.state.directionsUrl)}`,
+    ];
+
+    params.map((p) => {
+      url += `${p}&`;
+    });
+
+    return url;
+  }
+
+  handleInputChange(event: any) {
     const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
     this.setState({
       [name]: value,
@@ -138,9 +234,9 @@ class App extends React.Component<IAppProps, IAppState> {
     // console.log({ [name]: value });
   }
 
-  public async handleNameChange(event: any) {
+  async handleNameChange(event: any) {
     const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
     this.setState({
       [name]: await value,
@@ -151,31 +247,48 @@ class App extends React.Component<IAppProps, IAppState> {
     this.setState({ fullName, fullNameSlug });
   }
 
-  public async handleUtmChange(event: any) {
+  async handleUtmChange(event: any) {
     const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
     this.setState({
       [name]: await value,
     });
   }
 
-  public getFullNameDisplay(honorificPrefix: string | null, givenName: string | null, additionalName: string | null, familyName: string | null, honorificSuffix: string | null) {
+  getFullNameDisplay(honorificPrefix: string | null, givenName: string | null, additionalName: string | null, familyName: string | null, honorificSuffix: string | null) {
     // tslint:disable-next-line: only-arrow-functions
     const fullName = [honorificPrefix, givenName, additionalName, familyName, honorificSuffix].filter(function (value) { return value; }).join(" ");
     return fullName;
   }
 
-  public toggleBoxModal = () => {
+  toggleBoxModal() {
     this.setState({
       isBoxModalOpen: !this.state.isBoxModalOpen
     });
   }
 
-  public toggleCopyHtmlModal = () => {
+  toggleCopyHtmlModal() {
     this.setState({
       isCopyHtmlModalOpen: !this.state.isCopyHtmlModalOpen
     });
+  }
+
+  toggleSaveModal() {
+    this.setState({
+      isSaveModalOpen: !this.state.isSaveModalOpen
+    });
+  }
+
+  copyText(someId: string) {
+    const elementHolder = document.getElementById(someId);
+    if (elementHolder !== null) {
+      // @ts-ignore
+      elementHolder.select();
+      // @ts-ignore
+      elementHolder.setSelectionRange(0, 99999); /*For mobile devices*/
+      document.execCommand("copy");
+    }
   }
 
   // tslint:disable-next-line: member-access
@@ -185,7 +298,7 @@ class App extends React.Component<IAppProps, IAppState> {
         {/* Input names based on these standard autocomplete keywords */}
         {/* https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofilling-form-controls:-the-autocomplete-attribute */}
         <nav>
-          <div className="row between-xs middle-xs">
+          <div className="row between-xs middle-xs" >
             <div className="col-xs-6">
               <svg style={{ maxWidth: "8.75rem" }} width="100%" height="100%" viewBox="0 0 618 83" version="1.1" xmlns="http://www.w3.org/2000/svg">
                 <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
@@ -198,8 +311,12 @@ class App extends React.Component<IAppProps, IAppState> {
                 </h1>
               </header>
             </div>
-            <div className="col-xs-6">
-              <span className="c-nav-time">Updated: <time>2019 September 16</time></span>
+            <div className="col-xs-6" style={{ textAlign: "right" }}>
+              <button
+                onClick={this.toggleSaveModal} style={{ cursor: "pointer", fontSize: ".8em" }}
+                className="c-button c-button--primary">
+                ☁️ Save Your Signature
+                </button>
             </div>
           </div>
         </nav>
@@ -207,7 +324,7 @@ class App extends React.Component<IAppProps, IAppState> {
           <div className="container">
             <div className="row between-xs">
               <div className="last-xs last-sm initial-order-md col-xs-12 col-sm-12 col-md-6 col-lg-5 col-xl-4">
-                <a href="https://wiretapfiles.app.box.com/folder/72642759039" target="_blank" className="c-button c-button--primary c-button--block u-ta--c"><small>Grab an Aware Wallpaper</small></a>
+                <a href="https://wiretapfiles.app.box.com/folder/72642759039" target="_blank" className="c-button c-button--secondary c-button--block u-ta--c"><small>🎨 Grab an Aware Wallpaper</small></a>
                 <form name="personal-info" autoComplete="on">
                   <fieldset>
                     <legend>Your Photo</legend>
@@ -349,9 +466,10 @@ class App extends React.Component<IAppProps, IAppState> {
           </div>
         </main>
         <Modal show={this.state.isBoxModalOpen}
-          onClose={this.toggleBoxModal}>
+          onClose={this.toggleBoxModal}
+        >
           <div className="c-modal">
-            <h2>
+            <h2 style={{ marginTop: 0 }}>
               How to Get a Direct Link to an <span className="u-nowrap">Image in Box</span>
             </h2>
             <p>
@@ -367,6 +485,42 @@ class App extends React.Component<IAppProps, IAppState> {
                   </g>
                 </svg></a>
             </p>
+          </div>
+        </Modal>
+        <Modal show={this.state.isSaveModalOpen}
+          onClose={this.toggleSaveModal}>
+          <div className="c-modal">
+            <h2 style={{ marginTop: 0 }}>
+              Your Unique Shareable Link
+            </h2>
+            <p>
+              This link contains all of information within it, so none of your info is uploaded anywhere.
+          </p>
+            <p>
+              Easy.
+            </p>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <div style={{ width: "80%", marginRight: ".25em" }}>
+                <input
+                  readOnly
+                  type="url"
+                  style={{ overflow: "hidden", margin: 0 }}
+                  id="js-shareable-url"
+                  value={this.getShareableUrl()}
+                />
+              </div>
+              <div>
+                <button
+                  onClick={() => this.copyText("js-shareable-url")}
+                  style={{ fontSize: ".7em" }}
+                  className="c-button c-button--primary c-button--block u-ta--c"
+                >
+                  <span className="u-ta--c">
+                    Copy
+                    </span>
+                </button>
+              </div>
+            </div>
           </div>
         </Modal>
         {/* <Modal show={this.state.isCopyHtmlModalOpen}

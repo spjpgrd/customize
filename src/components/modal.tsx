@@ -1,13 +1,13 @@
-import * as React from 'react';
+import * as React from "react";
 
 interface IModalProps {
-    onClose: any,
-    show: boolean,
-    children: any,
+    onClose: any;
+    show: boolean;
+    children: any;
 }
 
 class Modal extends React.Component<IModalProps> {
-    public render() {
+    render() {
         // Render nothing if the "show" prop is false
         if (!this.props.show) {
             return null;
@@ -15,24 +15,23 @@ class Modal extends React.Component<IModalProps> {
 
         return (
             <div className="backdrop" style={{
-                position: 'fixed',
+                position: "fixed",
                 top: 0,
                 // tslint:disable-next-line: object-literal-sort-keys
                 bottom: 0,
                 left: 0,
                 right: 0,
-                backgroundColor: 'rgba(0,0,0,0.3)',
+                backgroundColor: "rgba(0,0,0,0.3)",
                 backdropFilter: "saturate(120%) blur(8px)",
-                webkitBackdropFilter: "saturate(120%) blur(8px)",
                 padding: 50
             }}>
                 <div className="modal" style={{
-                    backgroundColor: '#fff',
+                    backgroundColor: "#fff",
                     borderRadius: 5,
                     maxWidth: 500,
                     minHeight: 300,
                     // tslint:disable-next-line: object-literal-sort-keys
-                    margin: '1.5rem auto 0 auto',
+                    margin: "1.5rem auto 0 auto",
                     paddingTop: 30,
                     paddingRight: 30,
                     paddingBottom: 30,

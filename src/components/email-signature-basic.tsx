@@ -1,9 +1,10 @@
-import * as React from 'react';
-import { slugify } from 'src/helpers/helpers';
+import React from "react";
+// tslint:disable-next-line: no-implicit-dependencies
+import { slugify } from "src/helpers/helpers";
 // import UTMMediumEnum from "../enums/utm-medium-enum";
 // import UTMSourceEnum from "../enums/utm-source-enum";
 // import { IPersonModel } from "../models/person-model";
-import { IUTMParamModel } from "../models/utm-param-model"
+import { IUTMParamModel } from "../models/utm-param-model";
 
 // export interface IEmailSignatureBasic {
 
@@ -44,7 +45,7 @@ interface IEmailSignatureBasicProps {
     utmCampaign: string;
     fontStack: string;
     directionsUrl: string;
-};
+}
 
 // tslint:disable-next-line: no-empty-interface
 interface IEmailSignatureBasicState {
@@ -53,15 +54,13 @@ interface IEmailSignatureBasicState {
 
 class EmailSignatureBasic extends React.Component<IEmailSignatureBasicProps, IEmailSignatureBasicState> {
 
-
     constructor(props: IEmailSignatureBasicProps) {
         super(props);
 
         // const workPhone = "844-433-3326";
 
     }
-
-    public render() {
+    render() {
         const utmCampaignSlug = slugify(this.props.utmCampaign).trim();
         const fullUtmParams = `?utm_content=${this.props.utmParams.utmContent}-via-${this.props.fullNameSlug}&utm_medium=${this.props.utmParams.utmMedium}&utm_source=${this.props.utmParams.utmSource}${utmCampaignSlug !== "" ? `&utm_campaign=${utmCampaignSlug}` : ``}`;
 
@@ -108,5 +107,3 @@ class EmailSignatureBasic extends React.Component<IEmailSignatureBasicProps, IEm
 }
 
 export default EmailSignatureBasic;
-
-

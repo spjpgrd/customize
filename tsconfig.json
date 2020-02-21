@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "outDir": "build/dist",
     "module": "esnext",
     "target": "es5",
     "lib": [
-      "es6",
+      "es2019",
       "dom"
     ],
     "sourceMap": true,
@@ -16,6 +17,7 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
+    "no-implicit-dependencies": true,
     "noImplicitAny": true,
     "importHelpers": true,
     "strictNullChecks": true,

@@ -1,10 +1,51 @@
 {
-  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "extends": [
+    "tslint:latest",
+    "tslint-react-hooks"
+  ],
   "linterOptions": {
     "exclude": [
       "config/**/*.js",
-      "node_modules/**/*.ts",
+      "node_modules",
       "coverage/lcov-report/*.js"
     ]
+  },
+  "rules": {
+    "react-hooks-nesting": "error",
+    "object-literal-key-quotes": false,
+    "object-literal-shorthand": false,
+    "no-console": false,
+    "max-classes-per-file": false,
+    "member-access": [
+      true,
+      "no-public"
+    ],
+    "no-submodule-imports": false,
+    "no-var-keyword": false,
+    "no-this-assignment": [
+      true,
+      {
+        "allowed-names": [
+          "^self$"
+        ],
+        "allow-destructuring": true
+      }
+    ],
+    "jsx-no-multiline-js": false,
+    "object-literal-sort-keys": false,
+    "only-arrow-functions": false,
+    "prefer-conditional-expression": false,
+    "interface-name": false,
+    "import-name": false,
+    "comment-format": {
+      "options": [
+        "check-space"
+      ]
+    },
+    "max-line-length": false,
+    "trailing-comma": false,
+    "space-before-function-paren": false,
+    "jsx-boolean-value": false,
+    "ordered-imports": false
   }
 }

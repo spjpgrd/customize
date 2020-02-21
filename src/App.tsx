@@ -1,15 +1,16 @@
-import * as React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 
 // import logo from './logo.svg';
-import 'flexboxgrid2'
+import "flexboxgrid2";
 import Checkbox from "./components/checkbox";
-import EmailSignatureBasic from './components/email-signature-basic';
+import EmailSignatureBasic from "./components/email-signature-basic";
 import Modal from "./components/modal";
-import { getSlugIfNotNull } from './helpers/helpers';
+import { getSlugIfNotNull } from "./helpers/helpers";
 // import { IPersonModel } from './models/person-model';
 // import { IPersonModel } from './models/person-model';
 import { IUTMParamModel } from "./models/utm-param-model";
+// import queryString, { ParsedQuery } from "query-string";
 
 // interface IEmployeeList {
 //   fullName: string;
@@ -115,7 +116,7 @@ class App extends React.Component<IAppProps, IAppState> {
       fontStack: "'Effra','-apple-system', 'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','sans-serif','Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol','sans-serif'",
       directionsUrl: "https://wrtp.me/HQ1directions",
       // tslint:disable-next-line: object-literal-sort-keys
-    }
+    };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
@@ -127,9 +128,13 @@ class App extends React.Component<IAppProps, IAppState> {
 
   }
 
-  public handleInputChange(event: any) {
+  componentDidMount() {
+    console.log("f");
+  }
+
+  handleInputChange(event: any) {
     const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
     this.setState({
       [name]: value,
@@ -138,9 +143,9 @@ class App extends React.Component<IAppProps, IAppState> {
     // console.log({ [name]: value });
   }
 
-  public async handleNameChange(event: any) {
+  async handleNameChange(event: any) {
     const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
     this.setState({
       [name]: await value,
@@ -151,28 +156,28 @@ class App extends React.Component<IAppProps, IAppState> {
     this.setState({ fullName, fullNameSlug });
   }
 
-  public async handleUtmChange(event: any) {
+  async handleUtmChange(event: any) {
     const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
     this.setState({
       [name]: await value,
     });
   }
 
-  public getFullNameDisplay(honorificPrefix: string | null, givenName: string | null, additionalName: string | null, familyName: string | null, honorificSuffix: string | null) {
+  getFullNameDisplay(honorificPrefix: string | null, givenName: string | null, additionalName: string | null, familyName: string | null, honorificSuffix: string | null) {
     // tslint:disable-next-line: only-arrow-functions
     const fullName = [honorificPrefix, givenName, additionalName, familyName, honorificSuffix].filter(function (value) { return value; }).join(" ");
     return fullName;
   }
 
-  public toggleBoxModal = () => {
+  toggleBoxModal() {
     this.setState({
       isBoxModalOpen: !this.state.isBoxModalOpen
     });
   }
 
-  public toggleCopyHtmlModal = () => {
+  toggleCopyHtmlModal() {
     this.setState({
       isCopyHtmlModalOpen: !this.state.isCopyHtmlModalOpen
     });

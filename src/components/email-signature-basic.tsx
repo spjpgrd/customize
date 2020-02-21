@@ -1,6 +1,5 @@
 import React from "react";
-// tslint:disable-next-line: no-implicit-dependencies
-import { slugify } from "src/helpers/helpers";
+import { slugify } from "../helpers/helpers";
 // import UTMMediumEnum from "../enums/utm-medium-enum";
 // import UTMSourceEnum from "../enums/utm-source-enum";
 // import { IPersonModel } from "../models/person-model";
@@ -10,7 +9,7 @@ import { IUTMParamModel } from "../models/utm-param-model";
 
 // }
 
-interface IEmailSignatureBasicProps {
+export interface IEmailSignatureBasicProps {
     additionalName: string;
     cellPhone: string;
     emailAddress: string;

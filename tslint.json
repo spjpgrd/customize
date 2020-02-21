@@ -35,6 +35,7 @@
     "object-literal-sort-keys": false,
     "only-arrow-functions": false,
     "prefer-conditional-expression": false,
+    "no-implicit-dependencies": true,
     "interface-name": false,
     "import-name": false,
     "comment-format": {

@@ -68,9 +68,10 @@ class App extends React.Component<IAppProps, IAppState> {
 
   constructor(props: IAppProps) {
     super(props);
+
     this.state = {
       additionalName: "",
-      cellPhone: "O: 555-867-5309",
+      cellPhone: "C: 555-867-5309",
       emailAddress: "jeff@awarehq.com",
       workPhone: "W: 555-133-7123",
       // employeeList,
@@ -198,7 +199,7 @@ class App extends React.Component<IAppProps, IAppState> {
               </header>
             </div>
             <div className="col-xs-6">
-              <span className="c-nav-time">Updated: <time>May 14, 2019</time></span>
+              <span className="c-nav-time">Updated: <time>2019 September 16</time></span>
             </div>
           </div>
         </nav>
@@ -206,10 +207,13 @@ class App extends React.Component<IAppProps, IAppState> {
           <div className="container">
             <div className="row between-xs">
               <div className="last-xs last-sm initial-order-md col-xs-12 col-sm-12 col-md-6 col-lg-5 col-xl-4">
+                <a href="https://wiretapfiles.app.box.com/folder/72642759039" target="_blank" className="c-button c-button--primary c-button--block u-ta--c"><small>Grab an Aware Wallpaper</small></a>
                 <form name="personal-info" autoComplete="on">
                   <fieldset>
                     <legend>Your Photo</legend>
-                    <label htmlFor="profilePicture"><span aria-hidden="true">🖼️ </span>Profile Picture URL</label><a style={{ float: "right", cursor: "pointer", fontSize: ".8em", color: "rgb(72, 54, 150)" }} onClick={this.toggleBoxModal}>Need Help with Box?</a><br />
+                    <div className="l-flex l-jc--sb l-ai--bl">
+                      <label htmlFor="profilePicture"><span aria-hidden="true">🖼️ </span>Headshot URL <span className="c-form-label__optional">(optional)</span></label><a style={{ float: "right", cursor: "pointer", fontSize: ".8em", }} onClick={this.toggleBoxModal} className="c-text-gradient">Get Your Headshot</a>
+                    </div>
                     <input type="photo" name="profilePicture" value={this.state.profilePicture} required={true} onChange={this.handleInputChange} /><br />
                   </fieldset>
                   <fieldset>
@@ -221,7 +225,7 @@ class App extends React.Component<IAppProps, IAppState> {
                   </fieldset>
                   <fieldset>
                     <legend>Contact Options</legend>
-                    <label htmlFor="workPhone"><span aria-hidden="true">☎️</span> Office Phone<span className="c-form-label__optional">(optional)</span></label><br />
+                    <label htmlFor="workPhone"><span aria-hidden="true">☎️</span> Office Phone <span className="c-form-label__optional">(optional)</span></label><br />
                     <input type="tel-national" name="workPhone" autoComplete="tel-national" value={this.state.workPhone || ""} onChange={this.handleInputChange} /><br />
                     <label htmlFor="cellPhone"><span aria-hidden="true">📱 </span>Cell Phone <span className="c-form-label__optional">(optional)</span></label><br />
                     <input type="tel-national" name="cellPhone" autoComplete="tel-national" value={this.state.cellPhone || ""} onChange={this.handleInputChange} /><br />
@@ -255,7 +259,7 @@ class App extends React.Component<IAppProps, IAppState> {
                   </fieldset>
                   <fieldset>
                     <legend>Your Company's Details</legend>
-                    <label htmlFor="companyName"><span aria-hidden="true">📛 </span>Company Name</label><br />
+                    <label htmlFor="companyName"><span aria-hidden="true">📛 </span>Company Name <span className="c-form-label__optional">(optional)</span></label><br />
                     <input type="text" name="companyName" value={this.state.companyName} required={false} onChange={this.handleInputChange} /><br />
                     <label htmlFor="directionsUrl"><span aria-hidden="true">📍 </span>Directions URL<span className="c-form-label__optional">(optional)</span></label><br />
                     <input type="url" name="directionsUrl" value={this.state.directionsUrl} required={false} onChange={this.handleInputChange} />
@@ -286,19 +290,10 @@ class App extends React.Component<IAppProps, IAppState> {
                       onCheckboxChange={this.handleInputChange}
                       key="hideSocialLinks"
                     />
-                    <Checkbox
-                      label={`Hide "Formerly Known As"`}
-                      name="hideFKAW"
-                      isSelected={this.state.hideFKAW}
-                      onCheckboxChange={this.handleInputChange}
-                      key="hideFKAW"
-                    />
                   </fieldset>
                 </form>
                 <footer className="u-mb7">
-                  <small>Hacked together for Aware · <a href="https://github.com/spjpgrd/customize" target="_blank">View on Github</a></small><br />
-                  <hr />
-                  <small><a href="https://wiretapfiles.app.box.com/folder/72642759039" target="_blank">Grab an Aware wallpaper in Box</a></small>
+                  <small>Hacked together for Aware · <a href="https://github.com/spjpgrd/customize" target="_blank" className="c-text-gradient">View on Github</a></small><br />
                 </footer>
               </div>
               <div className="col-xs-12 col-sm-12 col-md-5 col-lg-6 col-xl-7">
@@ -362,9 +357,9 @@ class App extends React.Component<IAppProps, IAppState> {
             <p>
               A direct link will end in the file extension. This is the kind of URL the generator needs 👍
           </p>
-            <img src="/assets/images/how-to-get-a-public-link-from-box.gif" style={{ border: "2px solid rgba(0,0,0,.05)", marginTop: "16px", marginBottom: "24px" }} />
+            <img src="https://github.com/spjpgrd/customize/blob/master/public/assets/images/how-to-get-a-public-link-from-box.gif?raw=true" style={{ border: "2px solid rgba(0,0,0,.05)", marginTop: "16px", marginBottom: "24px" }} />
             <p>
-              <a href="https://wiretapfiles.box.com/v/emailsignatures" target="_blank" className="c-button c-button--primary c-button--block">Find your photo in Box
+              <a href="https://wiretapfiles.box.com/v/emailsignatures" target="_blank" className="c-button c-button--primary c-button--block">Get your photo in Box
 
               <svg style={{ marginLeft: "8px" }} width="16px" height="16px" viewBox="0 0 16 16" version="1.1">
                   <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">

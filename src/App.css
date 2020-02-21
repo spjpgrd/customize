@@ -142,7 +142,7 @@ small {
 }
 
 .c-button--secondary {
-    background-image: linear-gradient(-45deg, rgb(238, 238, 238) 0%, rgb(247, 247, 247) 100%);
+    background-image: linear-gradient(-45deg, rgb(252, 250, 250) 0%, rgb(253, 252, 252) 100%);
     border: .075em solid hsl(4, 4%, 1%);
     color: hsl(4, 4%, 1%);
     padding: .75rem 1rem;

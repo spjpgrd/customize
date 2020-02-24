@@ -143,7 +143,7 @@ small {
 
 .c-button--secondary {
     background-image: linear-gradient(-45deg, rgb(252, 250, 250) 0%, rgb(253, 252, 252) 100%);
-    border: .075em solid hsl(4, 4%, 1%);
+    border: .075em solid hsl(0, 4%, 14%);
     color: hsl(4, 4%, 1%);
     padding: .75rem 1rem;
     font-size: 1.25em;
@@ -157,13 +157,13 @@ small {
 .c-button--secondary:hover,
 .c-button--secondary:focus {
     opacity: 1;
-    color: rgb(247, 247, 247);
-    background-image: linear-gradient(-45deg, #2C2B2A 0%, #2C2B2A 100%);
+    color: hsl(4, 4%, 1%);
+    background-image: linear-gradient(-45deg, rgb(237, 234, 234) 0%, rgb(232, 226, 226) 100%);
 }
 
 .c-button--secondary:active {
-    color: rgb(247, 247, 247);
-    background-image: linear-gradient(-45deg, hsl(4, 8%, 7%) 0%, hsl(4, 8%, 7%) 100%);
+    color: hsl(4, 4%, 1%);
+    background-image: linear-gradient(-45deg, rgb(215, 208, 208) 0%, rgb(203, 194, 194) 100%);
 }
 
 .c-button--block {

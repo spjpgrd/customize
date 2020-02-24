@@ -1,6 +1,8 @@
 import React from "react";
+// import ReactDOM from "react-dom";
+import ReactDOMServer from "react-dom/server";
 import "./App.css";
-
+// import { renderToStaticMarkup } from "react-dom";
 // import logo from './logo.svg';
 import "flexboxgrid2";
 import Checkbox from "./components/checkbox";
@@ -129,6 +131,7 @@ class App extends React.Component<IAppProps, IAppState> {
     this.handleQueryParams = this.handleQueryParams.bind(this);
     this.getShareableUrl = this.getShareableUrl.bind(this);
     this.copyText = this.copyText.bind(this);
+    this.handleCopyHTML = this.handleCopyHTML.bind(this);
     // this.handleEmployeeListSelection = this.handleEmployeeListSelection.bind(this);
     // this.handleCheckboxChange = this.handleCheckboxChange.bind(this);fhandleCheckboxChange
 
@@ -291,6 +294,62 @@ class App extends React.Component<IAppProps, IAppState> {
     }
   }
 
+  handleCopyHTML() {
+    const test = ReactDOMServer.renderToStaticMarkup(
+      <EmailSignatureBasic
+        additionalName={this.state.additionalName.trim()}
+        cellPhone={this.state.cellPhone.trim()}
+        emailAddress={this.state.emailAddress.trim()}
+        workPhone={this.state.workPhone.trim()}
+        familyName={this.state.familyName.trim()}
+        fullName={this.state.fullName.trim()}
+        fullNameSlug={this.state.fullNameSlug.trim()}
+        givenName={this.state.givenName.trim()}
+        hidePicture={this.state.hidePicture}
+        hideAwareLogo={this.state.hideAwareLogo}
+        hideAddress={this.state.hideAddress}
+        hideSocialLinks={this.state.hideSocialLinks}
+        hideFKAW={this.state.hideFKAW}
+        honorificPrefix={this.state.honorificPrefix.trim()}
+        honorificSuffix={this.state.honorificSuffix.trim()}
+        sameLinePhoneNumbers={this.state.sameLinePhoneNumbers}
+        organizationTitle={this.state.organizationTitle.trim()}
+        linkedinUrl={this.state.linkedinUrl.trim()}
+        workplaceUrl={this.state.workplaceUrl.trim()}
+        profilePicture={this.state.profilePicture.trim()}
+        companyLogoUrl={this.state.companyLogoUrl.trim()}
+        companyLogoHeight={this.state.companyLogoHeight}
+        companyLogoWidth={this.state.companyLogoWidth}
+        companyAddress={this.state.companyAddress.trim()}
+        companyWebsite={this.state.companyWebsite.trim()}
+        companyLinkedIn={this.state.companyLinkedIn.trim()}
+        companyTwitter={this.state.companyTwitter.trim()}
+        companyFacebook={this.state.companyFacebook.trim()}
+        companyInstagram={this.state.companyInstagram.trim()}
+        companyName={this.state.companyName.trim()}
+        utmParams={this.state.utmParams}
+        utmCampaign={this.state.utmCampaign.trim()}
+        fontStack={this.state.fontStack.trim()}
+        directionsUrl={this.state.directionsUrl.trim()}
+        id={"js-aware-customize-signature"}
+        ref={`js-ref-aware-customize-signature`}
+      />
+    );
+    // @ts-ignore
+    console.log(test);
+    const el = document.createElement("textarea");  // Create a <textarea> element
+    el.value = test;                                 // Set its value to the string that you want copied
+    el.setAttribute("readonly", "");                // Make it readonly to be tamper-proof
+    el.style.position = "absolute";
+    el.style.left = "-9999px";                      // Move outside the screen to make it invisible
+    document.body.appendChild(el);                  // Append the <textarea> element to the HTML document
+    el.select();                                    // Select the <textarea> content
+    document.execCommand("copy");                   // Copy - only works as a result of a user action (e.g. click events)
+    document.body.removeChild(el);                  // Remove the <textarea> element
+
+    window.alert("Copied Successfully");
+  }
+
   // tslint:disable-next-line: member-access
   render() {
     return (
@@ -312,6 +371,11 @@ class App extends React.Component<IAppProps, IAppState> {
               </header>
             </div>
             <div className="col-xs-6" style={{ textAlign: "right" }}>
+              <button
+                onClick={this.handleCopyHTML} style={{ cursor: "pointer", fontSize: ".8em", marginRight: ".5em" }}
+                className="c-button c-button--secondary">
+                Copy as HTML
+              </button>
               <button
                 onClick={this.toggleSaveModal} style={{ cursor: "pointer", fontSize: ".8em" }}
                 className="c-button c-button--primary">
@@ -450,17 +514,10 @@ class App extends React.Component<IAppProps, IAppState> {
                     utmCampaign={this.state.utmCampaign.trim()}
                     fontStack={this.state.fontStack.trim()}
                     directionsUrl={this.state.directionsUrl.trim()}
+                    id={"js-aware-customize-signature"}
+                    ref={`js-ref-aware-customize-signature`}
                   />
                 </div>
-                {/* <hr />
-                <div>
-                  <button onClick={this.copySignature}>
-                    Copy Signature
-                  </button>
-                  <button onClick={this.copyDivAsHtmlToClipboard()}>
-                    Copy Signature as HTML
-                  </button>
-                </div> */}
               </div>
             </div>
           </div>

@@ -44,6 +44,7 @@ export interface IEmailSignatureBasicProps {
     utmCampaign: string;
     fontStack: string;
     directionsUrl: string;
+    id: string;
 }
 
 // tslint:disable-next-line: no-empty-interface
@@ -65,7 +66,7 @@ class EmailSignatureBasic extends React.Component<IEmailSignatureBasicProps, IEm
 
         return (
             <>
-                <table cellSpacing="0" cellPadding="0" style={{ border: "0px" }}>
+                <table cellSpacing="0" cellPadding="0" style={{ border: "0px" }} id={this.props.id}>
                     <tbody>
                         {(!this.props.hidePicture && this.props.profilePicture !== "") &&
                             <tr >

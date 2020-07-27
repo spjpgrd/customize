@@ -1,29 +1,16 @@
 import React from "react";
-// import ReactDOM from "react-dom";
 import ReactDOMServer from "react-dom/server";
 import "./App.css";
-// import { renderToStaticMarkup } from "react-dom";
-// import logo from './logo.svg';
 import "flexboxgrid2";
 import Checkbox from "./components/checkbox";
 import EmailSignatureBasic, { IEmailSignatureBasicProps } from "./components/email-signature-basic";
 import Modal from "./components/modal";
 import { getSlugIfNotNull, fixedEncodeURIComponent, parseBoolean } from "./helpers/helpers";
-// import { IPersonModel } from './models/person-model';
-// import { IPersonModel } from './models/person-model';
 import { IUTMParamModel } from "./models/utm-param-model";
 import queryString from "query-string";
 
-// interface IEmployeeList {
-//   fullName: string;
-//   givenName: string;
-//   familyName: string;
-//   fullNameSlug: string;
-//   profilePicture: string;
-// }
 // tslint:disable-next-line: no-empty-interface
 interface IAppProps {
-
 }
 
 interface IAppState {
@@ -63,7 +50,6 @@ interface IAppState {
   utmCampaign: string;
   fontStack: string;
   directionsUrl: string;
-  // employeeList: IEmployeeList[];
   selectedEmployee: string;
   [key: string]: any;
 }
@@ -74,8 +60,6 @@ class App extends React.Component<IAppProps, IAppState> {
     super(props);
 
     this.state = {
-      // employeeList,
-      // tslint:disable-next-line: object-literal-sort-keys
       additionalName: "",
       cellPhone: "C: 555-867-5309",
       emailAddress: "jeff@awarehq.com",
@@ -96,7 +80,7 @@ class App extends React.Component<IAppProps, IAppState> {
       isCopyHtmlModalOpen: false,
       isSaveModalOpen: false,
       organizationTitle: "CEO & Co-Founder",
-      linkedinUrl: "https://www.linkedin.com/in/jeffreyschumann/",
+      linkedinUrl: "",
       sameLinePhoneNumbers: true,
       workplaceUrl: "https://wiretap.facebook.com/profile.php?id=100013799348501",
       profilePicture: "https://wiretapfiles.box.com/shared/static/81nuynta2p10mbvg0kksiy8pa18qv140.png",
@@ -106,10 +90,10 @@ class App extends React.Component<IAppProps, IAppState> {
       companyName: "Aware",
       companyAddress: "111 Liberty Street \u00B7 Suite 102 \u00B7 Columbus, OH 43215",
       companyWebsite: "https://awarehq.com",
-      companyLinkedIn: "http://awarehq.com/li",
-      companyTwitter: "http://awarehq.com/tw",
-      companyFacebook: "http://awarehq.com/fb",
-      companyInstagram: "http://awarehq.com/ig",
+      companyLinkedIn: "https://awarehq.com/li",
+      companyTwitter: "https://awarehq.com/tw",
+      companyFacebook: "https://awarehq.com/fb",
+      companyInstagram: "https://awarehq.com/ig",
       utmParams: {
         utmCampaign: "",
         utmContent: "email-link",
@@ -118,8 +102,7 @@ class App extends React.Component<IAppProps, IAppState> {
       },
       utmCampaign: "",
       fontStack: "'Effra','-apple-system', 'BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','sans-serif','Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol','sans-serif'",
-      directionsUrl: "https://wrtp.me/HQ1directions",
-      // tslint:disable-next-line: object-literal-sort-keys
+      directionsUrl: "",
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -139,7 +122,6 @@ class App extends React.Component<IAppProps, IAppState> {
 
   componentDidMount() {
     const parsedQuery: IEmailSignatureBasicProps = this.handleQueryParams() as unknown as IEmailSignatureBasicProps;
-    console.log(parsedQuery);
 
     this.setState({
       additionalName: parsedQuery.additionalName ? parsedQuery.additionalName : this.state.additionalName,
@@ -233,8 +215,6 @@ class App extends React.Component<IAppProps, IAppState> {
     this.setState({
       [name]: value,
     });
-    // tslint:disable-next-line: no-console
-    // console.log({ [name]: value });
   }
 
   async handleNameChange(event: any) {
@@ -260,8 +240,7 @@ class App extends React.Component<IAppProps, IAppState> {
   }
 
   getFullNameDisplay(honorificPrefix: string | null, givenName: string | null, additionalName: string | null, familyName: string | null, honorificSuffix: string | null) {
-    // tslint:disable-next-line: only-arrow-functions
-    const fullName = [honorificPrefix, givenName, additionalName, familyName, honorificSuffix].filter(function (value) { return value; }).join(" ");
+    const fullName = [honorificPrefix, givenName, additionalName, familyName, honorificSuffix].filter((value) => value).join(" ");
     return fullName;
   }
 
@@ -338,7 +317,7 @@ class App extends React.Component<IAppProps, IAppState> {
     // @ts-ignore
     console.log(test);
     const el = document.createElement("textarea");  // Create a <textarea> element
-    el.value = test;                                 // Set its value to the string that you want copied
+    el.value = test;                                // Set its value to the string that you want copied
     el.setAttribute("readonly", "");                // Make it readonly to be tamper-proof
     el.style.position = "absolute";
     el.style.left = "-9999px";                      // Move outside the screen to make it invisible
@@ -350,7 +329,6 @@ class App extends React.Component<IAppProps, IAppState> {
     window.alert("Copied Successfully");
   }
 
-  // tslint:disable-next-line: member-access
   render() {
     return (
       <>
@@ -374,7 +352,7 @@ class App extends React.Component<IAppProps, IAppState> {
               <button
                 onClick={this.handleCopyHTML} style={{ cursor: "pointer", fontSize: ".8em", marginRight: ".5em" }}
                 className="c-button c-button--secondary">
-                Copy as HTML
+                🤓 Copy as HTML
               </button>
               <button
                 onClick={this.toggleSaveModal} style={{ cursor: "pointer", fontSize: ".8em" }}
@@ -388,7 +366,10 @@ class App extends React.Component<IAppProps, IAppState> {
           <div className="container">
             <div className="row between-xs">
               <div className="last-xs last-sm initial-order-md col-xs-12 col-sm-12 col-md-6 col-lg-5 col-xl-4">
-                <a href="https://wiretapfiles.app.box.com/folder/72642759039" target="_blank" className="c-button c-button--secondary c-button--block u-ta--c"><small>🎨 Grab an Aware Wallpaper</small></a>
+                <a href="https://wiretapfiles.app.box.com/folder/72642759039"
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  className="c-button c-button--secondary c-button--block u-ta--c"><small>🎨 Grab an Aware Wallpaper</small></a>
                 <form name="personal-info" autoComplete="on">
                   <fieldset>
                     <legend>Your Photo</legend>
@@ -474,7 +455,11 @@ class App extends React.Component<IAppProps, IAppState> {
                   </fieldset>
                 </form>
                 <footer className="u-mb7">
-                  <small>Hacked together for Aware · <a href="https://github.com/spjpgrd/customize" target="_blank" className="c-text-gradient">View on Github</a></small><br />
+                  <small>Hacked together for Aware · <a
+                    href="https://github.com/spjpgrd/customize"
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    className="c-text-gradient">View on Github</a></small><br />
                 </footer>
               </div>
               <div className="col-xs-12 col-sm-12 col-md-5 col-lg-6 col-xl-7">
@@ -580,42 +565,6 @@ class App extends React.Component<IAppProps, IAppState> {
             </div>
           </div>
         </Modal>
-        {/* <Modal show={this.state.isCopyHtmlModalOpen}
-          onClose={this.toggleCopyHtmlModal}>
-          <div className="c-modal">
-            <h2>
-              Copy HTML
-            </h2>
-            <p>
-              <pre style={{ height: "12.5em" }}>
-                <EmailSignatureBasic
-                  additionalName={this.state.additionalName}
-                  cellPhone={this.state.cellPhone}
-                  emailAddress={this.state.emailAddress}
-                  workPhone={this.state.workPhone}
-                  familyName={this.state.familyName}
-                  fullName={this.state.fullName}
-                  fullNameSlug={this.state.fullNameSlug}
-                  givenName={this.state.givenName}
-                  hidePicture={this.state.hidePicture}
-                  hideAwareLogo={this.state.hideAwareLogo}
-                  hideAddress={this.state.hideAddress}
-                  hideSocialLinks={this.state.hideSocialLinks}
-                  hideFKAW={this.state.hideFKAW}
-                  honorificPrefix={this.state.honorificPrefix}
-                  honorificSuffix={this.state.honorificSuffix}
-                  sameLinePhoneNumbers={this.state.sameLinePhoneNumbers}
-                  organizationTitle={this.state.organizationTitle}
-                  linkedinUrl={this.state.linkedinUrl}
-                  workplaceUrl={this.state.workplaceUrl}
-                  profilePicture={this.state.profilePicture}
-                  companyLogoUrl={this.state.companyLogoUrl}
-                  utmParams={this.state.utmParams}
-                  utmCampaign={this.state.utmCampaign} />
-              </pre>
-            </p>
-          </div>
-        </Modal> */}
       </>
     );
   }

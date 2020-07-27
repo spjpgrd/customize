@@ -56,9 +56,6 @@ class EmailSignatureBasic extends React.Component<IEmailSignatureBasicProps, IEm
 
     constructor(props: IEmailSignatureBasicProps) {
         super(props);
-
-        // const workPhone = "844-433-3326";
-
     }
     render() {
         const utmCampaignSlug = slugify(this.props.utmCampaign).trim();

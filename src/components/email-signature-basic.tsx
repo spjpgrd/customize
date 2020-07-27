@@ -67,8 +67,13 @@ class EmailSignatureBasic extends React.Component<IEmailSignatureBasicProps, IEm
                     <tbody>
                         {(!this.props.hidePicture && this.props.profilePicture !== "") &&
                             <tr >
-                                <td style={{ paddingLeft: "0px", paddingTop: "0px", paddingBottom: " 4px", paddingRight: "0px", verticalAlign: "top" }}>
-                                    <a target="_blank" href={this.props.linkedinUrl}><img src={this.props.profilePicture.endsWith("") ? this.props.profilePicture : "/profile-photos/default-aware-128.png"} style={{ width: "64px", height: "64px", }} width="64" height="64" alt={this.props.fullName} title={this.props.fullName} /></a></td>
+                                {this.props.linkedinUrl.length > 0 ?
+                                    <td style={{ paddingLeft: "0px", paddingTop: "0px", paddingBottom: " 4px", paddingRight: "0px", verticalAlign: "top" }}>
+                                        <a target="_blank" href={this.props.linkedinUrl}><img src={this.props.profilePicture.endsWith("") ? this.props.profilePicture : "/profile-photos/default-aware-128.png"} style={{ width: "64px", height: "64px", }} width="64" height="64" alt={this.props.fullName} title={this.props.fullName} /></a></td>
+                                    :
+                                    <td style={{ paddingLeft: "0px", paddingTop: "0px", paddingBottom: " 4px", paddingRight: "0px", verticalAlign: "top" }}>
+                                        <img src={this.props.profilePicture.endsWith("") ? this.props.profilePicture : "/profile-photos/default-aware-128.png"} style={{ width: "64px", height: "64px", }} width="64" height="64" alt={this.props.fullName} title={this.props.fullName} /></td>
+                                }
                             </tr>
                         }
                         <tr>

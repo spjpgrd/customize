@@ -346,6 +346,10 @@ footer {
     font-variant-numeric: tabular-nums;
 }
 
+.u-mr--2 {
+    margin-right: .25rem;
+}
+
 .u-ml--2 {
     margin-left: .25rem;
 }

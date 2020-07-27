@@ -124,38 +124,38 @@ class App extends React.Component<IAppProps, IAppState> {
     const parsedQuery: IEmailSignatureBasicProps = this.handleQueryParams() as unknown as IEmailSignatureBasicProps;
 
     this.setState({
-      additionalName: parsedQuery.additionalName ? parsedQuery.additionalName : this.state.additionalName,
-      cellPhone: parsedQuery.cellPhone ? parsedQuery.cellPhone : this.state.cellPhone,
-      emailAddress: parsedQuery.emailAddress ? parsedQuery.emailAddress : this.state.emailAddress,
-      workPhone: parsedQuery.workPhone ? parsedQuery.workPhone : this.state.workPhone,
-      familyName: parsedQuery.familyName ? parsedQuery.familyName : this.state.familyName,
-      fullName: parsedQuery.fullName ? parsedQuery.fullName : this.state.fullName,
-      fullNameSlug: parsedQuery.fullNameSlug ? parsedQuery.fullNameSlug : this.state.fullNameSlug,
-      givenName: parsedQuery.givenName ? parsedQuery.givenName : this.state.givenName,
-      hidePicture: parsedQuery.hidePicture ? parseBoolean(parsedQuery.hidePicture) : this.state.hidePicture,
-      hideAwareLogo: parsedQuery.hideAwareLogo ? parseBoolean(parsedQuery.hideAwareLogo) : this.state.hideAwareLogo,
-      hideAddress: parsedQuery.hideAddress ? parseBoolean(parsedQuery.hideAddress) : this.state.hideAddress,
-      hideSocialLinks: parsedQuery.hideSocialLinks ? parseBoolean(parsedQuery.hideSocialLinks) : this.state.hideSocialLinks,
-      hideFKAW: parsedQuery.hideFKAW ? parseBoolean(parsedQuery.hideFKAW) : this.state.hideFKAW,
-      honorificPrefix: parsedQuery.honorificPrefix ? parsedQuery.honorificPrefix : this.state.honorificPrefix,
-      honorificSuffix: parsedQuery.honorificSuffix ? parsedQuery.honorificSuffix : this.state.honorificSuffix,
-      sameLinePhoneNumbers: parsedQuery.sameLinePhoneNumbers ? parseBoolean(parsedQuery.sameLinePhoneNumbers) : this.state.sameLinePhoneNumbers,
-      organizationTitle: parsedQuery.organizationTitle ? parsedQuery.organizationTitle : this.state.organizationTitle,
-      linkedinUrl: parsedQuery.linkedinUrl ? parsedQuery.linkedinUrl : this.state.linkedinUrl,
-      workplaceUrl: parsedQuery.workplaceUrl ? parsedQuery.workplaceUrl : this.state.workplaceUrl,
-      profilePicture: parsedQuery.profilePicture ? parsedQuery.profilePicture : this.state.profilePicture,
-      companyLogoUrl: parsedQuery.companyLogoUrl ? parsedQuery.companyLogoUrl : this.state.companyLogoUrl,
-      companyLogoHeight: parsedQuery.companyLogoHeight ? Number(parsedQuery.companyLogoHeight) : this.state.companyLogoHeight,
-      companyLogoWidth: parsedQuery.companyLogoWidth ? Number(parsedQuery.companyLogoWidth) : this.state.companyLogoWidth,
-      companyAddress: parsedQuery.companyAddress ? parsedQuery.companyAddress : this.state.companyAddress,
-      companyWebsite: parsedQuery.companyWebsite ? parsedQuery.companyWebsite : this.state.companyWebsite,
-      companyLinkedIn: parsedQuery.companyLinkedIn ? parsedQuery.companyLinkedIn : this.state.companyLinkedIn,
-      companyTwitter: parsedQuery.companyTwitter ? parsedQuery.companyTwitter : this.state.companyTwitter,
-      companyFacebook: parsedQuery.companyFacebook ? parsedQuery.companyFacebook : this.state.companyFacebook,
-      companyInstagram: parsedQuery.companyInstagram ? parsedQuery.companyInstagram : this.state.companyInstagram,
-      companyName: parsedQuery.companyName ? parsedQuery.companyName : this.state.companyName,
-      utmCampaign: parsedQuery.utmCampaign ? parsedQuery.utmCampaign : this.state.utmCampaign,
-      directionsUrl: parsedQuery.directionsUrl ? parsedQuery.directionsUrl : this.state.directionsUrl,
+      additionalName: parsedQuery.additionalName !== undefined ? parsedQuery.additionalName : this.state.additionalName,
+      cellPhone: parsedQuery.cellPhone !== undefined ? parsedQuery.cellPhone : this.state.cellPhone,
+      emailAddress: parsedQuery.emailAddress !== undefined ? parsedQuery.emailAddress : this.state.emailAddress,
+      workPhone: parsedQuery.workPhone !== undefined ? parsedQuery.workPhone : this.state.workPhone,
+      familyName: parsedQuery.familyName !== undefined ? parsedQuery.familyName : this.state.familyName,
+      fullName: parsedQuery.fullName !== undefined ? parsedQuery.fullName : this.state.fullName,
+      fullNameSlug: parsedQuery.fullNameSlug !== undefined ? parsedQuery.fullNameSlug : this.state.fullNameSlug,
+      givenName: parsedQuery.givenName !== undefined ? parsedQuery.givenName : this.state.givenName,
+      hidePicture: parsedQuery.hidePicture !== undefined ? parseBoolean(parsedQuery.hidePicture) : this.state.hidePicture,
+      hideAwareLogo: parsedQuery.hideAwareLogo !== undefined ? parseBoolean(parsedQuery.hideAwareLogo) : this.state.hideAwareLogo,
+      hideAddress: parsedQuery.hideAddress !== undefined ? parseBoolean(parsedQuery.hideAddress) : this.state.hideAddress,
+      hideSocialLinks: parsedQuery.hideSocialLinks !== undefined ? parseBoolean(parsedQuery.hideSocialLinks) : this.state.hideSocialLinks,
+      hideFKAW: parsedQuery.hideFKAW !== undefined ? parseBoolean(parsedQuery.hideFKAW) : this.state.hideFKAW,
+      honorificPrefix: parsedQuery.honorificPrefix !== undefined ? parsedQuery.honorificPrefix : this.state.honorificPrefix,
+      honorificSuffix: parsedQuery.honorificSuffix !== undefined ? parsedQuery.honorificSuffix : this.state.honorificSuffix,
+      sameLinePhoneNumbers: parsedQuery.sameLinePhoneNumbers !== undefined ? parseBoolean(parsedQuery.sameLinePhoneNumbers) : this.state.sameLinePhoneNumbers,
+      organizationTitle: parsedQuery.organizationTitle !== undefined ? parsedQuery.organizationTitle : this.state.organizationTitle,
+      linkedinUrl: parsedQuery.linkedinUrl !== undefined ? parsedQuery.linkedinUrl : this.state.linkedinUrl,
+      workplaceUrl: parsedQuery.workplaceUrl !== undefined ? parsedQuery.workplaceUrl : this.state.workplaceUrl,
+      profilePicture: parsedQuery.profilePicture !== undefined ? parsedQuery.profilePicture : this.state.profilePicture,
+      companyLogoUrl: parsedQuery.companyLogoUrl !== undefined ? parsedQuery.companyLogoUrl : this.state.companyLogoUrl,
+      companyLogoHeight: parsedQuery.companyLogoHeight !== undefined ? Number(parsedQuery.companyLogoHeight) : this.state.companyLogoHeight,
+      companyLogoWidth: parsedQuery.companyLogoWidth !== undefined ? Number(parsedQuery.companyLogoWidth) : this.state.companyLogoWidth,
+      companyAddress: parsedQuery.companyAddress !== undefined ? parsedQuery.companyAddress : this.state.companyAddress,
+      companyWebsite: parsedQuery.companyWebsite !== undefined ? parsedQuery.companyWebsite : this.state.companyWebsite,
+      companyLinkedIn: parsedQuery.companyLinkedIn !== undefined ? parsedQuery.companyLinkedIn : this.state.companyLinkedIn,
+      companyTwitter: parsedQuery.companyTwitter !== undefined ? parsedQuery.companyTwitter : this.state.companyTwitter,
+      companyFacebook: parsedQuery.companyFacebook !== undefined ? parsedQuery.companyFacebook : this.state.companyFacebook,
+      companyInstagram: parsedQuery.companyInstagram !== undefined ? parsedQuery.companyInstagram : this.state.companyInstagram,
+      companyName: parsedQuery.companyName !== undefined ? parsedQuery.companyName : this.state.companyName,
+      utmCampaign: parsedQuery.utmCampaign !== undefined ? parsedQuery.utmCampaign : this.state.utmCampaign,
+      directionsUrl: parsedQuery.directionsUrl !== undefined ? parsedQuery.directionsUrl : this.state.directionsUrl,
     });
   }
 
@@ -167,38 +167,38 @@ class App extends React.Component<IAppProps, IAppState> {
     let url = `${window.location.protocol}//${window.location.host}?`;
 
     const params = [
-      `additionalName=${fixedEncodeURIComponent(this.state.additionalName)}`,
-      `cellPhone=${fixedEncodeURIComponent(this.state.cellPhone)}`,
-      `emailAddress=${fixedEncodeURIComponent(this.state.emailAddress)}`,
-      `workPhone=${fixedEncodeURIComponent(this.state.workPhone)}`,
-      `familyName=${fixedEncodeURIComponent(this.state.familyName)}`,
-      `fullName=${fixedEncodeURIComponent(this.state.fullName)}`,
-      `fullNameSlug=${fixedEncodeURIComponent(this.state.fullNameSlug)}`,
-      `givenName=${fixedEncodeURIComponent(this.state.givenName)}`,
+      `additionalName=${fixedEncodeURIComponent(this.state.additionalName.trim())}`,
+      `cellPhone=${fixedEncodeURIComponent(this.state.cellPhone.trim())}`,
+      `emailAddress=${fixedEncodeURIComponent(this.state.emailAddress.trim())}`,
+      `workPhone=${fixedEncodeURIComponent(this.state.workPhone.trim())}`,
+      `familyName=${fixedEncodeURIComponent(this.state.familyName.trim())}`,
+      `fullName=${fixedEncodeURIComponent(this.state.fullName.trim())}`,
+      `fullNameSlug=${fixedEncodeURIComponent(this.state.fullNameSlug.trim())}`,
+      `givenName=${fixedEncodeURIComponent(this.state.givenName.trim())}`,
       `hidePicture=${fixedEncodeURIComponent(this.state.hidePicture.toString())}`,
       `hideAwareLogo=${fixedEncodeURIComponent(this.state.hideAwareLogo.toString())}`,
       `hideAddress=${fixedEncodeURIComponent(this.state.hideAddress.toString())}`,
       `hideSocialLinks=${fixedEncodeURIComponent(this.state.hideSocialLinks.toString())}`,
       `hideFKAW=${fixedEncodeURIComponent(this.state.hideFKAW.toString())}`,
-      `honorificPrefix=${fixedEncodeURIComponent(this.state.honorificPrefix)}`,
-      `honorificSuffix=${fixedEncodeURIComponent(this.state.honorificSuffix)}`,
+      `honorificPrefix=${fixedEncodeURIComponent(this.state.honorificPrefix.trim())}`,
+      `honorificSuffix=${fixedEncodeURIComponent(this.state.honorificSuffix.trim())}`,
       `sameLinePhoneNumbers=${fixedEncodeURIComponent(this.state.sameLinePhoneNumbers.toString())}`,
-      `organizationTitle=${fixedEncodeURIComponent(this.state.organizationTitle)}`,
-      `linkedinUrl=${fixedEncodeURIComponent(this.state.linkedinUrl)}`,
-      `workplaceUrl=${fixedEncodeURIComponent(this.state.workplaceUrl)}`,
-      `profilePicture=${fixedEncodeURIComponent(this.state.profilePicture)}`,
-      `companyLogoUrl=${fixedEncodeURIComponent(this.state.companyLogoUrl)}`,
+      `organizationTitle=${fixedEncodeURIComponent(this.state.organizationTitle.trim())}`,
+      `linkedinUrl=${fixedEncodeURIComponent(this.state.linkedinUrl.trim())}`,
+      `workplaceUrl=${fixedEncodeURIComponent(this.state.workplaceUrl.trim())}`,
+      `profilePicture=${fixedEncodeURIComponent(this.state.profilePicture.trim())}`,
+      `companyLogoUrl=${fixedEncodeURIComponent(this.state.companyLogoUrl.trim())}`,
       `companyLogoHeight=${fixedEncodeURIComponent(this.state.companyLogoHeight.toString())}`,
       `companyLogoWidth=${fixedEncodeURIComponent(this.state.companyLogoWidth.toString())}`,
-      `companyAddress=${fixedEncodeURIComponent(this.state.companyAddress)}`,
-      `companyWebsite=${fixedEncodeURIComponent(this.state.companyWebsite)}`,
-      `companyLinkedIn=${fixedEncodeURIComponent(this.state.companyLinkedIn)}`,
-      `companyTwitter=${fixedEncodeURIComponent(this.state.companyTwitter)}`,
-      `companyFacebook=${fixedEncodeURIComponent(this.state.companyFacebook)}`,
-      `companyInstagram=${fixedEncodeURIComponent(this.state.companyInstagram)}`,
-      `companyName=${fixedEncodeURIComponent(this.state.companyName)}`,
-      `utmCampaign=${fixedEncodeURIComponent(this.state.utmCampaign)}`,
-      `directionsUrl=${fixedEncodeURIComponent(this.state.directionsUrl)}`,
+      `companyAddress=${fixedEncodeURIComponent(this.state.companyAddress.trim())}`,
+      `companyWebsite=${fixedEncodeURIComponent(this.state.companyWebsite.trim())}`,
+      `companyLinkedIn=${fixedEncodeURIComponent(this.state.companyLinkedIn.trim())}`,
+      `companyTwitter=${fixedEncodeURIComponent(this.state.companyTwitter.trim())}`,
+      `companyFacebook=${fixedEncodeURIComponent(this.state.companyFacebook.trim())}`,
+      `companyInstagram=${fixedEncodeURIComponent(this.state.companyInstagram.trim())}`,
+      `companyName=${fixedEncodeURIComponent(this.state.companyName.trim())}`,
+      `utmCampaign=${fixedEncodeURIComponent(this.state.utmCampaign.trim())}`,
+      `directionsUrl=${fixedEncodeURIComponent(this.state.directionsUrl.trim())}`,
     ];
 
     params.map((p) => {
@@ -352,12 +352,12 @@ class App extends React.Component<IAppProps, IAppState> {
               <button
                 onClick={this.handleCopyHTML} style={{ cursor: "pointer", fontSize: ".8em", marginRight: ".5em" }}
                 className="c-button c-button--secondary">
-                🤓 Copy as HTML
+                <span aria-hidden="true" className="u-mr--2">🤓</span> Copy as HTML
               </button>
               <button
                 onClick={this.toggleSaveModal} style={{ cursor: "pointer", fontSize: ".8em" }}
                 className="c-button c-button--primary">
-                ☁️ Save Your Signature
+                <span aria-hidden="true" className="u-mr--2">☁️</span> Save Your Signature
                 </button>
             </div>
           </div>
@@ -369,40 +369,40 @@ class App extends React.Component<IAppProps, IAppState> {
                 <a href="https://wiretapfiles.app.box.com/folder/72642759039"
                   target="_blank"
                   rel="noopener noreferrer nofollow"
-                  className="c-button c-button--secondary c-button--block u-ta--c"><small>🎨 Grab an Aware Wallpaper</small></a>
+                  className="c-button c-button--secondary c-button--block u-ta--c"><small><span aria-hidden="true" className="u-mr--2">🎨</span> Grab an Aware Wallpaper</small></a>
                 <form name="personal-info" autoComplete="on">
                   <fieldset>
                     <legend>Your Photo</legend>
                     <div className="l-flex l-jc--sb l-ai--bl">
-                      <label htmlFor="profilePicture"><span aria-hidden="true">🖼️ </span>Headshot URL <span className="c-form-label__optional">(optional)</span></label><a style={{ float: "right", cursor: "pointer", fontSize: ".8em", }} onClick={this.toggleBoxModal} className="c-text-gradient">Get Your Headshot</a>
+                      <label htmlFor="profilePicture"><span aria-hidden="true" className="u-mr--2">🖼️ </span>Headshot URL <span className="c-form-label__optional">(optional)</span></label><a style={{ float: "right", cursor: "pointer", fontSize: ".8em", }} onClick={this.toggleBoxModal} className="c-text-gradient">Get Your Headshot</a>
                     </div>
                     <input type="photo" name="profilePicture" value={this.state.profilePicture} required={true} onChange={this.handleInputChange} /><br />
                   </fieldset>
                   <fieldset>
                     <legend>Your Details</legend>
-                    <label htmlFor="givenName"><span aria-hidden="true">🙂 </span>Your Name</label><br />
+                    <label htmlFor="givenName"><span aria-hidden="true" className="u-mr--2">🙂 </span>Your Name</label><br />
                     <input type="text" name="givenName" required={true} autoCorrect="off" autoComplete="given-name" title="What do they call you? 🤔" value={this.state.givenName || ""} onChange={this.handleNameChange} /><br />
-                    <label htmlFor="organizationTitle"><span aria-hidden="true">💼 </span>Job Title <span className="c-form-label__optional">(optional)</span></label><br />
+                    <label htmlFor="organizationTitle"><span aria-hidden="true" className="u-mr--2">💼 </span>Job Title <span className="c-form-label__optional">(optional)</span></label><br />
                     <input type="text" name="organizationTitle" required={true} autoComplete="organization-title" title="Your job description this month 📝" value={this.state.organizationTitle || ""} onChange={this.handleInputChange} /><br />
                   </fieldset>
                   <fieldset>
                     <legend>Contact Options</legend>
-                    <label htmlFor="workPhone"><span aria-hidden="true">☎️</span> Office Phone <span className="c-form-label__optional">(optional)</span></label><br />
+                    <label htmlFor="workPhone"><span aria-hidden="true" className="u-mr--2">☎️</span> Office Phone <span className="c-form-label__optional">(optional)</span></label><br />
                     <input type="tel-national" name="workPhone" autoComplete="tel-national" value={this.state.workPhone || ""} onChange={this.handleInputChange} /><br />
-                    <label htmlFor="cellPhone"><span aria-hidden="true">📱 </span>Cell Phone <span className="c-form-label__optional">(optional)</span></label><br />
+                    <label htmlFor="cellPhone"><span aria-hidden="true" className="u-mr--2">📱 </span>Cell Phone <span className="c-form-label__optional">(optional)</span></label><br />
                     <input type="tel-national" name="cellPhone" autoComplete="tel-national" value={this.state.cellPhone || ""} onChange={this.handleInputChange} /><br />
-                    <label htmlFor="emailAddress"><span aria-hidden="true">💌 </span>Email Address </label><br />
+                    <label htmlFor="emailAddress"><span aria-hidden="true" className="u-mr--2">💌 </span>Email Address </label><br />
                     <input type="email" name="emailAddress" required={true} autoComplete="email" pattern="^[a-zA-Z0-9]+@[a-zA-Z0-9].awarehq.[a-zA-z]+$" title="Please use your @awarehq.com address 📬" value={this.state.emailAddress} onChange={this.handleInputChange} /><br />
-                    {/* <label htmlFor="workplaceUrl"><span aria-hidden="true">Wo</span>rkplace Profile <span className="c-form-label__optional">(optional)</span></label><br />
+                    {/* <label htmlFor="workplaceUrl"><span aria-hidden="true" className="u-mr--2">Wo</span>rkplace Profile <span className="c-form-label__optional">(optional)</span></label><br />
                 <span className="c-form-input__example">Tip: <a href={"https://workplace.com/?utm_medium=email-sig?utm_source=" + this.state.fullNameSlug} target="_blank">Head to Workplace</a>, go to your profile, and copy the URL from the address bar</span><br />
                 <input type="url" name="workplaceUrl" value={this.state.workplaceUrl || ""} onChange={this.handleInputChange} /><br /> */}
-                    <label htmlFor="linkedinUrl"><span aria-hidden="true">🔗 </span>LinkedIn Profile <span className="c-form-label__optional">(optional)</span></label><br />
+                    <label htmlFor="linkedinUrl"><span aria-hidden="true" className="u-mr--2">🔗 </span>HTTPS LinkedIn Profile <span className="c-form-label__optional">(optional)</span></label><br />
                     <span className="c-form-input__example">Adds a link to your profile picture</span><br />
                     <input type="url" name="linkedinUrl" value={this.state.linkedinUrl || ""} onChange={this.handleInputChange} /><br />
                   </fieldset>
                   <fieldset>
                     <legend>Your Company's Logo</legend>
-                    <label htmlFor="companyLogoUrl"><span aria-hidden="true">🎨 </span>Company Logo URL<span className="c-form-label__optional">(optional)</span></label><br />
+                    <label htmlFor="companyLogoUrl"><span aria-hidden="true" className="u-mr--2">🎨 </span>Company Logo URL<span className="c-form-label__optional">(optional)</span></label><br />
                     <input type="photo" name="companyLogoUrl" value={this.state.companyLogoUrl} required={false} onChange={this.handleInputChange} /><br />
                     <div className="row">
                       <div className="col-xs-6">
@@ -421,17 +421,17 @@ class App extends React.Component<IAppProps, IAppState> {
                   </fieldset>
                   <fieldset>
                     <legend>Your Company's Details</legend>
-                    <label htmlFor="companyName"><span aria-hidden="true">📛 </span>Company Name <span className="c-form-label__optional">(optional)</span></label><br />
+                    <label htmlFor="companyName"><span aria-hidden="true" className="u-mr--2">📛 </span>Company Name <span className="c-form-label__optional">(optional)</span></label><br />
                     <input type="text" name="companyName" value={this.state.companyName} required={false} onChange={this.handleInputChange} /><br />
-                    <label htmlFor="directionsUrl"><span aria-hidden="true">📍 </span>Directions URL<span className="c-form-label__optional">(optional)</span></label><br />
+                    <label htmlFor="directionsUrl"><span aria-hidden="true" className="u-mr--2">📍 </span>Directions URL<span className="c-form-label__optional">(optional)</span></label><br />
                     <input type="url" name="directionsUrl" value={this.state.directionsUrl} required={false} onChange={this.handleInputChange} />
-                    <label htmlFor="companyAddress"><span aria-hidden="true">📬 </span>Company Address<span className="c-form-label__optional">(optional)</span></label><br />
+                    <label htmlFor="companyAddress"><span aria-hidden="true" className="u-mr--2">📬 </span>Company Address<span className="c-form-label__optional">(optional)</span></label><br />
                     <input type="text" name="companyAddress" value={this.state.companyAddress} required={false} onChange={this.handleInputChange} />
                   </fieldset>
                   <fieldset>
                     <legend>UTM Parameters</legend>
                     <small className="u-d--b u-ml--2 u-mb--6 u-op--70">
-                      ℹ️ These are additional details added to the end of a URL. They provide more specific information about the link for marketing and analytics.
+                      <span aria-hidden="true" className="u-mr--2">ℹ️</span> These are additional details added to the end of a URL. They provide more specific information about the link for marketing and analytics.
                     </small>
                     <label htmlFor="utmCampaign">Campaign<span className="c-form-label__optional">(optional)</span></label><br />
                     <span className="c-form-input__example">Examples: Replies to Acme, Ignite 2019, Webinar Outreach</span><br />

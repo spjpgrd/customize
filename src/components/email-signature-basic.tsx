@@ -76,12 +76,12 @@ class EmailSignatureBasic extends React.Component<IEmailSignatureBasicProps, IEm
         const fullUtmParams = this.getFullUtmParams(slugify(this.props.utmCampaign).trim());
 
         switch (source) {
-            case "twitter":  return `http://awarehq.com/tw${fullUtmParams}`;
-            case "linkedin":  return `http://awarehq.com/li${fullUtmParams}`;
-            case "youtube":  return `http://awarehq.com/yt${fullUtmParams}`;
-            case "instagram": return `http://awarehq.com/ig${fullUtmParams}`;
-            case "facebook": return `http://awarehq.com/fb${fullUtmParams}`;
-            case "dotcom": return `http://awarehq.com${fullUtmParams}`;
+            case "twitter":  return `https://awarehq.com/tw${fullUtmParams}`;
+            case "linkedin":  return `https://awarehq.com/li${fullUtmParams}`;
+            case "youtube":  return `https://awarehq.com/yt${fullUtmParams}`;
+            case "instagram": return `https://awarehq.com/ig${fullUtmParams}`;
+            case "facebook": return `https://awarehq.com/fb${fullUtmParams}`;
+            case "dotcom": return `https://awarehq.com${fullUtmParams}`;
         }
     }
 

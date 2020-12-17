@@ -33,6 +33,7 @@ interface IAppState {
   isSaveModalOpen: boolean;
   isCopyHtmlModalOpen: boolean;
   organizationTitle: string;
+  secondaryTitle: string;
   linkedinUrl: string;
   workplaceUrl: string;
   profilePicture: string;
@@ -79,7 +80,8 @@ class App extends React.Component<IAppProps, IAppState> {
       isBoxModalOpen: false,
       isCopyHtmlModalOpen: false,
       isSaveModalOpen: false,
-      organizationTitle: "CEO & Co-Founder",
+      organizationTitle: "CEO",
+      secondaryTitle: "Co-Founder",
       linkedinUrl: "",
       sameLinePhoneNumbers: true,
       workplaceUrl: "https://wiretap.facebook.com/profile.php?id=100013799348501",
@@ -141,6 +143,7 @@ class App extends React.Component<IAppProps, IAppState> {
       honorificSuffix: parsedQuery.honorificSuffix ? parsedQuery.honorificSuffix : this.state.honorificSuffix,
       sameLinePhoneNumbers: parsedQuery.sameLinePhoneNumbers ? parseBoolean(parsedQuery.sameLinePhoneNumbers) : this.state.sameLinePhoneNumbers,
       organizationTitle: parsedQuery.organizationTitle ? parsedQuery.organizationTitle : this.state.organizationTitle,
+      secondaryTitle: parsedQuery.secondaryTitle ? parsedQuery.secondaryTitle : this.state.secondaryTitle,
       linkedinUrl: parsedQuery.linkedinUrl ? parsedQuery.linkedinUrl : this.state.linkedinUrl,
       workplaceUrl: parsedQuery.workplaceUrl ? parsedQuery.workplaceUrl : this.state.workplaceUrl,
       profilePicture: parsedQuery.profilePicture ? parsedQuery.profilePicture : this.state.profilePicture,
@@ -184,6 +187,7 @@ class App extends React.Component<IAppProps, IAppState> {
       `honorificSuffix=${fixedEncodeURIComponent(this.state.honorificSuffix)}`,
       `sameLinePhoneNumbers=${fixedEncodeURIComponent(this.state.sameLinePhoneNumbers.toString())}`,
       `organizationTitle=${fixedEncodeURIComponent(this.state.organizationTitle)}`,
+      `secondaryTitle=${fixedEncodeURIComponent(this.state.secondaryTitle)}`,
       `linkedinUrl=${fixedEncodeURIComponent(this.state.linkedinUrl)}`,
       `workplaceUrl=${fixedEncodeURIComponent(this.state.workplaceUrl)}`,
       `profilePicture=${fixedEncodeURIComponent(this.state.profilePicture)}`,
@@ -293,6 +297,7 @@ class App extends React.Component<IAppProps, IAppState> {
         honorificSuffix={this.state.honorificSuffix.trim()}
         sameLinePhoneNumbers={this.state.sameLinePhoneNumbers}
         organizationTitle={this.state.organizationTitle.trim()}
+        secondaryTitle={this.state.secondaryTitle.trim()}
         linkedinUrl={this.state.linkedinUrl.trim()}
         workplaceUrl={this.state.workplaceUrl.trim()}
         profilePicture={this.state.profilePicture.trim()}
@@ -384,6 +389,8 @@ class App extends React.Component<IAppProps, IAppState> {
                     <input type="text" name="givenName" required={true} autoCorrect="off" autoComplete="given-name" title="What do they call you? 🤔" value={this.state.givenName || ""} onChange={this.handleNameChange} /><br />
                     <label htmlFor="organizationTitle"><span aria-hidden="true">💼 </span>Job Title <span className="c-form-label__optional">(optional)</span></label><br />
                     <input type="text" name="organizationTitle" required={true} autoComplete="organization-title" title="Your job description this month 📝" value={this.state.organizationTitle || ""} onChange={this.handleInputChange} /><br />
+                    <label htmlFor="secondaryTitle"><span aria-hidden="true">🥈 </span>Secondary Title <span className="c-form-label__optional">(optional)</span></label><br />
+                    <input type="text" name="secondaryTitle" required={true} autoComplete="secondaryTitle-title" title="Secondary description" value={this.state.secondaryTitle || ""} onChange={this.handleInputChange} /><br />
                   </fieldset>
                   <fieldset>
                     <legend>Contact Options</legend>
@@ -482,6 +489,7 @@ class App extends React.Component<IAppProps, IAppState> {
                     honorificSuffix={this.state.honorificSuffix.trim()}
                     sameLinePhoneNumbers={this.state.sameLinePhoneNumbers}
                     organizationTitle={this.state.organizationTitle.trim()}
+                    secondaryTitle={this.state.secondaryTitle.trim()}
                     linkedinUrl={this.state.linkedinUrl.trim()}
                     workplaceUrl={this.state.workplaceUrl.trim()}
                     profilePicture={this.state.profilePicture.trim()}

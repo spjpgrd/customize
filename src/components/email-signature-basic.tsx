@@ -26,6 +26,7 @@ export interface IEmailSignatureBasicProps {
     honorificPrefix: string;
     honorificSuffix: string;
     organizationTitle: string;
+    secondaryTitle: string;
     linkedinUrl: string;
     sameLinePhoneNumbers: boolean;
     workplaceUrl: string;
@@ -47,6 +48,8 @@ export interface IEmailSignatureBasicProps {
     id: string;
 }
 
+type TLinkSource = "twitter" | "linkedin" | "youtube" | "instagram" | "dotcom" | "facebook";
+
 // tslint:disable-next-line: no-empty-interface
 interface IEmailSignatureBasicState {
 
@@ -56,10 +59,38 @@ class EmailSignatureBasic extends React.Component<IEmailSignatureBasicProps, IEm
 
     constructor(props: IEmailSignatureBasicProps) {
         super(props);
+        this.getLink = this.getLink.bind(this);
+        this.getFullUtmParams = this.getFullUtmParams.bind(this);
     }
-    render() {
-        const utmCampaignSlug = slugify(this.props.utmCampaign).trim();
+
+    getFullUtmParams(
+        utmCampaignSlug: string,
+    ) {
         const fullUtmParams = `?utm_content=${this.props.utmParams.utmContent}-via-${this.props.fullNameSlug}&utm_medium=${this.props.utmParams.utmMedium}&utm_source=${this.props.utmParams.utmSource}${utmCampaignSlug !== "" ? `&utm_campaign=${utmCampaignSlug}` : ``}`;
+        return fullUtmParams;
+    }
+
+    getLink(
+        source: TLinkSource,
+    ) {
+        const fullUtmParams = this.getFullUtmParams(slugify(this.props.utmCampaign).trim());
+
+        switch (source) {
+            case "twitter":  return `http://awarehq.com/tw${fullUtmParams}`;
+            case "linkedin":  return `http://awarehq.com/li${fullUtmParams}`;
+            case "youtube":  return `http://awarehq.com/yt${fullUtmParams}`;
+            case "instagram": return `http://awarehq.com/ig${fullUtmParams}`;
+            case "facebook": return `http://awarehq.com/fb${fullUtmParams}`;
+            case "dotcom": return `http://awarehq.com${fullUtmParams}`;
+        }
+    }
+
+    // const utmCampaignSlug = slugify(this.props.utmCampaign).trim();
+    // const fullUtmParams = `?utm_content=${this.props.utmParams.utmContent}-via-${this.props.fullNameSlug}&utm_medium=${this.props.utmParams.utmMedium}&utm_source=${this.props.utmParams.utmSource}${utmCampaignSlug !== "" ? `&utm_campaign=${utmCampaignSlug}` : ``}`;
+
+    render() {
+        // const utmCampaignSlug = slugify(this.props.utmCampaign).trim();
+        // const fullUtmParams = `?utm_content=${this.props.utmParams.utmContent}-via-${this.props.fullNameSlug}&utm_medium=${this.props.utmParams.utmMedium}&utm_source=${this.props.utmParams.utmSource}${utmCampaignSlug !== "" ? `&utm_campaign=${utmCampaignSlug}` : ``}`;
 
         return (
             <>
@@ -80,6 +111,7 @@ class EmailSignatureBasic extends React.Component<IEmailSignatureBasicProps, IEm
                             <td style={{ verticalAlign: "top", paddingLeft: "0px", paddingTop: "0px", paddingBottom: "8px", paddingRight: "0px" }}>
                                 <span style={{ textAlign: "left", color: "#2C2B2A", fontFamily: this.props.fontStack, fontSize: "10pt", fontWeight: "bold" }}>{this.props.fullName}<br /></span>
                                 {(this.props.organizationTitle !== "") && <span style={{ textAlign: "left", marginTop: "0px", marginBottom: "0px", color: "#3F3D3C", fontFamily: this.props.fontStack, fontWeight: "normal", fontSize: "10pt", lineHeight: "1.5" }}>{this.props.organizationTitle}<br /></span>}
+                                {(this.props.secondaryTitle !== "") && <span style={{ textAlign: "left", marginTop: "0px", marginBottom: "0px", color: "#3F3D3C", fontFamily: this.props.fontStack, fontWeight: "normal", fontSize: "10pt", lineHeight: "1.5" }}>{this.props.secondaryTitle}<br /></span>}
                                 {(this.props.workPhone !== "" || this.props.cellPhone !== "") && <span style={{ textAlign: "left", marginTop: "0px", marginBottom: "0px", color: "#878582", fontFamily: this.props.fontStack, fontWeight: "normal", fontSize: "10pt", lineHeight: "1.5", fontVariantNumeric: "tabular-nums slashed-zero", }}>{`${this.props.workPhone}`}{(this.props.workPhone !== "" && this.props.cellPhone !== "") && ` \u00B7 `}{`${this.props.cellPhone}`}<br /></span>}
                                 <a style={{ textDecoration: "none", borderBottomWidth: "0", color: "#E64257", fontFamily: this.props.fontStack, fontSize: "10pt", fontStyle: "normal", fontWeight: "normal", lineHeight: "1.5" }} href={"mailto:" + this.props.emailAddress}>{this.props.emailAddress}</a>
                             </td>
@@ -87,7 +119,7 @@ class EmailSignatureBasic extends React.Component<IEmailSignatureBasicProps, IEm
                         {(!this.props.hideAwareLogo && this.props.companyLogoUrl !== "") &&
                             <tr>
                                 <td style={{ verticalAlign: "bottom", paddingLeft: "0px", paddingTop: "16px", paddingBottom: "0px", paddingRight: "0px", marginTop: "0px" }}>
-                                    <a target="_blank" href={`https://awarehq.com${fullUtmParams}`}><img src={this.props.companyLogoUrl} style={{ width: `${this.props.companyLogoWidth}px`, height: `${this.props.companyLogoHeight}px`, border: "0" }} width={this.props.companyLogoWidth} height={this.props.companyLogoHeight} alt={`${this.props.companyName} Logo`} title={`${this.props.companyName} Logo`} /></a>
+                                    <a target="_blank" href={this.getLink("dotcom")}><img src={this.props.companyLogoUrl} style={{ width: `${this.props.companyLogoWidth}px`, height: `${this.props.companyLogoHeight}px`, border: "0" }} width={this.props.companyLogoWidth} height={this.props.companyLogoHeight} alt={`${this.props.companyName} Logo`} title={`${this.props.companyName} Logo`} /></a>
                                 </td>
                             </tr>
                         }
@@ -96,7 +128,7 @@ class EmailSignatureBasic extends React.Component<IEmailSignatureBasicProps, IEm
                                 <p style={{ marginTop: "0px", textAlign: "left", color: "#555759", fontFamily: this.props.fontStack, fontSize: "10pt", fontStyle: "normal", fontWeight: "normal", lineHeight: "1.5", paddingTop: "16px" }}>
                                     {(this.props.companyName !== "") && <span>{this.props.companyName !== "" && <b style={{ fontWeight: "bold", color: "#26241F" }}><strong>{this.props.companyName}</strong></b>} <br /></span>}{this.props.companyAddress !== "" && <span>{this.props.companyAddress}<br /></span>}
                                     {!this.props.hideSocialLinks &&
-                                        <span style={{ textAlign: "left", fontFamily: this.props.fontStack, fontSize: "10pt", fontStyle: "normal", fontWeight: "normal", lineHeight: "1.5" }}><a style={{ textDecoration: "none", borderBottomWidth: "0", color: "#E64257", fontFamily: "'Effra', 'Lato', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'sans-serif'", fontSize: "10pt", fontStyle: "normal", fontWeight: "normal", lineHeight: "1.5" }} target="_blank" href={`http://awarehq.com${fullUtmParams}`}>Website</a> {`\u00B7`} <a style={{ textDecoration: "none", borderBottomWidth: "0", color: "#E64257", fontFamily: this.props.fontStack, fontSize: "10pt", fontStyle: "normal", fontWeight: "normal", lineHeight: "1.5" }} target="_blank" href={`http://awarehq.com/li${fullUtmParams}`}>LinkedIn</a> {`\u00B7`} <a style={{ textDecoration: "none", borderBottomWidth: "0", color: "#E64257", fontFamily: this.props.fontStack, fontSize: "10pt", fontStyle: "normal", fontWeight: "normal", lineHeight: "1.5" }} target="_blank" href={`http://awarehq.com/tw${fullUtmParams}`}>Twitter</a> {`\u00B7`} <a style={{ textDecoration: "none", borderBottomWidth: "0", color: "#E64257", fontFamily: this.props.fontStack, fontSize: "10pt", fontStyle: "normal", fontWeight: "normal", lineHeight: "1.5" }} target="_blank" href={`http://awarehq.com/fb${fullUtmParams}`}>Facebook</a> {`\u00B7`} <a style={{ textDecoration: "none", borderBottomWidth: "0", color: "#E64257", fontFamily: this.props.fontStack, fontSize: "10pt", fontStyle: "normal", fontWeight: "normal", lineHeight: "1.5" }} target="_blank" href={`http://awarehq.com/ig${fullUtmParams}`}>Instagram</a><br /><br /></span>
+                                        <span style={{ textAlign: "left", fontFamily: this.props.fontStack, fontSize: "10pt", fontStyle: "normal", fontWeight: "normal", lineHeight: "1.5" }}><a style={{ textDecoration: "none", borderBottomWidth: "0", color: "#E64257", fontFamily: "'Effra', 'Lato', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'sans-serif'", fontSize: "10pt", fontStyle: "normal", fontWeight: "normal", lineHeight: "1.5" }} target="_blank" href={this.getLink("dotcom")}>Website</a> {`\u00B7`} <a style={{ textDecoration: "none", borderBottomWidth: "0", color: "#E64257", fontFamily: this.props.fontStack, fontSize: "10pt", fontStyle: "normal", fontWeight: "normal", lineHeight: "1.5" }} target="_blank" href={this.getLink("linkedin")}>LinkedIn</a> {`\u00B7`} <a style={{ textDecoration: "none", borderBottomWidth: "0", color: "#E64257", fontFamily: this.props.fontStack, fontSize: "10pt", fontStyle: "normal", fontWeight: "normal", lineHeight: "1.5" }} target="_blank"  href={this.getLink("twitter")}>Twitter</a> {`\u00B7`} <a style={{ textDecoration: "none", borderBottomWidth: "0", color: "#E64257", fontFamily: this.props.fontStack, fontSize: "10pt", fontStyle: "normal", fontWeight: "normal", lineHeight: "1.5" }} target="_blank"  href={this.getLink("facebook")}>Facebook</a> {`\u00B7`} <a style={{ textDecoration: "none", borderBottomWidth: "0", color: "#E64257", fontFamily: this.props.fontStack, fontSize: "10pt", fontStyle: "normal", fontWeight: "normal", lineHeight: "1.5" }} target="_blank"  href={this.getLink("instagram")}>Instagram</a><br /><br /></span>
                                     }
                                 </p>
                             </td >

@@ -81,7 +81,7 @@ class App extends React.Component<IAppProps, IAppState> {
       isCopyHtmlModalOpen: false,
       isSaveModalOpen: false,
       organizationTitle: "CEO",
-      secondaryTitle: "Co-Founder",
+      secondaryTitle: "",
       linkedinUrl: "",
       sameLinePhoneNumbers: true,
       workplaceUrl: "https://wiretap.facebook.com/profile.php?id=100013799348501",
